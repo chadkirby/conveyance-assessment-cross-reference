@@ -10,6 +10,7 @@ const PDF_BY_SOURCE_FILE = {
 const LOT_MAP_IMAGE = `${import.meta.env.BASE_URL}images/lot-map.jpg`;
 const AUTO_SELECT_DISTANCE = 0.028;
 const HOVER_PREVIEW_DISTANCE = 0.08;
+const POINT_OVERRIDE_STORAGE_KEY = "lotMapPointOverrides.v2";
 
 const MONEY = new Intl.NumberFormat("en-US", {
   style: "currency",
@@ -31,13 +32,177 @@ function formatMoney(value) {
 
 function parseDateKey(value) {
   if (!value) {
-    return Number.MAX_SAFE_INTEGER;
+    return Number.MIN_SAFE_INTEGER;
   }
   const [month, day, year] = String(value).split("/");
   if (!month || !day || !year) {
-    return Number.MAX_SAFE_INTEGER;
+    return Number.MIN_SAFE_INTEGER;
   }
   return Number(`${year}${month.padStart(2, "0")}${day.padStart(2, "0")}`);
+}
+
+const PARTY_STOPWORDS = new Set([
+  "A",
+  "AN",
+  "AND",
+  "AS",
+  "AT",
+  "BY",
+  "CO",
+  "COMPANY",
+  "CORP",
+  "CORPORATION",
+  "COUNTY",
+  "DEVELOPMENT",
+  "ESTATE",
+  "FOR",
+  "FROM",
+  "IN",
+  "INC",
+  "INCORPORATED",
+  "IS",
+  "L",
+  "LIABILITY",
+  "LIMITED",
+  "LLC",
+  "LP",
+  "MARRIED",
+  "OF",
+  "PERSON",
+  "STATE",
+  "THE",
+  "TITLE",
+  "TO",
+  "TRUST",
+  "WASHINGTON",
+  "WOMAN",
+  "MAN",
+  "WIFE",
+  "HUSBAND",
+  "COUPLE",
+]);
+
+function normalizeParty(value) {
+  return String(value || "")
+    .toUpperCase()
+    .replace(/[^A-Z0-9]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function partyTokens(value) {
+  const norm = normalizeParty(value);
+  if (!norm) {
+    return [];
+  }
+  return norm.split(" ").filter((token) => token.length > 1 && !PARTY_STOPWORDS.has(token));
+}
+
+function partyMatch(left, right) {
+  const a = normalizeParty(left);
+  const b = normalizeParty(right);
+  if (!a || !b) {
+    return false;
+  }
+  if (a === b) {
+    return true;
+  }
+  const minLen = Math.min(a.length, b.length);
+  if (minLen >= 10 && (a.includes(b) || b.includes(a))) {
+    return true;
+  }
+  const tokensA = partyTokens(left);
+  const tokensB = partyTokens(right);
+  if (!tokensA.length || !tokensB.length) {
+    return false;
+  }
+  const setB = new Set(tokensB);
+  const overlap = tokensA.filter((token) => setB.has(token)).length;
+  const coverageA = overlap / tokensA.length;
+  const coverageB = overlap / tokensB.length;
+  if (coverageA >= 0.6 && coverageB >= 0.6) {
+    return true;
+  }
+  return overlap >= 2 && Math.max(coverageA, coverageB) >= 0.8;
+}
+
+function sameDayOldnessScore(conveyance) {
+  const grantor = normalizeParty(conveyance.grantor);
+  const grantee = normalizeParty(conveyance.grantee);
+  const deedType = String(conveyance.deedType || "").toUpperCase();
+  let score = 0;
+
+  if (grantor.includes("SO UK")) {
+    score -= 40;
+  }
+  if (grantor.includes("THURSTON COUNTY TITLE")) {
+    score -= 25;
+  }
+  if (grantee.includes("LOTUS HOUSE")) {
+    score -= 10;
+  }
+  if (grantor.includes("LOTUS HOUSE")) {
+    score += 10;
+  }
+  if (deedType.includes("QUIT")) {
+    score -= 4;
+  }
+  return score;
+}
+
+function sortSameDayConveyancesNewestFirst(group) {
+  if (group.length <= 1) {
+    return group;
+  }
+
+  const n = group.length;
+  const out = Array.from({ length: n }, () => new Set());
+  const indegree = new Array(n).fill(0);
+
+  for (let i = 0; i < n; i += 1) {
+    for (let j = 0; j < n; j += 1) {
+      if (i === j) {
+        continue;
+      }
+      if (partyMatch(group[i].grantee, group[j].grantor)) {
+        if (!out[i].has(j)) {
+          out[i].add(j);
+          indegree[j] += 1;
+        }
+      }
+    }
+  }
+
+  const queue = [];
+  for (let i = 0; i < n; i += 1) {
+    if (indegree[i] === 0) {
+      queue.push(i);
+    }
+  }
+  queue.sort((a, b) => sameDayOldnessScore(group[a]) - sameDayOldnessScore(group[b]));
+
+  const oldestToNewest = [];
+  while (queue.length) {
+    const current = queue.shift();
+    oldestToNewest.push(group[current]);
+    for (const next of out[current]) {
+      indegree[next] -= 1;
+      if (indegree[next] === 0) {
+        queue.push(next);
+      }
+    }
+    queue.sort((a, b) => sameDayOldnessScore(group[a]) - sameDayOldnessScore(group[b]));
+  }
+
+  if (oldestToNewest.length < n) {
+    const consumed = new Set(oldestToNewest.map((row) => row.__idx));
+    const leftovers = group
+      .filter((row) => !consumed.has(row.__idx))
+      .sort((a, b) => sameDayOldnessScore(a) - sameDayOldnessScore(b));
+    oldestToNewest.push(...leftovers);
+  }
+
+  return oldestToNewest.reverse();
 }
 
 function parseLotNumber(value) {
@@ -48,6 +213,41 @@ function parseLotNumber(value) {
 function readLotFromUrl() {
   const params = new URLSearchParams(window.location.search);
   return parseLotNumber(params.get("lot"));
+}
+
+function readDebugFromUrl() {
+  const params = new URLSearchParams(window.location.search);
+  const value = (params.get("debug") || "").toLowerCase();
+  return value === "1" || value === "true" || value === "yes" || value === "on";
+}
+
+function clamp01(value) {
+  if (value < 0) {
+    return 0;
+  }
+  if (value > 1) {
+    return 1;
+  }
+  return value;
+}
+
+function readPointOverridesFromStorage() {
+  if (typeof window === "undefined") {
+    return {};
+  }
+  try {
+    const raw = window.localStorage.getItem(POINT_OVERRIDE_STORAGE_KEY);
+    if (!raw) {
+      return {};
+    }
+    const parsed = JSON.parse(raw);
+    if (!parsed || typeof parsed !== "object") {
+      return {};
+    }
+    return parsed;
+  } catch {
+    return {};
+  }
 }
 
 function writeLotToUrl(lot) {
@@ -79,6 +279,10 @@ function pdfLinks(sourceFile, sourcePages) {
 export default function App() {
   const [query, setQuery] = useState("");
   const [activeLot, setActiveLot] = useState(() => readLotFromUrl());
+  const [debugMode, setDebugMode] = useState(() => readDebugFromUrl());
+  const [pointOverrides, setPointOverrides] = useState(() => readPointOverridesFromStorage());
+  const [calibrateLot, setCalibrateLot] = useState(null);
+  const [debugMessage, setDebugMessage] = useState("");
   const [dataset, setDataset] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -91,7 +295,46 @@ export default function App() {
       setQuery(String(urlLot));
       setActiveLot(urlLot);
     }
+    setDebugMode(readDebugFromUrl());
   }, []);
+
+  useEffect(() => {
+    const onPopState = () => {
+      setDebugMode(readDebugFromUrl());
+    };
+    window.addEventListener("popstate", onPopState);
+    return () => window.removeEventListener("popstate", onPopState);
+  }, []);
+
+  useEffect(() => {
+    if (!debugMode) {
+      setCalibrateLot(null);
+      setDebugMessage("");
+    }
+  }, [debugMode]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+    window.localStorage.setItem(POINT_OVERRIDE_STORAGE_KEY, JSON.stringify(pointOverrides));
+  }, [pointOverrides]);
+
+  const mapPoints = useMemo(
+    () =>
+      LOT_MAP_POINTS.map((point) => {
+        const override = pointOverrides[String(point.lot)];
+        if (!override) {
+          return point;
+        }
+        return {
+          ...point,
+          x: typeof override.x === "number" ? override.x : point.x,
+          y: typeof override.y === "number" ? override.y : point.y,
+        };
+      }),
+    [pointOverrides],
+  );
 
   useEffect(() => {
     const load = async () => {
@@ -117,23 +360,9 @@ export default function App() {
     writeLotToUrl(activeLot);
   }, [activeLot]);
 
-  const availableLots = useMemo(() => {
-    const set = new Set();
-    for (const lot of dataset?.lots ?? []) {
-      set.add(Number(lot.lot));
-    }
-    return set;
-  }, [dataset]);
+  const clickableMapPoints = useMemo(() => mapPoints, [mapPoints]);
 
-  const clickableMapPoints = useMemo(
-    () => LOT_MAP_POINTS.filter((point) => availableLots.has(point.lot)),
-    [availableLots],
-  );
-
-  const activeMapPoint = useMemo(
-    () => LOT_MAP_POINTS.find((point) => point.lot === activeLot) ?? null,
-    [activeLot],
-  );
+  const activeMapPoint = useMemo(() => mapPoints.find((point) => point.lot === activeLot) ?? null, [activeLot, mapPoints]);
 
   const lotRecord = useMemo(() => {
     if (activeLot === null || !dataset?.lots) {
@@ -146,7 +375,24 @@ export default function App() {
     if (!lotRecord?.conveyances) {
       return [];
     }
-    return [...lotRecord.conveyances].sort((a, b) => parseDateKey(a.date) - parseDateKey(b.date));
+    const withIndex = lotRecord.conveyances.map((row, idx) => ({ ...row, __idx: idx }));
+    const byDate = new Map();
+    for (const row of withIndex) {
+      const dateKey = String(row.date || "");
+      if (!byDate.has(dateKey)) {
+        byDate.set(dateKey, []);
+      }
+      byDate.get(dateKey).push(row);
+    }
+
+    const sortedDates = [...byDate.keys()].sort((a, b) => parseDateKey(b) - parseDateKey(a));
+    const finalRows = [];
+    for (const dateKey of sortedDates) {
+      const sameDateRows = byDate.get(dateKey);
+      const ordered = sortSameDayConveyancesNewestFirst(sameDateRows);
+      finalRows.push(...ordered.map(({ __idx, ...row }) => row));
+    }
+    return finalRows;
   }, [lotRecord]);
 
   const lotStats = useMemo(() => {
@@ -192,6 +438,15 @@ export default function App() {
     const rect = event.currentTarget.getBoundingClientRect();
     const clickX = (event.clientX - rect.left) / rect.width;
     const clickY = (event.clientY - rect.top) / rect.height;
+
+    if (debugMode && calibrateLot !== null) {
+      setPointOverrides((prev) => ({
+        ...prev,
+        [String(calibrateLot)]: { x: clamp01(clickX), y: clamp01(clickY) },
+      }));
+      setDebugMessage(`Moved lot ${calibrateLot}.`);
+      return;
+    }
 
     const ranked = clickableMapPoints
       .map((point) => {
@@ -257,6 +512,23 @@ export default function App() {
     setHoverSelection(null);
   };
 
+  const copyMapPoints = async () => {
+    const sorted = [...mapPoints].sort((a, b) => a.lot - b.lot);
+    const json = JSON.stringify(sorted, null, 2);
+    try {
+      await navigator.clipboard.writeText(json);
+      setDebugMessage("Copied full lot point map to clipboard.");
+    } catch {
+      setDebugMessage("Failed to copy points to clipboard.");
+    }
+  };
+
+  const resetOverrides = () => {
+    setPointOverrides({});
+    setCalibrateLot(null);
+    setDebugMessage("Reset lot point overrides.");
+  };
+
   return (
     <div className="min-h-screen text-zinc-900">
       <div className="mx-auto max-w-none px-2 py-3 sm:px-3 lg:px-4">
@@ -291,6 +563,35 @@ export default function App() {
               <p className="mt-1.5 text-[11px] text-zinc-500">
                 Click any lot on the map to auto-search. If selection is ambiguous, you can choose from suggested lots. Link: <code>?lot=67</code>
               </p>
+              {debugMode && (
+                <div className="mt-1 space-y-1.5 rounded-md border border-sky-200 bg-sky-50/70 p-1.5">
+                  <p className="text-[11px] text-sky-800">
+                    Debug mode: click a blue lot badge, then click the map to reposition it (<code>?debug=true</code>).
+                  </p>
+                  <div className="flex flex-wrap items-center gap-1.5">
+                    <button
+                      type="button"
+                      className="rounded-md border border-sky-300 bg-white px-2 py-0.5 text-[11px] font-medium text-sky-800 hover:bg-sky-100"
+                      onClick={copyMapPoints}
+                    >
+                      Copy points JSON
+                    </button>
+                    <button
+                      type="button"
+                      className="rounded-md border border-sky-300 bg-white px-2 py-0.5 text-[11px] font-medium text-sky-800 hover:bg-sky-100"
+                      onClick={resetOverrides}
+                    >
+                      Reset overrides
+                    </button>
+                    {calibrateLot !== null && (
+                      <span className="text-[11px] text-sky-800">
+                        Calibrating lot <strong>{calibrateLot}</strong>
+                      </span>
+                    )}
+                  </div>
+                  {debugMessage && <p className="text-[11px] text-sky-700">{debugMessage}</p>}
+                </div>
+              )}
             </div>
           </div>
           <div
@@ -305,6 +606,34 @@ export default function App() {
               className="block w-full"
               draggable="false"
             />
+            {debugMode &&
+              clickableMapPoints.map((point) => (
+                <span
+                  key={`debug-${point.lot}`}
+                  role="button"
+                  tabIndex={0}
+                  className={`absolute -translate-x-1/2 -translate-y-1/2 cursor-pointer rounded-full border px-1.5 py-0 text-[10px] font-semibold shadow-sm ${
+                    calibrateLot === point.lot
+                      ? "border-emerald-700 bg-emerald-300/55 text-emerald-950"
+                      : "border-sky-500/80 bg-sky-300/35 text-sky-900"
+                  }`}
+                  style={{ left: `${point.x * 100}%`, top: `${point.y * 100}%` }}
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    setCalibrateLot(point.lot);
+                    setDebugMessage(`Selected lot ${point.lot} for calibration.`);
+                  }}
+                  onKeyDown={(event) => {
+                    if (event.key === "Enter" || event.key === " ") {
+                      event.preventDefault();
+                      setCalibrateLot(point.lot);
+                      setDebugMessage(`Selected lot ${point.lot} for calibration.`);
+                    }
+                  }}
+                >
+                  {point.lot}
+                </span>
+              ))}
             {activeMapPoint && (
               <span
                 className="pointer-events-none absolute -translate-x-1/2 -translate-y-1/2 rounded-full bg-emerald-600 px-2 py-0.5 text-xs font-semibold text-white shadow"
@@ -355,7 +684,14 @@ export default function App() {
           <p className="mt-2 text-sm text-zinc-600">Enter a lot number to view chain-of-title and assessment history.</p>
         )}
 
-        {!loading && !error && activeLot !== null && !lotRecord && (
+        {!loading && !error && activeLot !== null && !lotRecord && activeMapPoint && (
+          <div className="mt-2 rounded-xl border border-amber-300 bg-amber-50 p-3 text-sm text-amber-900">
+            <p className="font-semibold">No recorded transfer found for lot {activeLot} in current source data.</p>
+            <p className="mt-1">Likely owner is still SO UK INVESTMENT LLC, pending evidence of a later conveyance.</p>
+          </div>
+        )}
+
+        {!loading && !error && activeLot !== null && !lotRecord && !activeMapPoint && (
           <p className="mt-2 text-sm text-zinc-700">
             No lot record found for <strong>{activeLot}</strong>.
           </p>
