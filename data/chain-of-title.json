@@ -1,0 +1,2722 @@
+[
+  {
+    "lot": 1,
+    "parcelNumber": 44140000100,
+    "phase": "I",
+    "conveyances": [
+      {
+        "date": "08/09/2013",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "SO UK INVESTMENTS LLC, a Washington limited liability company",
+        "grantee": "PUGET SOUND HOMES AND DEVELOPMENT LLC, a Washington limited liability company",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          13
+        ]
+      },
+      {
+        "date": "02/22/2021",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "Deschutes Holding Group LLC",
+        "grantee": "Gallardo Homes, LLC",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          80
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 2,
+    "parcelNumber": 44140000200,
+    "phase": "I",
+    "conveyances": [
+      {
+        "date": "04/15/2013",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "SO UK INVESTMENT LLC, a Washington limited liability company DBA LOTUS HOUSE DEVELOPMENT CORP",
+        "grantee": "MARCHAND CONNOLLY, a married woman, as her separate estate",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          2
+        ]
+      },
+      {
+        "date": "04/18/2013",
+        "deedType": "QUIT_CLAIM",
+        "grantor": "DANIEL JOSEPH CONNOLLY, husband of grantee",
+        "grantee": "RELINQUISH ANY QUESTION AS TO COMMUNITY PROPERTY INTEREST conveys, and quit claims to MARCHAND CONNOLLY, a married woman, as her separate estate",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 3,
+    "parcelNumber": 44140000300,
+    "phase": "I",
+    "conveyances": [
+      {
+        "date": "08/09/2013",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "SO UK INVESTMENTS LLC, a Washington limited liability company",
+        "grantee": "PUGET SOUND HOMES AND DEVELOPMENT LLC, a Washington limited liability company",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          13
+        ]
+      },
+      {
+        "date": "01/01/2016",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "Puget Sound Homes and Development, LLC., a Washington limited liability company, a Washington limited liability company",
+        "grantee": "Sean P. Mee and Dana Mee, husband and wife",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          46
+        ]
+      },
+      {
+        "date": "05/17/2023",
+        "deedType": "QUIT_CLAIM",
+        "grantor": "SO UK INVESTMENT LLC, a Washington Limited Liability Company",
+        "grantee": "OLYMPIA ECOSYSTEMS, a Washington Non-Profit Corporation",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          116
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 4,
+    "parcelNumber": 44140000400,
+    "phase": "I",
+    "conveyances": [
+      {
+        "date": "08/09/2013",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "SO UK INVESTMENTS LLC, a Washington limited liability company",
+        "grantee": "PUGET SOUND HOMES AND DEVELOPMENT LLC, a Washington limited liability company",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          13
+        ]
+      },
+      {
+        "date": "03/27/2016",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "Puget Sound Homes, LLC., a Washington Limited Liability Company",
+        "grantee": "Colleen C. Zwickler, an unmarried woman",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          48
+        ]
+      },
+      {
+        "date": "03/25/2021",
+        "deedType": "QUIT_CLAIM",
+        "grantor": "** Colleen C. Zwickler, an unmarried woman",
+        "grantee": "** Colleen Zwickler, Trustee of Zwickler Family Trust dated October 13, 1994",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          82
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 5,
+    "parcelNumber": 44140000500,
+    "phase": "I",
+    "conveyances": [
+      {
+        "date": "08/09/2013",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "SO UK INVESTMENTS LLC, a Washington limited liability company",
+        "grantee": "PUGET SOUND HOMES AND DEVELOPMENT LLC, a Washington limited liability company",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          13
+        ]
+      },
+      {
+        "date": "06/07/2021",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "Deschutes Holding Group, LLC, a Washington Limited Liability Company",
+        "grantee": "Gallardo Homes LLC, a Washington limited liability company",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          85
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 6,
+    "parcelNumber": 44140000600,
+    "phase": "I",
+    "conveyances": [
+      {
+        "date": "08/09/2013",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "SO UK INVESTMENTS LLC, a Washington limited liability company",
+        "grantee": "PUGET SOUND HOMES AND DEVELOPMENT LLC, a Washington limited liability company",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          13
+        ]
+      },
+      {
+        "date": "09/30/2017",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "Puget Sound Homes & Development LLC, a Washington limited liability company",
+        "grantee": "Dean L. Hamlin, an unmarried person and Douglas R. Hamlin, an unmarried person",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          64
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 7,
+    "parcelNumber": 44140000700,
+    "phase": "I",
+    "conveyances": [
+      {
+        "date": "08/09/2013",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "SO UK INVESTMENTS LLC, a Washington limited liability company",
+        "grantee": "PUGET SOUND HOMES AND DEVELOPMENT LLC, a Washington limited liability company",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          13
+        ]
+      },
+      {
+        "date": "02/22/2021",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "Deschutes Holding Group LLC",
+        "grantee": "Gallardo Homes, LLC",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          80
+        ]
+      },
+      {
+        "date": "03/14/2022",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "Gallardo Homes LLC, a Washington Limited Liability Company,",
+        "grantee": "SFR Acquisitions 2 LLC, a Delaware Limited Liability Company",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          97
+        ]
+      },
+      {
+        "date": "11/21/2024",
+        "deedType": "WARRANTY",
+        "grantor": ", SFR ACQUISITIONS 2 LLC, a Delaware Limited Liability Company for and in consideration of Ten Dollars and other valuable consideration in hand paid, bargains, sells and conveys to SFR BORROWER 2021-2 LLC, a Delaware Limited Liability Company, the following described estate, situated in the County of Thurston, State of Washington:",
+        "grantee": "",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          129
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 8,
+    "parcelNumber": 44140000800,
+    "phase": "I",
+    "conveyances": [
+      {
+        "date": "08/09/2013",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "SO UK INVESTMENTS LLC, a Washington limited liability company",
+        "grantee": "PUGET SOUND HOMES AND DEVELOPMENT LLC, a Washington limited liability company",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          13
+        ]
+      },
+      {
+        "date": "02/22/2021",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "Deschutes Holding Group LLC",
+        "grantee": "Gallardo Homes, LLC",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          80
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 9,
+    "parcelNumber": 44140000900,
+    "phase": "I",
+    "conveyances": [
+      {
+        "date": "08/09/2013",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "SO UK INVESTMENTS LLC, a Washington limited liability company",
+        "grantee": "PUGET SOUND HOMES AND DEVELOPMENT LLC, a Washington limited liability company",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          13
+        ]
+      },
+      {
+        "date": "06/07/2021",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "Deschutes Holding Group, LLC, a Washington Limited Liability Company",
+        "grantee": "Gallardo Homes LLC, a Washington limited liability company",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          85
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 10,
+    "parcelNumber": 44140001000,
+    "phase": "I",
+    "conveyances": [
+      {
+        "date": "08/09/2013",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "SO UK INVESTMENTS LLC, a Washington limited liability company",
+        "grantee": "PUGET SOUND HOMES AND DEVELOPMENT LLC, a Washington limited liability company",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          13
+        ]
+      },
+      {
+        "date": "06/07/2021",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "Deschutes Holding Group, LLC, a Washington Limited Liability Company",
+        "grantee": "Gallardo Homes LLC, a Washington limited liability company",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          85
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 11,
+    "parcelNumber": 44140001100,
+    "phase": "I",
+    "conveyances": [
+      {
+        "date": "12/22/2014",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "PREMIER BUILDERS INVESTMENTS, LLC",
+        "grantee": "CONSTRUCTION OPPORTUNITY PARTNERS NO. I LLC",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          29
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 12,
+    "parcelNumber": 44140001200,
+    "phase": "I",
+    "conveyances": [
+      {
+        "date": "12/22/2014",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "PREMIER BUILDERS INVESTMENTS, LLC",
+        "grantee": "CONSTRUCTION OPPORTUNITY PARTNERS NO. I LLC",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          29
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 13,
+    "parcelNumber": 44140001300,
+    "phase": "I",
+    "conveyances": [
+      {
+        "date": "05/01/2013",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "SO UK INVESTMENT LLC, a Washington limited liability company, DBA LOTUS HOUSE DEVELOPMENT CORP.",
+        "grantee": "KAREN L. LYON, an unmarried woman",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          10
+        ]
+      },
+      {
+        "date": "12/15/2021",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "Karen L. Lyon, an unmarried woman",
+        "grantee": "Joesy Sanate and Nicole Tabor, a married couple",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          92
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 14,
+    "parcelNumber": 44140001400,
+    "phase": "I",
+    "conveyances": [
+      {
+        "date": "09/17/2013",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "SO UK INVESTMENT LLC, a Washington limited liability company",
+        "grantee": "TRONIE CORPORATION, a Washington corporation",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          15
+        ]
+      },
+      {
+        "date": "12/02/2013",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "TRONIE CORPORATION, a Washington corporation",
+        "grantee": "DALE V. DELOS REYES, a single person and MARION JOY PICCOLOMINI, a single person",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          23
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 15,
+    "parcelNumber": 44140001500,
+    "phase": "I",
+    "conveyances": [
+      {
+        "date": "10/25/2013",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "SO UK INVESTMENT LLC, a Washington limited liability company",
+        "grantee": "TRONIE CORPORATION, a Washington corporation",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          17
+        ]
+      },
+      {
+        "date": "01/23/2014",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "TRONIE CORPORATION, a Washington corporation",
+        "grantee": "JUSTIN BOEVERS and CORIE HANCOCK, husband and wife",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          25
+        ]
+      },
+      {
+        "date": "08/29/2025",
+        "deedType": "QUIT_CLAIM",
+        "grantor": "Justin Boevers WTTA AS A married man, now single",
+        "grantee": "Corie Hancock WTTA AS A married woman, now single",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          134
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 16,
+    "parcelNumber": 44140001600,
+    "phase": "I",
+    "conveyances": [
+      {
+        "date": "12/02/2013",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "SO UK INVESTMENT LLC, a Washington Limited Liability Company",
+        "grantee": "TRONIE CORPORATION, a Washington Corporation",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          21
+        ]
+      },
+      {
+        "date": "01/24/2014",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "TRONIE CORPORATION, a Washington corporation",
+        "grantee": "BRANDON S. FIRKINS and TAMMY R. FIRKINS, husband and wife",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          24
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 17,
+    "parcelNumber": 44140001700,
+    "phase": "I",
+    "conveyances": [
+      {
+        "date": "05/16/2014",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "SO UK INVESTMENT LLC, a Washington limited liability company",
+        "grantee": "TRONIE CORPORATION, a Washington corporation",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          26
+        ]
+      },
+      {
+        "date": "07/23/2014",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "TRONIE CORPORATION, a Washington corporation",
+        "grantee": "CHAD A. MARTIN and KAYCEE L. MARTIN, husband and wife",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          28
+        ]
+      },
+      {
+        "date": "12/17/2019",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "CHAD A. MARTIN and KAYCEE L. MARTIN, husband and wife",
+        "grantee": "SCOTT SUMMERS, an unmarried man",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          72
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 18,
+    "parcelNumber": 44140001800,
+    "phase": "I",
+    "conveyances": [
+      {
+        "date": "05/31/2015",
+        "deedType": "QUIT_CLAIM",
+        "grantor": "",
+        "grantee": "",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          74
+        ]
+      },
+      {
+        "date": "05/31/2015",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "DONALD B. BOURBON JR. and TINA L. BOURBON, husband and wife",
+        "grantee": "THOMAS DAVIS and JILLIAN DAVIS, husband and wife",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          41
+        ]
+      },
+      {
+        "date": "06/25/2018",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "THOMAS DAVIS and JILLIAN DAVIS, husband and wife",
+        "grantee": "JEFFREY L. HALL and LINDA L. HALL, husband and wife",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          70
+        ]
+      },
+      {
+        "date": "06/02/2020",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "Jeffrey Lynn Hall and Linda Lee Hall, Trustees of The Jeffrey and Linda Hall Revocable Living Trust, dated May 26 2020",
+        "grantee": "Brian S Morgan and Laura K Herrick, husband and wife",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          87
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 19,
+    "parcelNumber": 44140001900,
+    "phase": "I",
+    "conveyances": [
+      {
+        "date": "05/13/2013",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "EVERGREEN STATE BUILDERS LLC, a Washington limited liability company",
+        "grantee": "RONALD BLACK II and ELIZABETH BLACK, husband and wife",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          8
+        ]
+      },
+      {
+        "date": "05/07/2018",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "RONALD BLACK II and ELIZABETH BLACK, husband and wife",
+        "grantee": "ALLEN L. STARKEY and KELLEY A. STARKEY, husband and wife",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          68
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 20,
+    "parcelNumber": 44140002000,
+    "phase": "I",
+    "conveyances": [
+      {
+        "date": "06/21/2013",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "EVERGREEN STATE BUILDERS LLC, a Washington limited liability company",
+        "grantee": "RONALD P. RUPKE and LEANN L. RUPKE, husband and wife",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          12
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 21,
+    "parcelNumber": 44140002100,
+    "phase": "I",
+    "conveyances": [
+      {
+        "date": "04/24/2013",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "EVERGREEN STATE BUILDERS LLC, a Washington limited liability company",
+        "grantee": "JORGE RUIZ and ALICIA N. RUIZ, husband and wife",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          6
+        ]
+      },
+      {
+        "date": "08/22/2016",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "Jorge Ruiz and Alicia N. Ruiz",
+        "grantee": "Mohamed M. El Mobdy, Jr. and Enas El Mobdy",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          50
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 22,
+    "parcelNumber": 44140002200,
+    "phase": "I",
+    "conveyances": [
+      {
+        "date": "05/03/2013",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "EVERGREEN STATE BUILDERS LLC, a Washington limited liability company",
+        "grantee": "JOSHUA W. RENSCHLER and NICHOLE M. RENSCHLER, husband and wife",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          4
+        ]
+      },
+      {
+        "date": "11/16/2021",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "Joshua W. Renschler and Nichole M. Renschler, husband and wife",
+        "grantee": "Adam Griggs and Sheri Griggs, a married couple",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          90
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 23,
+    "parcelNumber": 44140002300,
+    "phase": "I",
+    "conveyances": [
+      {
+        "date": "05/16/2014",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "SO UK INVESTMENT LLC, a Washington limited liability company",
+        "grantee": "TRONIE CORPORATION, a Washington corporation",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          27
+        ]
+      },
+      {
+        "date": "12/09/2015",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "TRONIE CORPORATION, A WASHINGTON CORPORATION",
+        "grantee": "OMAR ARCELAY BARBOSA and ZAKIYYAH GRACIE LAVETTE ARCELAY, HUSBAND AND WIFE",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          45
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 24,
+    "parcelNumber": 44140002400,
+    "phase": "I",
+    "conveyances": [
+      {
+        "date": "11/05/2013",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "SO UK INVESTMENT LLC, a Washington limited liability company",
+        "grantee": "PREMIER BUILDERS INVESTMENTS LLC, a Washington limited liability company",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          19
+        ]
+      },
+      {
+        "date": "12/22/2014",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "PREMIER BUILDERS INVESTMENTS, LLC",
+        "grantee": "CONSTRUCTION OPPORTUNITY PARTNERS NO. I LLC",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          29
+        ]
+      },
+      {
+        "date": "10/28/2015",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "CONSTRUCTION OPPORTUNITY PARTNERS NO. 1 LLC",
+        "grantee": "JON D. PANAMAROFF and KELLY M. PANAMAROFF, A MARRIED COUPLE",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          43
+        ]
+      },
+      {
+        "date": "04/27/2018",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "Jon D. Panamaroff and Kelly M. Panamaroff",
+        "grantee": "Croft Bracken and Candice Bracken",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          66
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 25,
+    "parcelNumber": 44140002500,
+    "phase": "I",
+    "conveyances": [
+      {
+        "date": "12/10/2014",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "SO UK INVESTMENT LLC, a Washington limited liability company",
+        "grantee": "TRONIE CORPORATION, a Washington corporation",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          37
+        ]
+      },
+      {
+        "date": "09/17/2015",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "TRONIE CORPORATION, a Washington corporation",
+        "grantee": "ARLE D. SEATON and ELISA L WHITE-SEATON, husband and wife",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          42
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 26,
+    "parcelNumber": 44140002600,
+    "phase": "I",
+    "conveyances": [
+      {
+        "date": "12/10/2014",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "SO UK INVESTMENT LLC, a Washington limited liability company",
+        "grantee": "TRONIE CORPORATION, a Washington corporation",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          39
+        ]
+      },
+      {
+        "date": "11/09/2015",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "Denise Renee Sinclair, an unmarried person",
+        "grantee": "Christopher Haymes, an unmarried individual",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          131
+        ]
+      },
+      {
+        "date": "11/09/2015",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "TRONIE CORPORATION, A WASHINGTON CORPORATION",
+        "grantee": "ANTHONY JAMES SINCLAIR and DENISE RENEE SINCLAIR, Husband and Wife",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          44
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 27,
+    "parcelNumber": 44140002700,
+    "phase": "II",
+    "conveyances": [
+      {
+        "date": "03/28/2017",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "LOTUS HOUSE DEVELOPMENT CORP, a Washington corporation",
+        "grantee": "JAMES G. NIEBUHR and BERNADETTE M. NIEBUHR, husband and wife",
+        "sourceFile": "Deschutes Heights Phase 1 Deeds",
+        "sourcePages": [
+          4
+        ]
+      },
+      {
+        "date": "03/28/2017",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "SO UK INVESTMENT LLC, a Washington Limited Liability Company",
+        "grantee": "LOTUS HOUSE DEVELOPMENT CORP, a Washington Corporation",
+        "sourceFile": "Deschutes Heights Phase 1 Deeds",
+        "sourcePages": [
+          3
+        ]
+      },
+      {
+        "date": "03/28/2017",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "SO UK Investment LLC",
+        "grantee": "Aasve Home's LLC",
+        "sourceFile": "Deschutes Heights Phase 1 Deeds",
+        "sourcePages": [
+          4
+        ]
+      },
+      {
+        "date": "07/24/2025",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "Bernadette M. Niebuhr, an unmarried person",
+        "grantee": "Brenden Higashi, an unmarried man, and Miles Sari, an unmarried man",
+        "sourceFile": "Deschutes Heights Phase 1 Deeds",
+        "sourcePages": [
+          138
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 28,
+    "parcelNumber": 44140002800,
+    "phase": "II",
+    "conveyances": [
+      {
+        "date": "09/16/2016",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "SO UK Investment LLC",
+        "grantee": "High Definition Homes, LLC",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          52
+        ]
+      },
+      {
+        "date": "06/22/2017",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "High Definition Homes",
+        "grantee": "Sean R. Chatterton and Kathryn R. Chatterton",
+        "sourceFile": "Deschutes Heights Phase 1 Deeds",
+        "sourcePages": [
+          11
+        ]
+      },
+      {
+        "date": "10/23/2019",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": ", Sean R. Chatterton and Kathryn R. Chatterton, husband and wife for and in consideration of Ten Dollars and other valuable consideration in hand paid, conveys, and warrants to Dale Smith and Concepcion Smith, a married couple the following described real estate, situated in the County of Thurston, State of Washington:",
+        "grantee": "Dale Smith and Concepcion Smith, a married couple",
+        "sourceFile": "Deschutes Heights Phase 1 Deeds",
+        "sourcePages": [
+          47
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 29,
+    "parcelNumber": 44140002900,
+    "phase": "II",
+    "conveyances": [
+      {
+        "date": "09/16/2016",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "SO UK Investment LLC",
+        "grantee": "High Definition Homes, LLC",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          52
+        ]
+      },
+      {
+        "date": "10/18/2017",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "High Definition Homes, LLC",
+        "grantee": "Brian P. Finley and Melissa A. Finley",
+        "sourceFile": "Deschutes Heights Phase 1 Deeds",
+        "sourcePages": [
+          17
+        ]
+      },
+      {
+        "date": "07/16/2022",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "Brian Finley and Melissa Finley, a married couple,",
+        "grantee": "Thomas Beirne, a single person and Mary Elise Marshall, a single person,",
+        "sourceFile": "Deschutes Heights Phase 1 Deeds",
+        "sourcePages": [
+          90
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 30,
+    "parcelNumber": 44140003000,
+    "phase": "II",
+    "conveyances": [
+      {
+        "date": "09/16/2016",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "SO UK Investment LLC",
+        "grantee": "High Definition Homes, LLC",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          52
+        ]
+      },
+      {
+        "date": "06/26/2017",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "High Definition Homes, LLC",
+        "grantee": "Scott L. Taylor and Kim R. Taylor",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          62
+        ]
+      },
+      {
+        "date": "12/06/2021",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "Scott L. Taylor and Kim R. Taylor, a married couple",
+        "grantee": "Taylor Christian Rieff, an unmarried person",
+        "sourceFile": "Deschutes Heights Phase 1 Deeds",
+        "sourcePages": [
+          75
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 31,
+    "parcelNumber": 44140003100,
+    "phase": "II",
+    "conveyances": [
+      {
+        "date": "11/25/2016",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "SO UK INVESTMENT LLC, a Washington Limited Liability Company",
+        "grantee": "KENNY COHEN and BAT-SHEVA STEIN, husband and wife",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          58
+        ]
+      },
+      {
+        "date": "07/31/2019",
+        "deedType": "QUIT_CLAIM",
+        "grantor": "",
+        "grantee": "",
+        "sourceFile": "Deschutes Heights Phase 1 Deeds",
+        "sourcePages": [
+          25
+        ]
+      },
+      {
+        "date": "07/31/2019",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "Bat-Sheva Stein, a married woman as her separate property",
+        "grantee": "Michael C. Haupert and KaTrina L. Haupert, husband and wife",
+        "sourceFile": "Deschutes Heights Phase 1 Deeds",
+        "sourcePages": [
+          44
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 32,
+    "parcelNumber": 44140003200,
+    "phase": "II",
+    "conveyances": [
+      {
+        "date": "03/22/2017",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "SO UK INVESTMENT, LLC, a Washington Limited Liability Company",
+        "grantee": "TRONIE CORPORATION, a Washington Corporation",
+        "sourceFile": "Deschutes Heights Phase 1 Deeds",
+        "sourcePages": [
+          2
+        ]
+      },
+      {
+        "date": "10/30/2017",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "TRONIE CORPORATION, a Washington Corporation",
+        "grantee": "ROBERT O. MYKLEBY and TIFFANIE C. BARNES, husband and wife",
+        "sourceFile": "Deschutes Heights Phase 1 Deeds",
+        "sourcePages": [
+          19
+        ]
+      },
+      {
+        "date": "12/08/2021",
+        "deedType": "QUIT_CLAIM",
+        "grantor": "and Robert O. Mykleby and Tiffanie C. Mykleby, husband and wife, as tenants by the entirety, a mailing address of 2136 79Th Ave SE, Olympia, WA 98501, hereinafter referred to as Grantee(s).",
+        "grantee": ".",
+        "sourceFile": "Deschutes Heights Phase 1 Deeds",
+        "sourcePages": [
+          78
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 33,
+    "parcelNumber": 44140003300,
+    "phase": "II",
+    "conveyances": [
+      {
+        "date": "06/07/2017",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "LOTUS HOUSE DEVELOPMENT CORP., a Washington Corporation, a Washington Corporation",
+        "grantee": "COREY L. LENEKER and AMY S. LENEKER, husband and wife",
+        "sourceFile": "Deschutes Heights Phase 1 Deeds",
+        "sourcePages": [
+          8
+        ]
+      },
+      {
+        "date": "06/07/2017",
+        "deedType": "QUIT_CLAIM",
+        "grantor": "LOTUS HOUSE DEVELOPMENT CORP., a Washington Corporation, a Washington Corporation",
+        "grantee": "COREY L. LENEKER and AMY S. LENEKER, husband and wife",
+        "sourceFile": "Deschutes Heights Phase 1 Deeds",
+        "sourcePages": [
+          7
+        ]
+      },
+      {
+        "date": "07/09/2021",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": ", Corey L. Leneker and Amy S. Leneker, husband and wife for and in consideration of Ten Dollars and other valuable consideration in hand paid, conveys, and warrants to Chad Johnson and Stephanie Johnson, a married couple the following described real estate, situated in the County of Thurston, State of Washington:",
+        "grantee": "Chad Johnson and Stephanie Johnson, a married couple",
+        "sourceFile": "Deschutes Heights Phase 1 Deeds",
+        "sourcePages": [
+          64
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 34,
+    "parcelNumber": 44140003400,
+    "phase": "II",
+    "conveyances": [
+      {
+        "date": "07/29/2019",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "LOTUS HOUSE DEVELOPMENT CORPORATION, a Washington Corporation",
+        "grantee": "WALTER JAMES BRACY and MCKENNZIE ASPEN BRACY, a married couple",
+        "sourceFile": "Deschutes Heights Phase 1 Deeds",
+        "sourcePages": [
+          42
+        ]
+      },
+      {
+        "date": "07/29/2019",
+        "deedType": "QUIT_CLAIM",
+        "grantor": "THURSTON COUNTY TITLE CO.",
+        "grantee": "LOTUS HOUSE DEVELOPMENT CORPORATION, a Washington Corporation",
+        "sourceFile": "Deschutes Heights Phase 1 Deeds",
+        "sourcePages": [
+          40
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 35,
+    "parcelNumber": 44140003500,
+    "phase": "II",
+    "conveyances": [
+      {
+        "date": "04/07/2017",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "SO UK Investment LLC",
+        "grantee": "Aasve Home's LLC",
+        "sourceFile": "Deschutes Heights Phase 1 Deeds",
+        "sourcePages": [
+          5
+        ]
+      },
+      {
+        "date": "04/12/2019",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "AASVE HOME'S L.L.C., a Washington Limited Liability Company",
+        "grantee": "CHRISTIAN D. STEPHEN and JENNIFER K. STEPHEN, a married couple",
+        "sourceFile": "Deschutes Heights Phase 1 Deeds",
+        "sourcePages": [
+          35
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 36,
+    "parcelNumber": 44140003600,
+    "phase": "II",
+    "conveyances": [
+      {
+        "date": "08/01/2017",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "",
+        "grantee": "Kristine M. Rompa, an unmarried Person , whose mailing address is 849 101st Ave SE, Olympia, WA 98501",
+        "sourceFile": "Deschutes Heights Phase 1 Deeds",
+        "sourcePages": [
+          92
+        ]
+      },
+      {
+        "date": "08/01/2017",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "LOTUS HOUSE DEVELOPMENT CORP, a Washington Corporation",
+        "grantee": "JAMES M. HEFFERNAN and TROVA K. HEFFERNAN, a married couple",
+        "sourceFile": "Deschutes Heights Phase 1 Deeds",
+        "sourcePages": [
+          14
+        ]
+      },
+      {
+        "date": "08/01/2017",
+        "deedType": "QUIT_CLAIM",
+        "grantor": "SO UK INVESTMENT, LLC, a Washington Corporation",
+        "grantee": "LOTUS HOUSE DEVELOPMENT CORP, a Washington Corporation",
+        "sourceFile": "Deschutes Heights Phase 1 Deeds",
+        "sourcePages": [
+          13
+        ]
+      },
+      {
+        "date": "08/20/2022",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "",
+        "grantee": "SIRVA RELOCATION CREDIT, LLC, a Delaware Limited Liability Company, in fee simple, whose mailing address is 6200 Oak Tree Blvd., Suite 300, Independence, OH 44131, Attn: Kevin Butler",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          100
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 37,
+    "parcelNumber": 44140003700,
+    "phase": "II",
+    "conveyances": [
+      {
+        "date": "09/16/2016",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "SO UK Investment LLC",
+        "grantee": "High Definition Homes, LLC",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          55
+        ]
+      },
+      {
+        "date": "05/03/2017",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "High Definition Homes, LLC",
+        "grantee": "Denise Napier",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          60
+        ]
+      },
+      {
+        "date": "09/26/2025",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "DENISE NAPIER, AN UNMARRIED WOMAN,",
+        "grantee": "JORDAN . PINE AND LAIKLYN L. PINE, A MARRIED COUPLE,",
+        "sourceFile": "Deschutes Heights Phase 1 Deeds",
+        "sourcePages": [
+          142
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 38,
+    "parcelNumber": 44140003800,
+    "phase": "II",
+    "conveyances": [
+      {
+        "date": "11/30/2017",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "LOTUS HOUSE DEVELOPMENT CORP, a Washington Corporation",
+        "grantee": "JAMES R. COLARD and RENEE COLARD, husband and wife",
+        "sourceFile": "Deschutes Heights Phase 1 Deeds",
+        "sourcePages": [
+          21
+        ]
+      },
+      {
+        "date": "11/30/2017",
+        "deedType": "QUIT_CLAIM",
+        "grantor": "SO UK INVESTMENT LLC, a Washington Limited Liability Company",
+        "grantee": "LOTUS HOUSE DEVELOPMENT CORP, a Washington Corporation",
+        "sourceFile": "Deschutes Heights Phase 1 Deeds",
+        "sourcePages": [
+          23
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 39,
+    "parcelNumber": 44140003900,
+    "phase": "II",
+    "conveyances": [
+      {
+        "date": "09/16/2016",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "SO UK Investment LLC",
+        "grantee": "High Definition Homes, LLC",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          55
+        ]
+      },
+      {
+        "date": "06/07/2017",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "High Definition Homes, LLC",
+        "grantee": "Cheri Sears",
+        "sourceFile": "Deschutes Heights Phase 1 Deeds",
+        "sourcePages": [
+          9
+        ]
+      },
+      {
+        "date": "09/01/2021",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "Cheri Marbett, who acquired title as Cheri Sears, and Philip J. Marbett, a married couple",
+        "grantee": "Michelle LaPraim, an unmarried woman",
+        "sourceFile": "Deschutes Heights Phase 1 Deeds",
+        "sourcePages": [
+          66
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 40,
+    "parcelNumber": 44140004000,
+    "phase": "II",
+    "conveyances": [
+      {
+        "date": "03/08/2017",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "SO UK INVESTMENT, LLC, a Washington Limited Liability Company",
+        "grantee": "TRONIE CORPORATION, a Washington Corporation",
+        "sourceFile": "Deschutes Heights Phase 1 Deeds",
+        "sourcePages": [
+          1
+        ]
+      },
+      {
+        "date": "06/08/2018",
+        "deedType": "QUIT_CLAIM",
+        "grantor": "MELINA RENEE PALMER, Spouse of Grantee",
+        "grantee": "AARON PALMER, a married man as his separate estate",
+        "sourceFile": "Deschutes Heights Phase 1 Deeds",
+        "sourcePages": [
+          29
+        ]
+      },
+      {
+        "date": "06/12/2018",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "GRUHN HOMES, INC., a Washington Corporation",
+        "grantee": "AARON PALMER, a married man as his separate estate",
+        "sourceFile": "Deschutes Heights Phase 1 Deeds",
+        "sourcePages": [
+          27
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 41,
+    "parcelNumber": 44140004100,
+    "phase": "II",
+    "conveyances": [
+      {
+        "date": "12/21/2016",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "SO UK INVESTMENT, LLC., A Washington limited liability company",
+        "grantee": "GRUHN HOMES, INC., A WASHINGTON CORPORATION",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          59
+        ]
+      },
+      {
+        "date": "07/31/2017",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "Gruhn Homes, Inc.",
+        "grantee": "Gregorio E. Zayas, Jr.",
+        "sourceFile": "Deschutes Heights Phase 1 Deeds",
+        "sourcePages": [
+          15
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 47,
+    "parcelNumber": 44140004700,
+    "phase": "II",
+    "conveyances": [
+      {
+        "date": "04/17/2025",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "LOTUS HOUSE DEVELOPMENT CORPORATION, a Washington Corporation",
+        "grantee": "MARIANNE SCHULZE and RAUL RAMOS, a married couple",
+        "sourceFile": "Deschutes Heights Phase 1 Deeds",
+        "sourcePages": [
+          134
+        ]
+      },
+      {
+        "date": "04/17/2025",
+        "deedType": "QUIT_CLAIM",
+        "grantor": "SO UK INVESTMENT LLC, a Washington Limited Liability Company",
+        "grantee": "LOTUS HOUSE DEVELOPMENT CORPORATION, a Washington Corporation",
+        "sourceFile": "Deschutes Heights Phase 1 Deeds",
+        "sourcePages": [
+          132
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 48,
+    "parcelNumber": 44140004800,
+    "phase": "II",
+    "conveyances": [
+      {
+        "date": "01/31/2022",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "Lotus House Development Corp., a Washington Corporation,",
+        "grantee": "SFR Acquisitions 1 LLC, a Delaware Limited Liability Company",
+        "sourceFile": "Deschutes Heights Phase 1 Deeds",
+        "sourcePages": [
+          82
+        ]
+      },
+      {
+        "date": "01/31/2022",
+        "deedType": "QUIT_CLAIM",
+        "grantor": "SO UK Investment LLC, a Washington limited liability company",
+        "grantee": "Lotus House Development Corp., a Washington Corporation",
+        "sourceFile": "Deschutes Heights Phase 1 Deeds",
+        "sourcePages": [
+          85
+        ]
+      },
+      {
+        "date": "07/25/2024",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "SFR Borrower 2022-1 LLC, a Delaware Limited Liability Company",
+        "grantee": "Ryan K. Cook and Allison R. Cook, a married couple, and Linda L. Cornett, a single person",
+        "sourceFile": "Deschutes Heights Phase 1 Deeds",
+        "sourcePages": [
+          127
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 49,
+    "parcelNumber": 44140004900,
+    "phase": "II",
+    "conveyances": [
+      {
+        "date": "04/29/2022",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "LOTUS HOUSE DEVELOPMENT CORPORATION, a Washington Corporation",
+        "grantee": "WILLIAM SPANGLER and SUSAN BLOOMFIELD, a married couple",
+        "sourceFile": "Deschutes Heights Phase 1 Deeds",
+        "sourcePages": [
+          88
+        ]
+      },
+      {
+        "date": "04/29/2022",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "William Spangler and Susan Bloomfield, a married couple",
+        "grantee": "Chelsie Busey and Robert Busey, a married couple",
+        "sourceFile": "Deschutes Heights Phase 1 Deeds",
+        "sourcePages": [
+          130
+        ]
+      },
+      {
+        "date": "04/29/2022",
+        "deedType": "QUIT_CLAIM",
+        "grantor": "THURSTON COUNTY TITLE CO",
+        "grantee": "LOTUS HOUSE DEVELOPMENT CORPORATION, a Washington Corporation",
+        "sourceFile": "Deschutes Heights Phase 2 Deeds",
+        "sourcePages": [
+          82
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 50,
+    "parcelNumber": 44140005000,
+    "phase": "II",
+    "conveyances": [
+      {
+        "date": "05/04/2021",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "SO UK INVESTMENT, LLC, a Washington Limited Liability Company",
+        "grantee": "JK MONARCH, LLC, a Washington Limited Liability Company",
+        "sourceFile": "Deschutes Heights Phase 1 Deeds",
+        "sourcePages": [
+          62
+        ]
+      },
+      {
+        "date": "10/14/2022",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "JK Monarch, LLC, a Washington limited liability company",
+        "grantee": "Cynthia M Lind and Michael E Lind, a married couple",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          102
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 51,
+    "parcelNumber": 44140005100,
+    "phase": "II",
+    "conveyances": [
+      {
+        "date": "05/04/2021",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "SO UK INVESTMENT, LLC, a Washington Limited Liability Company",
+        "grantee": "JK MONARCH, LLC, a Washington Limited Liability Company",
+        "sourceFile": "Deschutes Heights Phase 1 Deeds",
+        "sourcePages": [
+          62
+        ]
+      },
+      {
+        "date": "10/21/2022",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "JK Monarch, LLC, a Washington Limited Liability Company",
+        "grantee": "Deborah Lee Seal and Thomas Seal, a married couple",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          106
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 52,
+    "parcelNumber": 44140005200,
+    "phase": "II",
+    "conveyances": [
+      {
+        "date": "05/04/2021",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "SO UK INVESTMENT, LLC, a Washington Limited Liability Company",
+        "grantee": "JK MONARCH, LLC, a Washington Limited Liability Company",
+        "sourceFile": "Deschutes Heights Phase 1 Deeds",
+        "sourcePages": [
+          62
+        ]
+      },
+      {
+        "date": "11/30/2022",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "JK Monarch, LLC, a Washington Limited Liability Company",
+        "grantee": "Robert Soldier and Frances Limtiaco, a married couple",
+        "sourceFile": "Deschutes Heights Phase 1 Deeds",
+        "sourcePages": [
+          105
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 53,
+    "parcelNumber": 44140005300,
+    "phase": "II",
+    "conveyances": [
+      {
+        "date": "05/04/2021",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "SO UK INVESTMENT, LLC, a Washington Limited Liability Company",
+        "grantee": "JK MONARCH, LLC, a Washington Limited Liability Company",
+        "sourceFile": "Deschutes Heights Phase 1 Deeds",
+        "sourcePages": [
+          62
+        ]
+      },
+      {
+        "date": "03/03/2023",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "JK Monarch, LLC, a Washington Limited Liability Company",
+        "grantee": "James Cody Lords and Kimberly Anne Lords, a married couple",
+        "sourceFile": "Deschutes Heights Phase 1 Deeds",
+        "sourcePages": [
+          117
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 54,
+    "parcelNumber": 44140005400,
+    "phase": "II",
+    "conveyances": [
+      {
+        "date": "12/02/2020",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "SO UK INVESTMENT, LLC, a Washington Limited Liability Company",
+        "grantee": "JK MONARCH LLC, a Washington Limited Liability Company",
+        "sourceFile": "Deschutes Heights Phase 1 Deeds",
+        "sourcePages": [
+          58
+        ]
+      },
+      {
+        "date": "02/28/2023",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "JK Monarch, LLC, a Washington Limited Liability Company",
+        "grantee": "Jaclyn Nicole Sison and Sean Michael S Sison, a married couple",
+        "sourceFile": "Deschutes Heights Phase 1 Deeds",
+        "sourcePages": [
+          113
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 55,
+    "parcelNumber": 44140005500,
+    "phase": "II",
+    "conveyances": [
+      {
+        "date": "03/22/2017",
+        "deedType": "QUIT_CLAIM",
+        "grantor": "Linda Stamer, an unmarried person",
+        "grantee": "Linda J. Stamer, Trustee, or her successors in interest, of the Linda J. Stamer Trust dated March 22, 2017, and any amendments thereto",
+        "sourceFile": "Deschutes Heights Phase 1 Deeds",
+        "sourcePages": [
+          136
+        ]
+      },
+      {
+        "date": "12/02/2020",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "SO UK INVESTMENT, LLC, a Washington Limited Liability Company",
+        "grantee": "JK MONARCH LLC, a Washington Limited Liability Company",
+        "sourceFile": "Deschutes Heights Phase 1 Deeds",
+        "sourcePages": [
+          58
+        ]
+      },
+      {
+        "date": "12/19/2023",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "JK Monarch, LLC, a Washington Limited Liability Company",
+        "grantee": "Linda Stamer, an unmarried person",
+        "sourceFile": "Deschutes Heights Phase 1 Deeds",
+        "sourcePages": [
+          121
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 56,
+    "parcelNumber": 44140005600,
+    "phase": "II",
+    "conveyances": [
+      {
+        "date": "09/19/2018",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "SO UK INVESTMENTS LLC, a Washington Limited Liability Company",
+        "grantee": "BLAKE CHARD and SHELIA CHARD, husband and wife",
+        "sourceFile": "Deschutes Heights Phase 1 Deeds",
+        "sourcePages": [
+          33
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 57,
+    "parcelNumber": 44140005700,
+    "phase": "II",
+    "conveyances": [
+      {
+        "date": "12/02/2020",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "SO UK INVESTMENT, LLC, a Washington Limited Liability Company",
+        "grantee": "JK MONARCH LLC, a Washington Limited Liability Company",
+        "sourceFile": "Deschutes Heights Phase 1 Deeds",
+        "sourcePages": [
+          58
+        ]
+      },
+      {
+        "date": "11/23/2022",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "JK Monarch, LLC, a Washington Limited Liability Company",
+        "grantee": "Angela Huber and Derrick Huber, a married couple",
+        "sourceFile": "Deschutes Heights Phase 1 Deeds",
+        "sourcePages": [
+          97
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 58,
+    "parcelNumber": 44140005800,
+    "phase": "II",
+    "conveyances": [
+      {
+        "date": "12/02/2020",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "SO UK INVESTMENT, LLC, a Washington Limited Liability Company",
+        "grantee": "JK MONARCH LLC, a Washington Limited Liability Company",
+        "sourceFile": "Deschutes Heights Phase 1 Deeds",
+        "sourcePages": [
+          58
+        ]
+      },
+      {
+        "date": "12/02/2022",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "JK Monarch, LLC, a Washington Limited Liability Company",
+        "grantee": "Anthony J Davis and Cyann L Davis, a married couple",
+        "sourceFile": "Deschutes Heights Phase 1 Deeds",
+        "sourcePages": [
+          109
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 59,
+    "parcelNumber": 44140005900,
+    "phase": "II",
+    "conveyances": [
+      {
+        "date": "05/19/2020",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "Jamie E. Merly and Jason W. Merly, wife and husband,",
+        "grantee": "Martha L. Hall, an unmarried woman, and Juliet Shier, an unmarried woman",
+        "sourceFile": "Deschutes Heights Phase 1 Deeds",
+        "sourcePages": [
+          125
+        ]
+      },
+      {
+        "date": "05/19/2020",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "LOTUS HOUSE DEVELOPMENT CORPORATION, a Washington Corporation",
+        "grantee": "JAMIE E. MERLY and JASON W. MERLY, wife and husband",
+        "sourceFile": "Deschutes Heights Phase 1 Deeds",
+        "sourcePages": [
+          54
+        ]
+      },
+      {
+        "date": "05/19/2020",
+        "deedType": "QUIT_CLAIM",
+        "grantor": "THURSTON COUNTY TITLE CO",
+        "grantee": "LOTUS HOUSE DEVELOPMENT CORPORATION, a Washington Corporation",
+        "sourceFile": "Deschutes Heights Phase 1 Deeds",
+        "sourcePages": [
+          56
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 60,
+    "parcelNumber": 44140006000,
+    "phase": "II",
+    "conveyances": [
+      {
+        "date": "12/02/2020",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "SO UK INVESTMENT, LLC, a Washington Limited Liability Company",
+        "grantee": "JK MONARCH LLC, a Washington Limited Liability Company",
+        "sourceFile": "Deschutes Heights Phase 1 Deeds",
+        "sourcePages": [
+          58
+        ]
+      },
+      {
+        "date": "11/28/2022",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "JK Monarch, LLC, a Washington Limited Liability Company",
+        "grantee": "Megan C Israel and Brenden J Weinroth, a married couple",
+        "sourceFile": "Deschutes Heights Phase 1 Deeds",
+        "sourcePages": [
+          101
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 61,
+    "parcelNumber": 44140006100,
+    "phase": "II",
+    "conveyances": [
+      {
+        "date": "03/09/2020",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "SO UK INVESTMENT, LLC, a Washington Limited Liability Company",
+        "grantee": "JK MONARCH, LLC, a Washington Limited Liability Company",
+        "sourceFile": "Deschutes Heights Phase 1 Deeds",
+        "sourcePages": [
+          49
+        ]
+      },
+      {
+        "date": "12/08/2021",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "JK Monarch, LLC, a Washington Limited Liability Company",
+        "grantee": "Chad Kirby and Karla Youngers, a married couple",
+        "sourceFile": "Deschutes Heights Phase 1 Deeds",
+        "sourcePages": [
+          80
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 62,
+    "parcelNumber": 44140006200,
+    "phase": "II",
+    "conveyances": [
+      {
+        "date": "06/06/2019",
+        "deedType": "QUIT_CLAIM",
+        "grantor": "SO UK INVESTMENT LLC, a Washington Limited Liability Company",
+        "grantee": "LOTUS HOUSE DEVELOPMENT CORP, a Washington Corporation",
+        "sourceFile": "Deschutes Heights Phase 1 Deeds",
+        "sourcePages": [
+          38
+        ]
+      },
+      {
+        "date": "05/12/2020",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "LOTUS HOUSE DEVELOPMENT CORP, a Washington Corporation",
+        "grantee": "JERRY E. NICHOLS and TONJA R. NICHOLS, a married couple",
+        "sourceFile": "Deschutes Heights Phase 1 Deeds",
+        "sourcePages": [
+          52
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 63,
+    "parcelNumber": 44140006300,
+    "phase": "II",
+    "conveyances": [
+      {
+        "date": "03/09/2020",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "SO UK INVESTMENT, LLC, a Washington Limited Liability Company",
+        "grantee": "JK MONARCH, LLC, a Washington Limited Liability Company",
+        "sourceFile": "Deschutes Heights Phase 1 Deeds",
+        "sourcePages": [
+          49
+        ]
+      },
+      {
+        "date": "10/14/2021",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "JK Monarch, LLC, a Washington Limited Liability Company",
+        "grantee": "Charles E Akau and Brianna Akau, a married couple",
+        "sourceFile": "Deschutes Heights Phase 1 Deeds",
+        "sourcePages": [
+          73
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 64,
+    "parcelNumber": 44140006400,
+    "phase": "II",
+    "conveyances": [
+      {
+        "date": "03/09/2020",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "SO UK INVESTMENT, LLC, a Washington Limited Liability Company",
+        "grantee": "JK MONARCH, LLC, a Washington Limited Liability Company",
+        "sourceFile": "Deschutes Heights Phase 1 Deeds",
+        "sourcePages": [
+          49
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 65,
+    "parcelNumber": 44140006500,
+    "phase": "II",
+    "conveyances": [
+      {
+        "date": "03/09/2020",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "SO UK INVESTMENT, LLC, a Washington Limited Liability Company",
+        "grantee": "JK MONARCH, LLC, a Washington Limited Liability Company",
+        "sourceFile": "Deschutes Heights Phase 1 Deeds",
+        "sourcePages": [
+          49
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 66,
+    "parcelNumber": 44140006600,
+    "phase": "II",
+    "conveyances": [
+      {
+        "date": "09/16/2016",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "SO UK Investment LLC",
+        "grantee": "High Definition Homes, LLC",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          52
+        ]
+      },
+      {
+        "date": "07/16/2018",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "High Definition Homes, LLC",
+        "grantee": "Christina M. Primiano and Joel P. Primiano",
+        "sourceFile": "Deschutes Heights Phase 1 Deeds",
+        "sourcePages": [
+          31
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 68,
+    "parcelNumber": 44140006800,
+    "phase": "III",
+    "conveyances": [
+      {
+        "date": "08/20/2019",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "Capital Development Properties, LLC, a Washington limited liability company",
+        "grantee": "Evan Seguirant and Alexis J Jackowski-Yurovchak, a married couple",
+        "sourceFile": "Deschutes Heights Phase 2 Deeds",
+        "sourcePages": [
+          19
+        ]
+      },
+      {
+        "date": "08/20/2019",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "SO UK INVESTMENT, LLC, a Washington Limited Liability Company",
+        "grantee": "CAPITAL DEVELOPMENT PROPERTIES LLC, a Washington Limited Liability Company",
+        "sourceFile": "Deschutes Heights Phase 2 Deeds",
+        "sourcePages": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 69,
+    "parcelNumber": 44140006900,
+    "phase": "III",
+    "conveyances": [
+      {
+        "date": "08/20/2019",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "Capital Development Properties, LLC, a Washington Limited Liability Company",
+        "grantee": "Todd Kelly, Jr, an unmarried person",
+        "sourceFile": "Deschutes Heights Phase 2 Deeds",
+        "sourcePages": [
+          42
+        ]
+      },
+      {
+        "date": "08/20/2019",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "SO UK INVESTMENT, LLC, a Washington Limited Liability Company",
+        "grantee": "CAPITAL DEVELOPMENT PROPERTIES LLC, a Washington Limited Liability Company",
+        "sourceFile": "Deschutes Heights Phase 2 Deeds",
+        "sourcePages": [
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 70,
+    "parcelNumber": 44140007000,
+    "phase": "III",
+    "conveyances": [
+      {
+        "date": "02/16/2021",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "LOTUS HOUSE DEVELOPMENT CORPORATION, a Washington Limited Liability Company",
+        "grantee": "SHERYL STAUDACHER, a single person",
+        "sourceFile": "Deschutes Heights Phase 2 Deeds",
+        "sourcePages": [
+          52
+        ]
+      },
+      {
+        "date": "02/16/2021",
+        "deedType": "QUIT_CLAIM",
+        "grantor": "SO UK INVESTMENT LLC., a Washington Limited Liability Company",
+        "grantee": "LOTUS HOUSE DEVELOPMENT CORPORATION, a Washington Corporation",
+        "sourceFile": "Deschutes Heights Phase 2 Deeds",
+        "sourcePages": [
+          50
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 72,
+    "parcelNumber": 44140007200,
+    "phase": "III",
+    "conveyances": [
+      {
+        "date": "01/02/2020",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "SO UK INVESTMENT LLC, a Washington Limited Liability Company",
+        "grantee": "CAPITAL DEVELOPMENT PROPERTIES, a Washington Limited Liability Company",
+        "sourceFile": "Deschutes Heights Phase 2 Deeds",
+        "sourcePages": [
+          9
+        ]
+      },
+      {
+        "date": "06/24/2021",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "Capital Development Properties LLC, a Washington Limited Liability Company",
+        "grantee": "Andrew Van Gerpen and Phuc Van Gerpen, husband and wife",
+        "sourceFile": "Deschutes Heights Phase 2 Deeds",
+        "sourcePages": [
+          66
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 73,
+    "parcelNumber": 44140007300,
+    "phase": "III",
+    "conveyances": [
+      {
+        "date": "12/28/2020",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "LOTUS HOUSE DEVELOPMENT CORPORATION, a Washington Corporation",
+        "grantee": "CHRISTOPHER R. BARNER and GINA D. BARNER, a married couple",
+        "sourceFile": "Deschutes Heights Phase 2 Deeds",
+        "sourcePages": [
+          38
+        ]
+      },
+      {
+        "date": "12/28/2020",
+        "deedType": "QUIT_CLAIM",
+        "grantor": "THURSTON COUNTY TITLE CO",
+        "grantee": "LOTUS HOUSE DEVELOPMENT CORPORATION, a Washington Corporation",
+        "sourceFile": "Deschutes Heights Phase 2 Deeds",
+        "sourcePages": [
+          40
+        ]
+      },
+      {
+        "date": "05/07/2025",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "Christopher R Barner and Gina D Barner, a married couple",
+        "grantee": "Joshua J Creekpaum, an unmarried man and Tara Morey, an unmarried woman",
+        "sourceFile": "Deschutes Heights Phase 2 Deeds",
+        "sourcePages": [
+          142
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 74,
+    "parcelNumber": 44140007400,
+    "phase": "III",
+    "conveyances": [
+      {
+        "date": "02/08/2021",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "LOTUS HOUSE DEVELOPMENT CORPORATION, a Washington Corporation",
+        "grantee": "WILLIAM A. EDWARDS, unmarried man",
+        "sourceFile": "Deschutes Heights Phase 2 Deeds",
+        "sourcePages": [
+          46
+        ]
+      },
+      {
+        "date": "02/08/2021",
+        "deedType": "QUIT_CLAIM",
+        "grantor": "THURSTON COUNTY TITLE CO",
+        "grantee": "LOTUS HOUSE DEVELOPMENT CORPORATION, A Washington Corporation",
+        "sourceFile": "Deschutes Heights Phase 2 Deeds",
+        "sourcePages": [
+          48
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 75,
+    "parcelNumber": 44140007500,
+    "phase": "III",
+    "conveyances": [
+      {
+        "date": "05/17/2022",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "LOTUS HOUSE DEVELOPMENT CORPORATION, a Washington Corporation",
+        "grantee": "DANIEL MICHAEL WALSH and AMANDA WALSH, a married couple",
+        "sourceFile": "Deschutes Heights Phase 2 Deeds",
+        "sourcePages": [
+          86
+        ]
+      },
+      {
+        "date": "05/18/2022",
+        "deedType": "QUIT_CLAIM",
+        "grantor": "SO UK INVESTMENT LLC, a Washington Limited Liability Company",
+        "grantee": "LOTUS HOUSE DEVELOPMENT CORPORATION, a Washington Corporation",
+        "sourceFile": "Deschutes Heights Phase 2 Deeds",
+        "sourcePages": [
+          84
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 77,
+    "parcelNumber": 44140007700,
+    "phase": "III",
+    "conveyances": [
+      {
+        "date": "07/15/2020",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "LOTUS HOUSE DEVELOPMENT CORPORATION, a Washington Corporation",
+        "grantee": "ANDREW J. GRAVES and LEILA G. GRAVES, a married couple",
+        "sourceFile": "Deschutes Heights Phase 2 Deeds",
+        "sourcePages": [
+          13
+        ]
+      },
+      {
+        "date": "07/15/2020",
+        "deedType": "QUIT_CLAIM",
+        "grantor": "SO UK INVESTMENT, LLC, a Washington Limited Liability Company",
+        "grantee": "LOTUS HOUSE DEVELOPMENT CORP, a Washington Corporation",
+        "sourceFile": "Deschutes Heights Phase 2 Deeds",
+        "sourcePages": [
+          11
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 78,
+    "parcelNumber": 44140007800,
+    "phase": "III",
+    "conveyances": [
+      {
+        "date": "11/19/2019",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "SO UK INVESTMENTS, LLC, a Washington Limited Liability Company",
+        "grantee": "ISAAC DERMANOSKI, an unmarried person",
+        "sourceFile": "Deschutes Heights Phase 2 Deeds",
+        "sourcePages": [
+          5
+        ]
+      },
+      {
+        "date": "04/21/2023",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": ", Isaac Dermanoski, an unmarried person, for and in consideration of Ten Dollars and other good and valuable consideration in hand paid, conveys, and warrants to Shamsher Singh and Anita Rani, a married couple, the following described real estate, situated in the County of Thurston, State of Washington:",
+        "grantee": "Shamsher Singh and Anita Rani, a married couple",
+        "sourceFile": "Deschutes Heights Phase 2 Deeds",
+        "sourcePages": [
+          107
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 79,
+    "parcelNumber": 44140007900,
+    "phase": "III",
+    "conveyances": [
+      {
+        "date": "03/22/2021",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "LOTUS HOUSE DEVELOPMENT CORPORATION, a Washington Corporation",
+        "grantee": "CRAIG A. PALMER and JENNIFER E. SAGERSER, a married couple",
+        "sourceFile": "Deschutes Heights Phase 2 Deeds",
+        "sourcePages": [
+          56
+        ]
+      },
+      {
+        "date": "03/22/2021",
+        "deedType": "QUIT_CLAIM",
+        "grantor": "SO UK INVESTMENT LLC, a Washington Limited Liability Company",
+        "grantee": "LOTUS HOUSE DEVELOPMENT CORPORATION, a Washington Corporation",
+        "sourceFile": "Deschutes Heights Phase 2 Deeds",
+        "sourcePages": [
+          54
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 81,
+    "parcelNumber": 44140008100,
+    "phase": "III",
+    "conveyances": [
+      {
+        "date": "12/14/2020",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "LOTUS HOUSE DEVELOPMENT CORPORATION, a Washington Corporation",
+        "grantee": "LEVI TATE and KAYLA TATE, husband and wife",
+        "sourceFile": "Deschutes Heights Phase 2 Deeds",
+        "sourcePages": [
+          32
+        ]
+      },
+      {
+        "date": "12/14/2020",
+        "deedType": "QUIT_CLAIM",
+        "grantor": "SO UK INVESTMENT LLC, a Washington Limited Liability",
+        "grantee": "LOTUS HOUSE DEVELOPMENT CORPORATION, a Washington Corporation",
+        "sourceFile": "Deschutes Heights Phase 2 Deeds",
+        "sourcePages": [
+          30
+        ]
+      },
+      {
+        "date": "06/05/2024",
+        "deedType": "QUIT_CLAIM",
+        "grantor": "Kayla Tate, an unmarried person (former Spouse of Grantee)",
+        "grantee": "Levi Tate, an unmarried person",
+        "sourceFile": "Deschutes Heights Phase 2 Deeds",
+        "sourcePages": [
+          122
+        ]
+      },
+      {
+        "date": "06/14/2024",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "Levi Tate, an unmarried person",
+        "grantee": "Kevin D Randich and Claire R Randich, a married couple",
+        "sourceFile": "Deschutes Heights Phase 2 Deeds",
+        "sourcePages": [
+          124
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 82,
+    "parcelNumber": 44140008200,
+    "phase": "III",
+    "conveyances": [
+      {
+        "date": "12/09/2019",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "SO UK INVESTMENT LLC, a Washington Limited Liability Company",
+        "grantee": "C & E DEVELOPMENT, LLC, a Washington Limited Liability Company",
+        "sourceFile": "Deschutes Heights Phase 2 Deeds",
+        "sourcePages": [
+          7
+        ]
+      },
+      {
+        "date": "12/10/2020",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "C & E Developments, LLC",
+        "grantee": "Daniel Young and Brenna Young",
+        "sourceFile": "Deschutes Heights Phase 2 Deeds",
+        "sourcePages": [
+          28
+        ]
+      },
+      {
+        "date": "03/25/2024",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "DANIEL YOUNG and BRENNA YOUNG, husband and wife",
+        "grantee": "JORDAN J. DOWERS and LEAH M. DOWERS, a married couple",
+        "sourceFile": "Deschutes Heights Phase 2 Deeds",
+        "sourcePages": [
+          116
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 83,
+    "parcelNumber": 44140008300,
+    "phase": "III",
+    "conveyances": [
+      {
+        "date": "10/16/2020",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "Kirk M. Olson and Teri Ward who acquired title as Teresa Olson, husband and wife",
+        "grantee": "Alicia DiFolco and Dan DiFolco, a married couple",
+        "sourceFile": "Deschutes Heights Phase 2 Deeds",
+        "sourcePages": [
+          129
+        ]
+      },
+      {
+        "date": "10/16/2020",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "LOTUS HOUSE DEVELOPMENT CORPORATION, a Washington Corporation",
+        "grantee": "KIRK M. OLSON and TERESA OLSON, husband and wife",
+        "sourceFile": "Deschutes Heights Phase 2 Deeds",
+        "sourcePages": [
+          15
+        ]
+      },
+      {
+        "date": "10/16/2020",
+        "deedType": "QUIT_CLAIM",
+        "grantor": "SO UK INVESTMENT, LLC., a Washington Limited Liability Company",
+        "grantee": "LOTUS HOUSE DEVELOPMENT CORPORATION, a Washington Corporation",
+        "sourceFile": "Deschutes Heights Phase 2 Deeds",
+        "sourcePages": [
+          17
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 84,
+    "parcelNumber": 44140008400,
+    "phase": "III",
+    "conveyances": [
+      {
+        "date": "03/29/2022",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "LOTUS HOUSE DEVELOPMENT CORPORATION, a Washington Corporation",
+        "grantee": "EMILY NICHOLSON, an unmarried person",
+        "sourceFile": "Deschutes Heights Phase 2 Deeds",
+        "sourcePages": [
+          80
+        ]
+      },
+      {
+        "date": "03/29/2022",
+        "deedType": "QUIT_CLAIM",
+        "grantor": "SO UK INVESTMENT LLC, A WASHINGTON LIMITED LIABILITY COMPANY",
+        "grantee": "LOTUS HOUSE DEVELOPMENT CORPORATION, A WASHINGTON CORPORATION",
+        "sourceFile": "Deschutes Heights Phase 2 Deeds",
+        "sourcePages": [
+          78
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 85,
+    "parcelNumber": 44140008500,
+    "phase": "III",
+    "conveyances": [
+      {
+        "date": "05/06/2021",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "LOTUS HOUSE DEVELOPMENT CORPORATION, a Washington Corporation",
+        "grantee": "MICHAEL D. MATLOCK and NANCY M. MATLOCK, a married couple",
+        "sourceFile": "Deschutes Heights Phase 2 Deeds",
+        "sourcePages": [
+          64
+        ]
+      },
+      {
+        "date": "05/06/2021",
+        "deedType": "QUIT_CLAIM",
+        "grantor": "SO UK INVESTMENT LLC, A WASHINGTON LIMITED LIABILITY COMPANY",
+        "grantee": "LOTUS HOUSE DEVELOPMENT CORPORATION, A WASHINGTON CORPORATION",
+        "sourceFile": "Deschutes Heights Phase 2 Deeds",
+        "sourcePages": [
+          62
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 86,
+    "parcelNumber": 44140008600,
+    "phase": "III",
+    "conveyances": [
+      {
+        "date": "03/25/2022",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "LOTUS HOUSE DEVELOPMENT CORPORATION, a Washington Corporation",
+        "grantee": "KEVIN CHRISTIE and LIBBY CHRISTIE, a married couple",
+        "sourceFile": "Deschutes Heights Phase 2 Deeds",
+        "sourcePages": [
+          74
+        ]
+      },
+      {
+        "date": "03/25/2022",
+        "deedType": "QUIT_CLAIM",
+        "grantor": "SO UK INVESTMENT LLC, A WASHINGTON LIMITED LIABILITY COMPANY",
+        "grantee": "LOTUS HOUSE DEVELOPMENT CORPORATION, A WASHINGTON CORPORATION",
+        "sourceFile": "Deschutes Heights Phase 2 Deeds",
+        "sourcePages": [
+          76
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 87,
+    "parcelNumber": 44140008700,
+    "phase": "III",
+    "conveyances": [
+      {
+        "date": "12/23/2020",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "LOTUS HOUSE DEVELOPMENT CORPORATION, a Washington Corporation",
+        "grantee": "EVAN M. LAURIE and ELISE M. LAURIE, a married couple",
+        "sourceFile": "Deschutes Heights Phase 2 Deeds",
+        "sourcePages": [
+          34
+        ]
+      },
+      {
+        "date": "12/23/2020",
+        "deedType": "QUIT_CLAIM",
+        "grantor": "THURSTON COUNTY TITLE CO",
+        "grantee": "LOTUS HOUSE DEVELOPMENT CORPORATION, a Washington Corporation",
+        "sourceFile": "Deschutes Heights Phase 2 Deeds",
+        "sourcePages": [
+          36
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 88,
+    "parcelNumber": 44140008800,
+    "phase": "III",
+    "conveyances": [
+      {
+        "date": "12/09/2019",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "SO UK INVESTMENT LLC, a Washington Limited Liability Company",
+        "grantee": "C & E DEVELOPMENT, LLC, a Washington Limited Liability Company",
+        "sourceFile": "Deschutes Heights Phase 2 Deeds",
+        "sourcePages": [
+          7
+        ]
+      },
+      {
+        "date": "12/04/2020",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "C & E Developments, LLC",
+        "grantee": "Christopher Chaney, Sr. and Trena Cutarelli Chaney",
+        "sourceFile": "Deschutes Heights Phase 2 Deeds",
+        "sourcePages": [
+          26
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 89,
+    "parcelNumber": 44140008900,
+    "phase": "III",
+    "conveyances": [
+      {
+        "date": "12/09/2019",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "SO UK INVESTMENT LLC, a Washington Limited Liability Company",
+        "grantee": "C & E DEVELOPMENT, LLC, a Washington Limited Liability Company",
+        "sourceFile": "Deschutes Heights Phase 2 Deeds",
+        "sourcePages": [
+          7
+        ]
+      },
+      {
+        "date": "11/24/2020",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "C & E Developments, LLC",
+        "grantee": "Scott Paul Jungkuntz and Amanda Sue Jungkuntz",
+        "sourceFile": "Deschutes Heights Phase 2 Deeds",
+        "sourcePages": [
+          24
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 90,
+    "parcelNumber": 44140009000,
+    "phase": "III",
+    "conveyances": [
+      {
+        "date": "01/02/2020",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "SO UK INVESTMENT LLC, a Washington Limited Liability Company",
+        "grantee": "CAPITAL DEVELOPMENT PROPERTIES, a Washington Limited Liability Company",
+        "sourceFile": "Deschutes Heights Phase 2 Deeds",
+        "sourcePages": [
+          9
+        ]
+      },
+      {
+        "date": "09/08/2021",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "Capital Development Properties, LLC, a Washington Limited Liability Company for and in consideration of Ten And No/100 Dollars ($10.00), and other valuable consideration in hand paid, conveys, and warrants to Stefanie Olar and George Olar, a married couple",
+        "grantee": "Stefanie Olar and George Olar, a married couple",
+        "sourceFile": "Deschutes Heights Phase 2 Deeds",
+        "sourcePages": [
+          70
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 91,
+    "parcelNumber": 44140009100,
+    "phase": "III",
+    "conveyances": [
+      {
+        "date": "03/31/2023",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "LOTUS HOUSE DEVELOPMENT CORPORATION, a Washington Corporation",
+        "grantee": "MARIE ANN MCDANIEL, an unmarried person",
+        "sourceFile": "Deschutes Heights Phase 2 Deeds",
+        "sourcePages": [
+          103
+        ]
+      },
+      {
+        "date": "03/31/2023",
+        "deedType": "QUIT_CLAIM",
+        "grantor": "SO UK INVESTMENT LLC, a Washington Limited Liability Company",
+        "grantee": "LOTUS HOUSE DEVELOPMENT CORPORATION, Washington Corporation",
+        "sourceFile": "Deschutes Heights Phase 2 Deeds",
+        "sourcePages": [
+          105
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 92,
+    "parcelNumber": 44140009200,
+    "phase": "III",
+    "conveyances": [
+      {
+        "date": "04/27/2021",
+        "deedType": "QUIT_CLAIM",
+        "grantor": "JAMES CUTLER, SPOUSE OF THE GRANTEE",
+        "grantee": "TANA MARIE DENNERY, A MARRIED WOMAN AS HER SEPARATE ESTATE",
+        "sourceFile": "Deschutes Heights 4414 Deeds",
+        "sourcePages": [
+          83
+        ]
+      },
+      {
+        "date": "04/27/2021",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "LOTUS HOUSE DEVELOPMENT CORPORATION, a Washington Corporation",
+        "grantee": "TANA MARIE DENNERY, a married woman as her separate estate",
+        "sourceFile": "Deschutes Heights Phase 2 Deeds",
+        "sourcePages": [
+          60
+        ]
+      },
+      {
+        "date": "04/27/2021",
+        "deedType": "QUIT_CLAIM",
+        "grantor": "THURSTON COUNTY TITLE CO",
+        "grantee": "LOTUS HOUSE DEVELOPMENT CORPORATION, A WASHINGTON CORPORATION",
+        "sourceFile": "Deschutes Heights Phase 2 Deeds",
+        "sourcePages": [
+          58
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 93,
+    "parcelNumber": 44140009300,
+    "phase": "III",
+    "conveyances": [
+      {
+        "date": "06/24/2022",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "LOTUS HOUSE DEVELOPMENT CORPORATION, a Washington Corporation",
+        "grantee": "PATRICK KELLEY and LISA KELLEY, a married couple",
+        "sourceFile": "Deschutes Heights Phase 2 Deeds",
+        "sourcePages": [
+          88
+        ]
+      },
+      {
+        "date": "06/24/2022",
+        "deedType": "QUIT_CLAIM",
+        "grantor": "THURSTON COUNTY TITLE CO",
+        "grantee": "LOTUS HOUSE DEVELOPMENT CORPORATION, a Washington Corporation",
+        "sourceFile": "Deschutes Heights Phase 2 Deeds",
+        "sourcePages": [
+          90
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 97,
+    "parcelNumber": 44140009700,
+    "phase": "III",
+    "conveyances": [
+      {
+        "date": "11/26/2024",
+        "deedType": "QUIT_CLAIM",
+        "grantor": "SO UK INVESTMENT LLC, a washington limited liability company",
+        "grantee": "LOTUS HOUSE DEVELOPMENT CORPORATION, a washington corporation",
+        "sourceFile": "Deschutes Heights Phase 2 Deeds",
+        "sourcePages": [
+          138
+        ]
+      },
+      {
+        "date": "02/10/2025",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "LOTUS HOUSE DEVELOPMENT CORPORATION, a Washington Corporation",
+        "grantee": "JENNIFER S. MAGNUSON and DAVID J. MAGNUSON, wife and husband, and ADRIENNE R. GREEN, an unmarried woman",
+        "sourceFile": "Deschutes Heights Phase 2 Deeds",
+        "sourcePages": [
+          140
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 98,
+    "parcelNumber": 44140009800,
+    "phase": "III",
+    "conveyances": [
+      {
+        "date": "06/27/2024",
+        "deedType": "QUIT_CLAIM",
+        "grantor": "SO UK INVESTMENT LLC, a Washington Limited Liability Company",
+        "grantee": "LOTUS HOUSE DEVELOPMENT CORPORATION, a Washington Corporation",
+        "sourceFile": "Deschutes Heights Phase 2 Deeds",
+        "sourcePages": [
+          136
+        ]
+      },
+      {
+        "date": "07/05/2024",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "LOTUS HOUSE DEVELOPMENT CORPORATION, a Washington Corporation",
+        "grantee": "ANDRIANA JEON and ABRAHAM JEON, a married couple",
+        "sourceFile": "Deschutes Heights Phase 2 Deeds",
+        "sourcePages": [
+          134
+        ]
+      },
+      {
+        "date": "11/13/2025",
+        "deedType": "QUIT_CLAIM",
+        "grantor": "Andriana Jeon, Spouse of Abraham Jeon",
+        "grantee": "Abraham Jeon, a married man as his sole and separate property",
+        "sourceFile": "Deschutes Heights Phase 2 Deeds",
+        "sourcePages": [
+          146
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 106,
+    "parcelNumber": 44140010600,
+    "phase": "III",
+    "conveyances": [
+      {
+        "date": "03/07/2023",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "LOTUS HOUSE DEVELOPMENT CORPORATION, a Washington Corporation",
+        "grantee": "STEPHANIE HARRIS and ROBERT W. HARRIS, a married couple",
+        "sourceFile": "Deschutes Heights Phase 2 Deeds",
+        "sourcePages": [
+          101
+        ]
+      },
+      {
+        "date": "03/07/2023",
+        "deedType": "QUIT_CLAIM",
+        "grantor": "THURSTON COUNTY TITLE CO",
+        "grantee": "LOTUS HOUSE DEVELOPMENT CORPORATION, Washington Corporation",
+        "sourceFile": "Deschutes Heights Phase 2 Deeds",
+        "sourcePages": [
+          99
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 107,
+    "parcelNumber": 44140010700,
+    "phase": "III",
+    "conveyances": [
+      {
+        "date": "07/01/2022",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "LOTUS HOUSE DEVELOPMENT CORPORATION, a Washington Corporation",
+        "grantee": "BRET R. JENSEN and JOCELYN W. JENSEN, a married couple",
+        "sourceFile": "Deschutes Heights Phase 2 Deeds",
+        "sourcePages": [
+          92
+        ]
+      },
+      {
+        "date": "07/01/2022",
+        "deedType": "QUIT_CLAIM",
+        "grantor": "THURSTON COUNTY TITLE CO",
+        "grantee": "LOTUS HOUSE DEVELOPMENT CORPORATION, a Washington Corporation",
+        "sourceFile": "Deschutes Heights Phase 2 Deeds",
+        "sourcePages": [
+          94
+        ]
+      },
+      {
+        "date": "06/14/2024",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "BRET R. JENSEN, an unmarried individual",
+        "grantee": "JACLYN FRASER, an unmarried person, and MATTHEW MAZUR-HART, an unmarried person as joint tenants with rights of survivorship and not as tenants in common",
+        "sourceFile": "Deschutes Heights Phase 2 Deeds",
+        "sourcePages": [
+          132
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 108,
+    "parcelNumber": 44140010800,
+    "phase": "III",
+    "conveyances": [
+      {
+        "date": "03/21/2024",
+        "deedType": "STATUTORY_WARRANTY",
+        "grantor": "LOTUS HOUSE DEVELOPMENT CORPORATION, a Washington Corporation",
+        "grantee": "PETER CHAFFEY, an unmarried man and CORINNE L. FISHER, an unmarried woman",
+        "sourceFile": "Deschutes Heights Phase 2 Deeds",
+        "sourcePages": [
+          118
+        ]
+      },
+      {
+        "date": "03/21/2024",
+        "deedType": "QUIT_CLAIM",
+        "grantor": "SO UK INVESTMENT LLC, a Washington Limited Liability Company",
+        "grantee": "LOTUS HOUSE DEVELOPMENT CORPORATION, a Washington Corporation",
+        "sourceFile": "Deschutes Heights Phase 2 Deeds",
+        "sourcePages": [
+          120
+        ]
+      }
+    ]
+  },
+  {
+    "lot": 110,
+    "parcelNumber": 44140011000,
+    "phase": "III",
+    "conveyances": [
+      {
+        "date": "07/24/2023",
+        "deedType": "QUIT_CLAIM",
+        "grantor": "THURSTON COUNTY TITLE CO",
+        "grantee": "MIN LEUNG LAI, a married man as his separate estate",
+        "sourceFile": "Deschutes Heights Phase 2 Deeds",
+        "sourcePages": [
+          111
+        ]
+      }
+    ]
+  }
+]
