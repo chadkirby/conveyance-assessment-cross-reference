@@ -15,6 +15,11 @@ from openpyxl.styles import Alignment, Font, PatternFill
 
 
 AMENDMENT_DATE = date(2021, 1, 11)
+SOURCE_FILES = {
+    "4414 Deeds": "Deschutes Heights 4414 Deeds.md",
+    "Phase 1 File": "Deschutes Heights Phase 1 Deeds.md",
+    "Phase 2 File": "Deschutes Heights Phase 2 Deeds.md",
+}
 
 
 @dataclass
@@ -33,6 +38,10 @@ def parse_us_date(value: str | None) -> date | None:
         except ValueError:
             continue
     return None
+
+
+def date_to_str(value: date | None) -> str:
+    return value.strftime("%m/%d/%Y") if value else ""
 
 
 def normalize_space(text: str | None) -> str:
@@ -233,6 +242,102 @@ def infer_gl_unit(row: dict[str, Any]) -> int | None:
     return None
 
 
+def normalize_year(raw: str) -> int:
+    y = int(raw)
+    if y < 100:
+        return 2000 + y if y < 50 else 1900 + y
+    return y
+
+
+def parse_pages(file_path: Path) -> dict[int, str]:
+    content = file_path.read_text(encoding="utf-8", errors="ignore")
+    matches = list(re.finditer(r"<!-- PAGE (\d+) -->", content))
+    pages: dict[int, str] = {}
+    for i, m in enumerate(matches):
+        page_num = int(m.group(1))
+        start = m.start()
+        end = matches[i + 1].start() if i + 1 < len(matches) else len(content)
+        pages[page_num] = content[start:end]
+    return pages
+
+
+def extract_dated_line(text: str) -> date | None:
+    month_map = {
+        "jan": 1,
+        "january": 1,
+        "feb": 2,
+        "february": 2,
+        "mar": 3,
+        "march": 3,
+        "apr": 4,
+        "april": 4,
+        "may": 5,
+        "jun": 6,
+        "june": 6,
+        "jul": 7,
+        "july": 7,
+        "aug": 8,
+        "august": 8,
+        "sep": 9,
+        "sept": 9,
+        "september": 9,
+        "oct": 10,
+        "october": 10,
+        "nov": 11,
+        "november": 11,
+        "dec": 12,
+        "december": 12,
+    }
+
+    m = re.search(r"\bDated[:\s]+(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{2,4})\b", text, flags=re.IGNORECASE)
+    if m:
+        mm, dd, yy = int(m.group(1)), int(m.group(2)), normalize_year(m.group(3))
+        try:
+            return date(yy, mm, dd)
+        except ValueError:
+            pass
+
+    m = re.search(r"\bDated[:\s]+([A-Za-z]+)\s+(\d{1,2}),?\s+(\d{2,4})\b", text, flags=re.IGNORECASE)
+    if m:
+        month = month_map.get(m.group(1).lower())
+        if month:
+            day, year = int(m.group(2)), normalize_year(m.group(3))
+            try:
+                return date(year, month, day)
+            except ValueError:
+                pass
+
+    m = re.search(
+        r"\bDated\s+this\s+(\d{1,2})(?:st|nd|rd|th)?\s+day\s+of\s+([A-Za-z]+),?\s+(\d{4})\b",
+        text,
+        flags=re.IGNORECASE,
+    )
+    if m:
+        day, month_name, year = int(m.group(1)), m.group(2).lower(), int(m.group(3))
+        month = month_map.get(month_name)
+        if month:
+            try:
+                return date(year, month, day)
+            except ValueError:
+                pass
+    return None
+
+
+def extract_recording_stamp(text: str) -> date | None:
+    m = re.search(
+        r"\b(\d{1,2})/(\d{1,2})/(\d{4})\s+\d{1,2}:\d{2}\s*(?:AM|PM)\b",
+        text,
+        flags=re.IGNORECASE,
+    )
+    if m:
+        mm, dd, yy = int(m.group(1)), int(m.group(2)), int(m.group(3))
+        try:
+            return date(yy, mm, dd)
+        except ValueError:
+            return None
+    return None
+
+
 def auto_fit_columns(ws, min_width: int = 10, max_width: int = 60) -> None:
     for column in ws.columns:
         values = [normalize_space(str(cell.value)) for cell in column if cell.value is not None]
@@ -274,6 +379,46 @@ def main() -> None:
         deed["deedDateObj"] = parse_us_date(deed.get("normalizedDate"))
         deed["grantor"] = normalize_space(deed.get("grantor"))
         deed["grantee"] = normalize_space(deed.get("grantee"))
+
+    page_maps: dict[str, dict[int, str]] = {}
+    for source_key, filename in SOURCE_FILES.items():
+        src_path = data_dir / filename
+        if src_path.exists():
+            page_maps[source_key] = parse_pages(src_path)
+
+    repaired_dates = 0
+    for deed in deeds:
+        source = deed.get("source")
+        page = deed.get("page")
+        if source not in page_maps or not isinstance(page, int):
+            continue
+        pages = page_maps[source]
+        chunk = "\n".join(pages.get(p, "") for p in range(page, page + 4))
+        primary = "\n".join(pages.get(p, "") for p in range(page, page + 2))
+        extracted_dated = extract_dated_line(chunk)
+        recording_stamp = extract_recording_stamp(primary)
+
+        current = deed.get("deedDateObj")
+        replacement = None
+        reason = ""
+
+        if current is None and extracted_dated:
+            replacement = extracted_dated
+            reason = "Filled missing deed date from deed text."
+        elif current and recording_stamp and abs((current - recording_stamp).days) > 365:
+            if extracted_dated and abs((extracted_dated - recording_stamp).days) < abs((current - recording_stamp).days):
+                replacement = extracted_dated
+                reason = "Corrected suspicious deed date using deed text (closer to recording stamp)."
+            elif extracted_dated is None:
+                replacement = recording_stamp
+                reason = "Corrected suspicious deed date using recording stamp fallback."
+
+        if replacement and replacement != current:
+            deed["deedDateObj"] = replacement
+            deed["normalizedDate"] = date_to_str(replacement)
+            deed["isPostAmendment"] = replacement >= AMENDMENT_DATE
+            deed["dateRepairNote"] = reason
+            repaired_dates += 1
 
     deed_to_resale = match_by_lot(
         left_items=deeds,
@@ -419,6 +564,8 @@ def main() -> None:
                 f"Resale escrow {resale['escrowDate']} from {resale['sourceFile']} (delta {delta} days)."
             )
         notes.extend(deed.get("fillNotes", []))
+        if deed.get("dateRepairNote"):
+            notes.append(deed["dateRepairNote"])
         if primary_gl:
             gl_delta = abs((primary_gl["glDateObj"] - deed["deedDateObj"]).days)
             notes.append(f"GL/deed date delta: {gl_delta} days.")
@@ -459,12 +606,33 @@ def main() -> None:
 
     matched_gl_ids = set(deed_to_collection.values()) | used_reversal_ids
     unmatched_gl_rows: list[dict[str, Any]] = []
+    unmatched_gl_linked_pre = 0
     for gl in sorted(
         [g for g in gl_entries if g.get("isPostAmendment") and g.get("type") in {"collection", "reversal"}],
         key=lambda x: (x["glDateObj"], x["_idx"]),
     ):
         if gl["_idx"] in matched_gl_ids:
             continue
+        lot = gl.get("unitInt")
+        pre_link_note = ""
+        category = "Unmatched GL entry"
+        if isinstance(lot, int):
+            deed_candidates = [
+                d for d in deeds if d.get("lotInt") == lot and isinstance(d.get("deedDateObj"), date)
+            ]
+            if deed_candidates:
+                nearest = min(
+                    deed_candidates,
+                    key=lambda d: abs((d["deedDateObj"] - gl["glDateObj"]).days),
+                )
+                delta = abs((nearest["deedDateObj"] - gl["glDateObj"]).days)
+                if delta <= 120 and nearest["deedDateObj"] < AMENDMENT_DATE:
+                    category = "GL tied to pre-amendment deed"
+                    pre_link_note = (
+                        f"Nearest deed for lot {lot}: {date_to_str(nearest['deedDateObj'])} "
+                        f"(recording #{nearest.get('recordingNumber', '')}), {delta} days from GL."
+                    )
+                    unmatched_gl_linked_pre += 1
         unmatched_gl_rows.append(
             {
                 "Phase": "",
@@ -473,7 +641,7 @@ def main() -> None:
                 "Deed Type": "",
                 "Grantor": "",
                 "Grantee": "",
-                "Category": "Unmatched GL entry",
+                "Category": category,
                 "Grantor=Lotus House?": "",
                 "$500 Due?": "",
                 "GL Date": gl.get("glDateObj"),
@@ -481,7 +649,14 @@ def main() -> None:
                 "GL Description": gl.get("description", ""),
                 "Match Status": "Unmatched GL",
                 "$ Impact": currency(float(gl.get("amount", 0))),
-                "Notes": f"Type={gl.get('type')}; source={gl.get('source')}; original date={gl.get('date')}",
+                "Notes": " ".join(
+                    part
+                    for part in [
+                        f"Type={gl.get('type')}; source={gl.get('source')}; original date={gl.get('date')}.",
+                        pre_link_note,
+                    ]
+                    if part
+                ),
                 "_deedIdx": None,
                 "_glIdx": gl.get("_idx"),
             }
@@ -834,6 +1009,7 @@ def main() -> None:
     lines.append("")
     lines.append("## Data Validation")
     lines.append(f"- Deeds loaded: {len(deeds)}")
+    lines.append(f"- Deed dates auto-corrected from source pages: {repaired_dates}")
     lines.append(f"- Post-amendment deeds: {len(post_deeds)}")
     lines.append(f"- Deeds missing normalized date after recovery: {sum(1 for d in deeds if not d.get('deedDateObj'))}")
     lines.append(f"- Resale rows parsed: {len(resale_entries)}")
@@ -852,6 +1028,7 @@ def main() -> None:
     lines.append(f"- Under-collected rows: {status_counts.get('Under-Collected', 0)}")
     lines.append(f"- Over-collected rows: {status_counts.get('Over-Collected', 0)}")
     lines.append(f"- Unmatched GL rows: {len(unmatched_gl_rows)}")
+    lines.append(f"- Unmatched GL rows tied to pre-amendment deeds: {unmatched_gl_linked_pre}")
     lines.append("")
     lines.append("## Spot-Check Matches")
     if not spot_checks:
@@ -888,10 +1065,12 @@ def main() -> None:
         "unmatchedGlRows": len(unmatched_gl_rows),
         "resaleRows": len(resale_entries),
         "resaleMissingDeedRows": len(resale_missing_deed),
+        "repairedDeedDates": repaired_dates,
         "claim1Count": claim1_count,
         "claim1Subtotal": claim1_total,
         "claim2Subtotal": claim2_total,
         "grandTotal": grand_total,
+        "unmatchedGlLinkedPreAmendment": unmatched_gl_linked_pre,
     }
     summary_path.write_text(json.dumps(summary, indent=2), encoding="utf-8")
 
