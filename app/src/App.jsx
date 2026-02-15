@@ -218,35 +218,10 @@ export default function App() {
           </p>
         </header>
 
-        <section className="mt-6 rounded-2xl border border-zinc-200/70 bg-white/75 p-6 shadow-lg shadow-zinc-900/5">
-          <form className="flex flex-col gap-3 sm:flex-row" onSubmit={submitLookup}>
-            <label className="flex-1">
-              <span className="mb-2 block text-xs uppercase tracking-[0.18em] text-zinc-500">Lot Number</span>
-              <input
-                className="w-full rounded-xl border border-zinc-300 bg-white px-3 py-2.5 text-base outline-none ring-emerald-500 transition focus:ring-2"
-                placeholder="Enter lot (e.g., 67)"
-                value={query}
-                onChange={(event) => setQuery(event.target.value)}
-                inputMode="numeric"
-              />
-            </label>
-            <button
-              type="submit"
-              className="h-fit self-end rounded-xl bg-zinc-900 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-zinc-700"
-            >
-              Find Lot
-            </button>
-          </form>
-          <p className="mt-3 text-xs text-zinc-500">Direct link format: <code>?lot=67</code></p>
-        </section>
-
         <section className="mt-6 rounded-2xl border border-zinc-200/70 bg-white/75 p-4 shadow-lg shadow-zinc-900/5 sm:p-6">
-          <p className="text-xs uppercase tracking-[0.18em] text-zinc-500">Lot Map</p>
-          <p className="mt-2 text-sm text-zinc-600">Click a lot on the map to auto-fill and run search.</p>
-          <button
-            type="button"
+          <div
             onClick={handleMapClick}
-            className="relative mt-3 block w-full overflow-hidden rounded-xl border border-zinc-200 bg-zinc-100"
+            className="relative mt-1 block w-full overflow-hidden rounded-xl border border-zinc-200 bg-zinc-100 lg:w-3/4"
           >
             <img
               src={LOT_MAP_IMAGE}
@@ -254,6 +229,32 @@ export default function App() {
               className="block w-full"
               draggable="false"
             />
+            <div
+              className="absolute left-3 top-3 z-10 w-[min(28rem,85vw)] rounded-xl border border-zinc-200 bg-white/95 p-3 shadow-xl backdrop-blur sm:left-4 sm:top-4 sm:p-4"
+              onClick={(event) => event.stopPropagation()}
+            >
+              <form className="flex flex-col gap-2 sm:flex-row sm:items-end" onSubmit={submitLookup}>
+                <label className="flex-1">
+                  <span className="mb-1.5 block text-xs uppercase tracking-[0.18em] text-zinc-500">Lot Number</span>
+                  <input
+                    className="w-full rounded-xl border border-zinc-300 bg-white px-3 py-2.5 text-base outline-none ring-emerald-500 transition focus:ring-2"
+                    placeholder="Enter lot (e.g., 67)"
+                    value={query}
+                    onChange={(event) => setQuery(event.target.value)}
+                    inputMode="numeric"
+                  />
+                </label>
+                <button
+                  type="submit"
+                  className="rounded-xl bg-zinc-900 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-zinc-700"
+                >
+                  Find Lot
+                </button>
+              </form>
+              <p className="mt-2 text-xs text-zinc-500">
+                Click any lot on the map to auto-search. Direct link: <code>?lot=67</code>
+              </p>
+            </div>
             {activeMapPoint && (
               <span
                 className="pointer-events-none absolute -translate-x-1/2 -translate-y-1/2 rounded-full bg-emerald-600 px-2 py-0.5 text-xs font-semibold text-white shadow"
@@ -262,7 +263,7 @@ export default function App() {
                 {activeMapPoint.lot}
               </span>
             )}
-          </button>
+          </div>
         </section>
 
         {loading && <p className="mt-6 text-sm text-zinc-600">Loading data...</p>}
