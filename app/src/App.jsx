@@ -1,10 +1,14 @@
 import { useEffect, useMemo, useState } from "react";
+import { LOT_MAP_POINTS } from "./lotMapPoints";
 
 const PDF_BY_SOURCE_FILE = {
   "Deschutes Heights Phase 1 Deeds": "Deschutes Heights Phase 1 Deeds.pdf",
   "Deschutes Heights 4414 Deeds": "Deschutes Heights 4414 Deeds.pdf",
   "Deschutes Heights Phase 2 Deeds": "Deschutes Heights Phase 2 Deeds.pdf",
 };
+
+const LOT_MAP_IMAGE = `${import.meta.env.BASE_URL}images/lot-map.jpg`;
+const MAX_MAP_SNAP_DISTANCE = 0.045;
 
 const MONEY = new Intl.NumberFormat("en-US", {
   style: "currency",
@@ -35,6 +39,30 @@ function parseDateKey(value) {
   return Number(`${year}${month.padStart(2, "0")}${day.padStart(2, "0")}`);
 }
 
+function parseLotNumber(value) {
+  const parsed = Number.parseInt(String(value ?? "").trim(), 10);
+  return Number.isNaN(parsed) ? null : parsed;
+}
+
+function readLotFromUrl() {
+  const params = new URLSearchParams(window.location.search);
+  return parseLotNumber(params.get("lot"));
+}
+
+function writeLotToUrl(lot) {
+  const url = new URL(window.location.href);
+  if (lot === null) {
+    url.searchParams.delete("lot");
+  } else {
+    url.searchParams.set("lot", String(lot));
+  }
+  const next = `${url.pathname}${url.search}${url.hash}`;
+  const current = `${window.location.pathname}${window.location.search}${window.location.hash}`;
+  if (next !== current) {
+    window.history.replaceState({}, "", next);
+  }
+}
+
 function pdfLinks(sourceFile, sourcePages) {
   const pdfName = PDF_BY_SOURCE_FILE[sourceFile];
   if (!pdfName || !Array.isArray(sourcePages) || sourcePages.length === 0) {
@@ -49,10 +77,18 @@ function pdfLinks(sourceFile, sourcePages) {
 
 export default function App() {
   const [query, setQuery] = useState("");
-  const [activeLot, setActiveLot] = useState(null);
+  const [activeLot, setActiveLot] = useState(() => readLotFromUrl());
   const [dataset, setDataset] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    const urlLot = readLotFromUrl();
+    if (urlLot !== null) {
+      setQuery(String(urlLot));
+      setActiveLot(urlLot);
+    }
+  }, []);
 
   useEffect(() => {
     const load = async () => {
@@ -73,6 +109,28 @@ export default function App() {
 
     load();
   }, []);
+
+  useEffect(() => {
+    writeLotToUrl(activeLot);
+  }, [activeLot]);
+
+  const availableLots = useMemo(() => {
+    const set = new Set();
+    for (const lot of dataset?.lots ?? []) {
+      set.add(Number(lot.lot));
+    }
+    return set;
+  }, [dataset]);
+
+  const clickableMapPoints = useMemo(
+    () => LOT_MAP_POINTS.filter((point) => availableLots.has(point.lot)),
+    [availableLots],
+  );
+
+  const activeMapPoint = useMemo(
+    () => LOT_MAP_POINTS.find((point) => point.lot === activeLot) ?? null,
+    [activeLot],
+  );
 
   const lotRecord = useMemo(() => {
     if (activeLot === null || !dataset?.lots) {
@@ -108,14 +166,43 @@ export default function App() {
     return stats;
   }, [sortedConveyances]);
 
-  const submitLookup = (event) => {
-    event.preventDefault();
-    const parsed = Number.parseInt(query, 10);
-    if (Number.isNaN(parsed)) {
+  const setSelectedLot = (lot) => {
+    const parsed = parseLotNumber(lot);
+    if (parsed === null) {
       setActiveLot(null);
       return;
     }
+    setQuery(String(parsed));
     setActiveLot(parsed);
+  };
+
+  const submitLookup = (event) => {
+    event.preventDefault();
+    setSelectedLot(query);
+  };
+
+  const handleMapClick = (event) => {
+    if (!clickableMapPoints.length) {
+      return;
+    }
+
+    const rect = event.currentTarget.getBoundingClientRect();
+    const clickX = (event.clientX - rect.left) / rect.width;
+    const clickY = (event.clientY - rect.top) / rect.height;
+
+    let best = null;
+    for (const point of clickableMapPoints) {
+      const dx = point.x - clickX;
+      const dy = point.y - clickY;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+      if (!best || distance < best.distance) {
+        best = { lot: point.lot, distance };
+      }
+    }
+
+    if (best && best.distance <= MAX_MAP_SNAP_DISTANCE) {
+      setSelectedLot(best.lot);
+    }
   };
 
   return (
@@ -150,6 +237,32 @@ export default function App() {
               Find Lot
             </button>
           </form>
+          <p className="mt-3 text-xs text-zinc-500">Direct link format: <code>?lot=67</code></p>
+        </section>
+
+        <section className="mt-6 rounded-2xl border border-zinc-200/70 bg-white/75 p-4 shadow-lg shadow-zinc-900/5 sm:p-6">
+          <p className="text-xs uppercase tracking-[0.18em] text-zinc-500">Lot Map</p>
+          <p className="mt-2 text-sm text-zinc-600">Click a lot on the map to auto-fill and run search.</p>
+          <button
+            type="button"
+            onClick={handleMapClick}
+            className="relative mt-3 block w-full overflow-hidden rounded-xl border border-zinc-200 bg-zinc-100"
+          >
+            <img
+              src={LOT_MAP_IMAGE}
+              alt="Deschutes Heights lot number map"
+              className="block w-full"
+              draggable="false"
+            />
+            {activeMapPoint && (
+              <span
+                className="pointer-events-none absolute -translate-x-1/2 -translate-y-1/2 rounded-full bg-emerald-600 px-2 py-0.5 text-xs font-semibold text-white shadow"
+                style={{ left: `${activeMapPoint.x * 100}%`, top: `${activeMapPoint.y * 100}%` }}
+              >
+                {activeMapPoint.lot}
+              </span>
+            )}
+          </button>
         </section>
 
         {loading && <p className="mt-6 text-sm text-zinc-600">Loading data...</p>}
