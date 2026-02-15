@@ -1,8 +1,8 @@
 # Verification Report
 
 ## Data Validation
-- Deeds loaded: 207
-- Deed dates auto-corrected from source pages: 9
+- Deeds loaded: 210
+- Deed dates auto-corrected from source pages: 10
 - Post-amendment deeds: 90
 - Deeds missing normalized date after recovery: 0
 - Resale rows parsed: 59
@@ -41,7 +41,7 @@
 - Lot 9 escrow 03/08/2023: Sharline and Vincent Charaba (Nearest deed date 06/07/2021 is 639 days away.)
 - Lot 9 escrow 11/20/2025: Sarah Simmons-Morgan and Brady Morgan (Nearest deed date 06/07/2021 is 1627 days away.)
 - Lot 10 escrow 12/19/2022: Charles and Kira-Beth Mount (Nearest deed date 06/07/2021 is 560 days away.)
-- Lot 11 escrow 04/22/2022: Marisa A. Myer and Justin R. Kirk (No deed found for lot in deed dataset.)
+- Lot 11 escrow 04/22/2022: Marisa A. Myer and Justin R. Kirk (Nearest deed date 12/22/2014 is 2678 days away.)
 - Lot 65 escrow 12/21/2022: Rebecca J Valero Trustee (Nearest deed date 03/09/2020 is 1017 days away.)
 - Lot 108 escrow 04/17/2023: Marie Ann McDaniel (Nearest deed date 03/21/2024 is 339 days away.)
 - Lot 109 escrow 05/08/2024: Corinne L. Fisher and Peter Chaffey (No deed found for lot in deed dataset.)

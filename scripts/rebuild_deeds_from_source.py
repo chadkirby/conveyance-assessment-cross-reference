@@ -158,8 +158,26 @@ def extract_deed_type(chunk: str) -> str:
 
 
 def extract_grantor_grantee(chunk: str) -> tuple[str, str]:
+    m_table_g = re.search(
+        r"<td>\s*Grantor(?:\(s\))?\s*:\s*</td>\s*<td>\s*([^<]+?)\s*</td>",
+        chunk,
+        flags=re.IGNORECASE | re.DOTALL,
+    )
+    m_table_gg = re.search(
+        r"<td>\s*Grantee(?:\(s\))?\s*:\s*</td>\s*<td>\s*([^<]+?)\s*</td>",
+        chunk,
+        flags=re.IGNORECASE | re.DOTALL,
+    )
+    if m_table_g and m_table_gg:
+        return normalize_space(m_table_g.group(1)), normalize_space(m_table_gg.group(1))
+
     m_g = re.search(r"Grantor\(s\):\s*(.+)", chunk, flags=re.IGNORECASE)
     m_gg = re.search(r"Grantee\(s\):\s*(.+)", chunk, flags=re.IGNORECASE)
+    if m_g and m_gg:
+        return normalize_space(m_g.group(1)), normalize_space(m_gg.group(1))
+
+    m_g = re.search(r"\bGrantor:\s*(.+)", chunk, flags=re.IGNORECASE)
+    m_gg = re.search(r"\bGrantee:\s*(.+)", chunk, flags=re.IGNORECASE)
     if m_g and m_gg:
         return normalize_space(m_g.group(1)), normalize_space(m_gg.group(1))
 
@@ -173,6 +191,14 @@ def extract_grantor_grantee(chunk: str) -> tuple[str, str]:
 
     m = re.search(
         r"The\s+Grantor,?\s+(.+?)\s+for\s+and\s+in\s+consideration[\s\S]{0,900}?\s+to\s+(.+?)\s+the\s+following\s+described",
+        chunk,
+        flags=re.IGNORECASE,
+    )
+    if m:
+        return normalize_space(m.group(1)), normalize_space(m.group(2))
+
+    m = re.search(
+        r"made\s+by\s+and\s+between\s+(.+?),\s*(?:whose address|\"?\(Grantor\))[\s\S]{0,400}?\sand\s+(.+?),\s*(?:whose address|\"?\(Grantee\))",
         chunk,
         flags=re.IGNORECASE,
     )
@@ -226,13 +252,15 @@ def parse_source_pages(source_name: str, pages: dict[int, str]) -> list[ParsedPa
         chunk = f"{p0}\n{p1}"
         if "DEED" not in p0.upper():
             continue
-        if "THE GRANTOR" not in p0.upper() and "GRANTOR(S):" not in p0.upper() and "The Grantor" not in p0:
+        m_page = re.search(r"\bPage\s+(\d+)\s+of\s+(\d+)\b", p0, flags=re.IGNORECASE)
+        if m_page and int(m_page.group(1)) > 1:
             continue
 
         deed_type = extract_deed_type(p0)
         recording = extract_recording_number(p0) or extract_recording_number(chunk)
         grantor, grantee = extract_grantor_grantee(p0)
-        if (not grantor or not grantee) and p1:
+        start_markers = ("When recorded return to", "THE GRANTOR", "Grantor:", "Grantor(s):")
+        if (not grantor or not grantee) and p1 and any(marker in p0 for marker in start_markers):
             g0, g1 = extract_grantor_grantee(chunk)
             grantor = grantor or g0
             grantee = grantee or g1

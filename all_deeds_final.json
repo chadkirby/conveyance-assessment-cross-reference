@@ -580,6 +580,72 @@
   },
   {
     "source": "4414 Deeds",
+    "page": 29,
+    "lot": "11",
+    "phase": "I (Original)",
+    "deedType": "Statutory Warranty Deed",
+    "grantor": "PREMIER BUILDERS INVESTMENTS, LLC",
+    "grantee": "CONSTRUCTION OPPORTUNITY PARTNERS NO. I LLC",
+    "date": "12/22/2014 02:27 PM",
+    "taxParcel": "4414-00-01100",
+    "recordingNumber": "4422474",
+    "exciseTax": "",
+    "consideration": "",
+    "normalizedDate": "12/22/2014",
+    "isPostAmendment": false,
+    "relatedLots": [
+      11,
+      12,
+      24
+    ],
+    "derivedFrom": "page_scan"
+  },
+  {
+    "source": "4414 Deeds",
+    "page": 29,
+    "lot": "12",
+    "phase": "I (Original)",
+    "deedType": "Statutory Warranty Deed",
+    "grantor": "PREMIER BUILDERS INVESTMENTS, LLC",
+    "grantee": "CONSTRUCTION OPPORTUNITY PARTNERS NO. I LLC",
+    "date": "12/22/2014 02:27 PM",
+    "taxParcel": "4414-00-01100",
+    "recordingNumber": "4422474",
+    "exciseTax": "",
+    "consideration": "",
+    "normalizedDate": "12/22/2014",
+    "isPostAmendment": false,
+    "relatedLots": [
+      11,
+      12,
+      24
+    ],
+    "derivedFrom": "page_scan"
+  },
+  {
+    "source": "4414 Deeds",
+    "page": 29,
+    "lot": "24",
+    "phase": "I (Original)",
+    "deedType": "Statutory Warranty Deed",
+    "grantor": "PREMIER BUILDERS INVESTMENTS, LLC",
+    "grantee": "CONSTRUCTION OPPORTUNITY PARTNERS NO. I LLC",
+    "date": "12/22/2014 02:27 PM",
+    "taxParcel": "4414-00-01100",
+    "recordingNumber": "4422474",
+    "exciseTax": "",
+    "consideration": "",
+    "normalizedDate": "12/22/2014",
+    "isPostAmendment": false,
+    "relatedLots": [
+      11,
+      12,
+      24
+    ],
+    "derivedFrom": "page_scan"
+  },
+  {
+    "source": "4414 Deeds",
     "page": 37,
     "lot": "25",
     "phase": "I (Original)",
@@ -1823,23 +1889,22 @@
   },
   {
     "source": "Phase 1 File",
-    "page": 26,
+    "page": 25,
     "lot": "31",
     "phase": "II",
     "deedType": "Quit Claim Deed",
-    "grantor": "GRUHN HOMES, INC., a Washington Corporation",
-    "grantee": "AARON PALMER, a married man as his separate estate",
-    "date": "04/23/2018 12:34 PM",
+    "grantor": "",
+    "grantee": "",
+    "date": "",
     "taxParcel": "44140003100",
     "recordingNumber": "4622186",
     "exciseTax": "",
     "consideration": "",
-    "normalizedDate": "04/23/2018",
+    "normalizedDate": "07/31/2019",
     "isPostAmendment": false,
     "relatedLots": [
       31
-    ],
-    "derivedFrom": "page_scan"
+    ]
   },
   {
     "source": "Phase 1 File",
