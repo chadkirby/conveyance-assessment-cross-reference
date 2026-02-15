@@ -1,3 +1,9 @@
 node_modules
 .~lock*
 __pycache__
+.venv
+.uv-cache
+.pnpm-store
+app/dist
+app/public/data
+app/public/pdfs

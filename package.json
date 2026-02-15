@@ -1,17 +1,14 @@
 {
-  "name": "deschutes-heights-deeds",
+  "name": "conveyance-assessment-cross-reference",
+  "private": true,
   "version": "1.0.0",
-  "description": "",
   "license": "UNLICENSED",
   "author": "Chad Kirby",
-  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "dependencies": {
-    "undici-types": "^6.21.0"
-  },
-  "devDependencies": {
-    "@types/node": "^22.19.11"
+    "pipeline:build": "pnpm --filter @conveyance/pipeline build",
+    "site:prepare-data": "node ./scripts/prepare_site_assets.mjs",
+    "site:dev": "pnpm site:prepare-data && pnpm --filter @conveyance/site dev",
+    "site:build": "pnpm site:prepare-data && pnpm --filter @conveyance/site build",
+    "build": "pnpm pipeline:build && pnpm site:build"
   }
 }

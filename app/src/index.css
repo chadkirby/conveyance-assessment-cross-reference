@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+:root {
+  font-family: "Avenir Next", "Trebuchet MS", "Segoe UI", sans-serif;
+  color: #1f2937;
+  background: linear-gradient(140deg, #e4f2ec 0%, #f9f3e7 55%, #e7eef8 100%);
+}
+
+body {
+  margin: 0;
+}
+
+#root {
+  min-height: 100vh;
+}

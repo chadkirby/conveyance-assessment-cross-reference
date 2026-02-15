@@ -1,0 +1,12 @@
+{
+  "name": "@conveyance/pipeline",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "rebuild-deeds": "../../.venv/bin/python ../../scripts/rebuild_deeds_from_source.py",
+    "build-chain": "../../.venv/bin/python ../../scripts/build_chain_of_title.py",
+    "build-cross": "../../.venv/bin/python ../../scripts/build_cross_reference.py",
+    "build-conveyance-data": "../../.venv/bin/python ../../scripts/build_conveyance_assessment_data.py",
+    "build": "pnpm run rebuild-deeds && pnpm run build-chain && pnpm run build-cross && pnpm run build-conveyance-data"
+  }
+}

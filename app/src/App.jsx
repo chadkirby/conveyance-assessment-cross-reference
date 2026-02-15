@@ -1,0 +1,273 @@
+import { useEffect, useMemo, useState } from "react";
+
+const PDF_BY_SOURCE_FILE = {
+  "Deschutes Heights Phase 1 Deeds": "Deschutes Heights Phase 1 Deeds.pdf",
+  "Deschutes Heights 4414 Deeds": "Deschutes Heights 4414 Deeds.pdf",
+  "Deschutes Heights Phase 2 Deeds": "Deschutes Heights Phase 2 Deeds.pdf",
+};
+
+const MONEY = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+  minimumFractionDigits: 0,
+  maximumFractionDigits: 2,
+});
+
+function formatMoney(value) {
+  if (value === null || value === undefined || value === "") {
+    return "-";
+  }
+  const numberValue = Number(value);
+  if (Number.isNaN(numberValue)) {
+    return "-";
+  }
+  return MONEY.format(numberValue);
+}
+
+function parseDateKey(value) {
+  if (!value) {
+    return Number.MAX_SAFE_INTEGER;
+  }
+  const [month, day, year] = String(value).split("/");
+  if (!month || !day || !year) {
+    return Number.MAX_SAFE_INTEGER;
+  }
+  return Number(`${year}${month.padStart(2, "0")}${day.padStart(2, "0")}`);
+}
+
+function pdfLinks(sourceFile, sourcePages) {
+  const pdfName = PDF_BY_SOURCE_FILE[sourceFile];
+  if (!pdfName || !Array.isArray(sourcePages) || sourcePages.length === 0) {
+    return [];
+  }
+  const encodedName = encodeURIComponent(pdfName).replace(/%2F/g, "/");
+  return sourcePages.map((page) => ({
+    label: `p.${page}`,
+    href: `${import.meta.env.BASE_URL}pdfs/${encodedName}#page=${page}`,
+  }));
+}
+
+export default function App() {
+  const [query, setQuery] = useState("");
+  const [activeLot, setActiveLot] = useState(null);
+  const [dataset, setDataset] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const load = async () => {
+      try {
+        setLoading(true);
+        const dataResp = await fetch(`${import.meta.env.BASE_URL}data/conveyance_assessment_data.json`);
+        if (!dataResp.ok) {
+          throw new Error("Failed to load conveyance data.");
+        }
+        const dataJson = await dataResp.json();
+        setDataset(dataJson);
+      } catch (loadError) {
+        setError(loadError instanceof Error ? loadError.message : "Failed to load data.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    load();
+  }, []);
+
+  const lotRecord = useMemo(() => {
+    if (activeLot === null || !dataset?.lots) {
+      return null;
+    }
+    return dataset.lots.find((lot) => Number(lot.lot) === Number(activeLot)) || null;
+  }, [activeLot, dataset]);
+
+  const sortedConveyances = useMemo(() => {
+    if (!lotRecord?.conveyances) {
+      return [];
+    }
+    return [...lotRecord.conveyances].sort((a, b) => parseDateKey(a.date) - parseDateKey(b.date));
+  }, [lotRecord]);
+
+  const lotStats = useMemo(() => {
+    const stats = {
+      expected: 0,
+      collected: 0,
+      assessedCount: 0,
+    };
+    for (const conveyance of sortedConveyances) {
+      const assessment = conveyance.assessment;
+      if (!assessment) {
+        continue;
+      }
+      stats.assessedCount += 1;
+      const expectedValue = Number(assessment.expectedAmount || 0);
+      const collectedValue = Number(assessment.collectedAmount || 0);
+      stats.expected += expectedValue;
+      stats.collected += collectedValue;
+    }
+    return stats;
+  }, [sortedConveyances]);
+
+  const submitLookup = (event) => {
+    event.preventDefault();
+    const parsed = Number.parseInt(query, 10);
+    if (Number.isNaN(parsed)) {
+      setActiveLot(null);
+      return;
+    }
+    setActiveLot(parsed);
+  };
+
+  return (
+    <div className="min-h-screen text-zinc-900">
+      <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+        <header className="rounded-3xl border border-zinc-200/70 bg-white/80 p-7 shadow-xl shadow-zinc-900/5 backdrop-blur">
+          <p className="text-xs uppercase tracking-[0.22em] text-zinc-500">Deschutes Heights HOA</p>
+          <h1 className="mt-2 text-balance text-3xl font-semibold tracking-tight text-zinc-900 sm:text-4xl">
+            Conveyance Chain + Assessment Explorer
+          </h1>
+          <p className="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-600">
+            Search by lot number to review deed history, linked assessment collections, and source PDF pages.
+          </p>
+        </header>
+
+        <section className="mt-6 rounded-2xl border border-zinc-200/70 bg-white/75 p-6 shadow-lg shadow-zinc-900/5">
+          <form className="flex flex-col gap-3 sm:flex-row" onSubmit={submitLookup}>
+            <label className="flex-1">
+              <span className="mb-2 block text-xs uppercase tracking-[0.18em] text-zinc-500">Lot Number</span>
+              <input
+                className="w-full rounded-xl border border-zinc-300 bg-white px-3 py-2.5 text-base outline-none ring-emerald-500 transition focus:ring-2"
+                placeholder="Enter lot (e.g., 67)"
+                value={query}
+                onChange={(event) => setQuery(event.target.value)}
+                inputMode="numeric"
+              />
+            </label>
+            <button
+              type="submit"
+              className="h-fit self-end rounded-xl bg-zinc-900 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-zinc-700"
+            >
+              Find Lot
+            </button>
+          </form>
+        </section>
+
+        {loading && <p className="mt-6 text-sm text-zinc-600">Loading data...</p>}
+        {!loading && error && <p className="mt-6 text-sm text-rose-700">{error}</p>}
+
+        {!loading && !error && activeLot === null && (
+          <p className="mt-6 text-sm text-zinc-600">Enter a lot number to view chain-of-title and assessment history.</p>
+        )}
+
+        {!loading && !error && activeLot !== null && !lotRecord && (
+          <p className="mt-6 text-sm text-zinc-700">
+            No lot record found for <strong>{activeLot}</strong>.
+          </p>
+        )}
+
+        {!loading && !error && lotRecord && (
+          <section className="mt-6 space-y-4">
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              <article className="rounded-2xl border border-zinc-200 bg-white p-4">
+                <p className="text-xs uppercase tracking-[0.16em] text-zinc-500">Lot</p>
+                <p className="mt-2 text-2xl font-semibold">{lotRecord.lot}</p>
+                <p className="mt-1 text-sm text-zinc-600">Phase {lotRecord.phase}</p>
+              </article>
+              <article className="rounded-2xl border border-zinc-200 bg-white p-4">
+                <p className="text-xs uppercase tracking-[0.16em] text-zinc-500">Conveyances</p>
+                <p className="mt-2 text-2xl font-semibold">{sortedConveyances.length}</p>
+                <p className="mt-1 text-sm text-zinc-600">With assessment rows: {lotStats.assessedCount}</p>
+              </article>
+              <article className="rounded-2xl border border-zinc-200 bg-white p-4">
+                <p className="text-xs uppercase tracking-[0.16em] text-zinc-500">Expected</p>
+                <p className="mt-2 text-2xl font-semibold">{formatMoney(lotStats.expected)}</p>
+                <p className="mt-1 text-sm text-zinc-600">Linked assessments: {lotStats.assessedCount}</p>
+              </article>
+              <article className="rounded-2xl border border-zinc-200 bg-white p-4">
+                <p className="text-xs uppercase tracking-[0.16em] text-zinc-500">Collected</p>
+                <p className="mt-2 text-2xl font-semibold">{formatMoney(lotStats.collected)}</p>
+                <p className="mt-1 text-sm text-zinc-600">Gap: {formatMoney(lotStats.expected - lotStats.collected)}</p>
+              </article>
+            </div>
+
+            <div className="overflow-x-auto rounded-2xl border border-zinc-200 bg-white shadow-lg shadow-zinc-900/5">
+              <table className="min-w-full divide-y divide-zinc-200 text-sm">
+                <thead className="bg-zinc-100/70 text-xs uppercase tracking-[0.16em] text-zinc-600">
+                  <tr>
+                    <th className="px-4 py-3 text-left">Date</th>
+                    <th className="px-4 py-3 text-left">Deed</th>
+                    <th className="px-4 py-3 text-left">Grantor</th>
+                    <th className="px-4 py-3 text-left">Grantee</th>
+                    <th className="px-4 py-3 text-left">Expected</th>
+                    <th className="px-4 py-3 text-left">Collected</th>
+                    <th className="px-4 py-3 text-left">GL Link</th>
+                    <th className="px-4 py-3 text-left">Source</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-zinc-100">
+                  {sortedConveyances.map((conveyance, index) => {
+                    const assessment = conveyance.assessment;
+                    const links = pdfLinks(conveyance.sourceFile, conveyance.sourcePages);
+                    return (
+                      <tr key={`${conveyance.date}-${index}`} className="align-top">
+                        <td className="px-4 py-3 font-medium text-zinc-900">{conveyance.date || "-"}</td>
+                        <td className="px-4 py-3">{conveyance.deedType || "-"}</td>
+                        <td className="px-4 py-3 text-zinc-700">{conveyance.grantor || "-"}</td>
+                        <td className="px-4 py-3 text-zinc-700">{conveyance.grantee || "-"}</td>
+                        <td className="px-4 py-3">{formatMoney(assessment?.expectedAmount)}</td>
+                        <td className="px-4 py-3">{formatMoney(assessment?.collectedAmount)}</td>
+                        <td className="px-4 py-3 text-xs text-zinc-600">
+                          {assessment?.glDate ? (
+                            <div>
+                              <p className="font-medium text-zinc-800">{assessment.glDate}</p>
+                              <p className="mt-1 max-w-xs">{assessment.glDescription || "Collection entry"}</p>
+                            </div>
+                          ) : (
+                            "-"
+                          )}
+                        </td>
+                        <td className="px-4 py-3 text-xs text-zinc-700">
+                          <p>{conveyance.sourceFile || "-"}</p>
+                          {links.length > 0 ? (
+                            <div className="mt-1 flex flex-wrap gap-1.5">
+                              {links.map((link) => (
+                                <a
+                                  key={link.href}
+                                  href={link.href}
+                                  target="_blank"
+                                  rel="noreferrer"
+                                  className="rounded-md bg-emerald-100 px-2 py-0.5 font-medium text-emerald-900 transition hover:bg-emerald-200"
+                                >
+                                  {link.label}
+                                </a>
+                              ))}
+                            </div>
+                          ) : (
+                            <p className="mt-1 text-zinc-500">No page reference</p>
+                          )}
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+
+            {lotRecord.unmatchedCrossRows?.length > 0 && (
+              <div className="rounded-2xl border border-amber-300 bg-amber-50 p-4 text-sm text-amber-900">
+                <p className="font-semibold">Unmatched cross-reference rows for lot {lotRecord.lot}</p>
+                <ul className="mt-2 space-y-1">
+                  {lotRecord.unmatchedCrossRows.map((row) => (
+                    <li key={row.crossReferenceRowId}>
+                      {row.deedDate || "Unknown date"} | {row.matchStatus || "Unmatched"} | {row.glDescription || "No GL description"}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </section>
+        )}
+      </div>
+    </div>
+  );
+}
