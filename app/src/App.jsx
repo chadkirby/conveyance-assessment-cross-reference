@@ -563,6 +563,20 @@ export default function App() {
               <p className="mt-1.5 text-[11px] text-zinc-500">
                 Click any lot on the map to auto-search. If selection is ambiguous, you can choose from suggested lots. Link: <code>?lot=67</code>
               </p>
+              {!loading && !error && lotRecord && (
+                <div className="mt-2 hidden grid-cols-2 gap-2 lg:grid">
+                  <div className="rounded-lg border border-zinc-200 bg-white p-2">
+                    <p className="text-[10px] uppercase tracking-[0.14em] text-zinc-500">Lot</p>
+                    <p className="mt-0.5 text-base font-semibold text-zinc-900">{lotRecord.lot}</p>
+                    <p className="text-xs text-zinc-600">Phase {lotRecord.phase}</p>
+                  </div>
+                  <div className="rounded-lg border border-zinc-200 bg-white p-2">
+                    <p className="text-[10px] uppercase tracking-[0.14em] text-zinc-500">Conveyances</p>
+                    <p className="mt-0.5 text-base font-semibold text-zinc-900">{sortedConveyances.length}</p>
+                    <p className="text-xs text-zinc-600">Assessment rows: {lotStats.assessedCount}</p>
+                  </div>
+                </div>
+              )}
               {debugMode && (
                 <div className="mt-1 space-y-1.5 rounded-md border border-sky-200 bg-sky-50/70 p-1.5">
                   <p className="text-[11px] text-sky-800">
@@ -699,7 +713,7 @@ export default function App() {
 
         {!loading && !error && lotRecord && (
           <section className="mt-2 space-y-3">
-            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid gap-2 sm:grid-cols-2 lg:hidden">
               <article className="rounded-2xl border border-zinc-200 bg-white p-4">
                 <p className="text-xs uppercase tracking-[0.16em] text-zinc-500">Lot</p>
                 <p className="mt-2 text-2xl font-semibold">{lotRecord.lot}</p>
@@ -708,17 +722,7 @@ export default function App() {
               <article className="rounded-2xl border border-zinc-200 bg-white p-4">
                 <p className="text-xs uppercase tracking-[0.16em] text-zinc-500">Conveyances</p>
                 <p className="mt-2 text-2xl font-semibold">{sortedConveyances.length}</p>
-                <p className="mt-1 text-sm text-zinc-600">With assessment rows: {lotStats.assessedCount}</p>
-              </article>
-              <article className="rounded-2xl border border-zinc-200 bg-white p-4">
-                <p className="text-xs uppercase tracking-[0.16em] text-zinc-500">Expected</p>
-                <p className="mt-2 text-2xl font-semibold">{formatMoney(lotStats.expected)}</p>
-                <p className="mt-1 text-sm text-zinc-600">Linked assessments: {lotStats.assessedCount}</p>
-              </article>
-              <article className="rounded-2xl border border-zinc-200 bg-white p-4">
-                <p className="text-xs uppercase tracking-[0.16em] text-zinc-500">Collected</p>
-                <p className="mt-2 text-2xl font-semibold">{formatMoney(lotStats.collected)}</p>
-                <p className="mt-1 text-sm text-zinc-600">Gap: {formatMoney(lotStats.expected - lotStats.collected)}</p>
+                <p className="mt-1 text-sm text-zinc-600">Assessment rows: {lotStats.assessedCount}</p>
               </article>
             </div>
 
