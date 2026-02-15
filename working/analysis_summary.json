@@ -1,0 +1,17 @@
+{
+  "workbook": "/Users/ckirby/repos/Cowork Projects/Conveyance Assessment Cross-Reference/conveyance_assessment_analysis.xlsx",
+  "postAmendmentDeeds": 75,
+  "crossRows": 75,
+  "statusCounts": {
+    "Over-Collected": 7,
+    "Under-Collected": 24,
+    "Correct": 44
+  },
+  "unmatchedGlRows": 36,
+  "resaleRows": 59,
+  "resaleMissingDeedRows": 23,
+  "claim1Count": 18,
+  "claim1Subtotal": 9000.0,
+  "claim2Subtotal": 49000.0,
+  "grandTotal": 58000.0
+}
