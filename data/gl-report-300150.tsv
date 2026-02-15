@@ -1,0 +1,97 @@
+Date	Source  	Description	Long Desc.	Cost Center	Debit	Credit	Balance	Account	Account Category	Account Type	Vendor	Month	Year	Amount
+5/31/2020	GL	Balance Forward		Operating		$5,500.00	-$5,500.00	300150	Revenue	Income		5	2020	-$5,500.00
+7/2/2020	AR	Transfer Fee - Capital Contribution		Operating		$500.00	-$6,000.00	300150	Revenue	Income		7	2020	-$500.00
+7/30/2020	AR	Capital Contribution - Unit 077		Operating		$500.00	-$6,500.00	300150	Revenue	Income		7	2020	-$500.00
+11/4/2020	AR	Transfer Fee - Capital Contribution Unit 083		Operating		$500.00	-$7,000.00	300150	Revenue	Income		11	2020	-$500.00
+11/10/2020	AR	Transfer Fee - Capital Contribution Unit 068		Operating		$500.00	-$7,500.00	300150	Revenue	Income		11	2020	-$500.00
+12/9/2020	AR	Transfer Fee - Capital Contribution Unit 089		Operating		$500.00	-$8,000.00	300150	Revenue	Income		12	2020	-$500.00
+12/21/2020	AR	Transfer Fee - Capital Contribution		Operating		$500.00	-$8,500.00	300150	Revenue	Income		12	2020	-$500.00
+12/21/2020	AR	Transfer Fee - Capital Contribution		Operating		$2,000.00	-$10,500.00	300150	Revenue	Income		12	2020	-$2,000.00
+12/21/2020	AR	Capital Reserve Contribution Unit 088		Operating		$500.00	-$11,000.00	300150	Revenue	Income		12	2020	-$500.00
+12/21/2020	AR	Capital Reserve Contribution Unit 082		Operating		$500.00	-$11,500.00	300150	Revenue	Income		12	2020	-$500.00
+12/23/2020	AR	Transfer Fee - Capital Contribution Unit 081		Operating		$500.00	-$12,000.00	300150	Revenue	Income		12	2020	-$500.00
+1/6/2021	AR	Transfer Fee - Capital Contribution		Operating		$500.00	-$12,500.00	300150	Revenue	Income		1	2021	-$500.00
+1/8/2021	AR	Transfer Fee - Capital Contribution Unit 073		Operating		$500.00	-$13,000.00	300150	Revenue	Income		1	2021	-$500.00
+1/12/2021	AR	Transfer Fee - Capital Contribution Unit 069		Operating		$500.00	-$13,500.00	300150	Revenue	Income		1	2021	-$500.00
+2/9/2021	AR	Transfer Fee - Capital Contribution		Operating		$500.00	-$14,000.00	300150	Revenue	Income		2	2021	-$500.00
+2/19/2021	AR	Transfer Fee - Capital Contribution - Unit 074		Operating		$500.00	-$14,500.00	300150	Revenue	Income		2	2021	-$500.00
+3/5/2021	AR	Capital Reserve Contribution		Operating		$500.00	-$15,000.00	300150	Revenue	Income		3	2021	-$500.00
+3/5/2021	AR	Capital Reserve Contribution.		Operating		$500.00	-$15,500.00	300150	Revenue	Income		3	2021	-$500.00
+3/5/2021	AR	Capital Reserve Contribution.		Operating		$500.00	-$16,000.00	300150	Revenue	Income		3	2021	-$500.00
+3/10/2021	AP	Lotus House Development Corp (Lotus House Development Corp), Invoice #: 20210310; Transfer Contributions Fees		Operating	$12,000.00		-$4,000.00	300150	Revenue	Income		3	2021	$12,000.00
+3/16/2021	AR	Transfer Fee - Capital Contribution - Unit 070		Operating		$500.00	-$4,500.00	300150	Revenue	Income		3	2021	-$500.00
+3/31/2021	AR	Transfer Fee - Capital Contribution Lot 079		Operating		$500.00	-$5,000.00	300150	Revenue	Income		3	2021	-$500.00
+5/6/2021	AR	Transfer Fee - Capital Contribution Unit 92		Operating		$500.00	-$5,500.00	300150	Revenue	Income		5	2021	-$500.00
+5/17/2021	AR	Transfer Fee - Capital Contribution Unit #085		Operating		$500.00	-$6,000.00	300150	Revenue	Income		5	2021	-$500.00
+5/17/2021	AR	Capital Contribution - Unit 050		Operating		$2,000.00	-$8,000.00	300150	Revenue	Income		5	2021	-$2,000.00
+6/28/2021	AR	Transfer Fee - Capital Contribution Unit 005		Operating		$500.00	-$8,500.00	300150	Revenue	Income		6	2021	-$500.00
+6/28/2021	AR	Transfer Fee - Capital Contribution Unit 009		Operating		$500.00	-$9,000.00	300150	Revenue	Income		6	2021	-$500.00
+6/28/2021	AR	Transfer Fee - Capital Contribution Unit 010		Operating		$500.00	-$9,500.00	300150	Revenue	Income		6	2021	-$500.00
+7/6/2021	AR	Capital Reserve Contribution		Operating		$500.00	-$10,000.00	300150	Revenue	Income		7	2021	-$500.00
+7/7/2021	AR	Transfer Fee - Capital Contribution Unit 072		Operating		$500.00	-$10,500.00	300150	Revenue	Income		7	2021	-$500.00
+7/21/2021	AR	Transfer Fee - Capital Contribution Unit 033		Operating		$500.00	-$11,000.00	300150	Revenue	Income		7	2021	-$500.00
+9/10/2021	AR	Transfer Fee - Capital Contribution Unit 064		Operating		$500.00	-$11,500.00	300150	Revenue	Income		9	2021	-$500.00
+9/13/2021	AR	Transfer Fee - Capital Contribution Unit 090		Operating		$500.00	-$12,000.00	300150	Revenue	Income		9	2021	-$500.00
+9/16/2021	AR	Transfer Fee - Capital Contribution Unit 039		Operating		$500.00	-$12,500.00	300150	Revenue	Income		9	2021	-$500.00
+11/8/2021	AR	Transfer Fee - Capital Contribution Unit 063		Operating		$500.00	-$13,000.00	300150	Revenue	Income		11	2021	-$500.00
+12/1/2021	AR	Transfer Fee - Capital Contribution Unit 022		Operating		$500.00	-$13,500.00	300150	Revenue	Income		12	2021	-$500.00
+12/16/2021	AR	Capital Reserve Contribution		Operating		$500.00	-$14,000.00	300150	Revenue	Income		12	2021	-$500.00
+12/21/2021	AR	Transfer Fee - Capital Contribution Unit 061		Operating		$500.00	-$14,500.00	300150	Revenue	Income		12	2021	-$500.00
+1/4/2022	AR	Capital Reserve Contribution		Operating		$500.00	-$15,000.00	300150	Revenue	Income		1	2022	-$500.00
+1/25/2022	AP	[VOID] - Lotus House Development Corp (Lotus House Development Corp), Invoice #: 20220125; Payout per Agreement		Operating		$14,500.00	-$29,500.00	300150	Revenue	Income		1	2022	-$14,500.00
+1/25/2022	AP	Lotus House Development Corp (Lotus House Development Corp), Invoice #: 20220125; Payout per Agreement		Operating	$14,500.00		-$15,000.00	300150	Revenue	Income		1	2022	$14,500.00
+1/25/2022	AP	Lotus House Development Corp (Lotus House Development Corp), Invoice #: 20220125-1; Payment per Agreement		Operating	$14,500.00		-$500.00	300150	Revenue	Income		1	2022	$14,500.00
+2/4/2022	AR	Transfer Fee - Capital Contribution Unit 048		Operating		$500.00	-$1,000.00	300150	Revenue	Income		2	2022	-$500.00
+3/21/2022	AR	Transfer Fee - Capital Contribution Unit 007		Operating		$500.00	-$1,500.00	300150	Revenue	Income		3	2022	-$500.00
+3/21/2022	AR	Transfer Fee - Capital Contribution Unit 008		Operating		$500.00	-$2,000.00	300150	Revenue	Income		3	2022	-$500.00
+4/22/2022	AR	Capital Reserve Contribution - Unit 011		Operating		$500.00	-$2,500.00	300150	Revenue	Income		4	2022	-$500.00
+4/22/2022	AR	Transfer Fee - Capital Contribution - Unit 011		Operating		$500.00	-$3,000.00	300150	Revenue	Income		4	2022	-$500.00
+4/22/2022	AR	REVERSAL - [Capital Reserve Contribution - Unit 011]		Operating	$500.00		-$2,500.00	300150	Revenue	Income		4	2022	$500.00
+5/9/2022	AR	Transfer Fee - Capital Contribution - Lot #86		Operating		$500.00	-$3,000.00	300150	Revenue	Income		5	2022	-$500.00
+5/9/2022	AR	Transfer Fee - Capital Contribution Unit 049		Operating		$500.00	-$3,500.00	300150	Revenue	Income		5	2022	-$500.00
+5/9/2022	AR	Transfer Fee - Capital Contribution - Unit 084		Operating		$500.00	-$4,000.00	300150	Revenue	Income		5	2022	-$500.00
+5/25/2022	AR	Transfer Fee - Capital Contribution Unit 075		Operating		$500.00	-$4,500.00	300150	Revenue	Income		5	2022	-$500.00
+7/7/2022	AR	Transfer Fee - Capital Contribution - Unit 093		Operating		$500.00	-$5,000.00	300150	Revenue	Income		7	2022	-$500.00
+7/13/2022	AR	Transfer Fee - Capital Contribution - Unit 107		Operating		$500.00	-$5,500.00	300150	Revenue	Income		7	2022	-$500.00
+8/3/2022	AR	Transfer Fee - Capital Contribution - unit 029		Operating		$500.00	-$6,000.00	300150	Revenue	Income		8	2022	-$500.00
+9/22/2022	AR	Transfer Fee - Capital Contribution - Lot 036		Operating		$500.00	-$6,500.00	300150	Revenue	Income		9	2022	-$500.00
+10/28/2022	AR	Transfer Fee - Capital Contribution		Operating		$500.00	-$7,000.00	300150	Revenue	Income		10	2022	-$500.00
+10/28/2022	AR	Capital Contribution		Operating		$500.00	-$7,500.00	300150	Revenue	Income		10	2022	-$500.00
+12/7/2022	AR	Capital Contribution - Unit #057		Operating		$500.00	-$8,000.00	300150	Revenue	Income		12	2022	-$500.00
+12/7/2022	AR	Transfer Fee - Capital Contribution - Unit #060		Operating		$500.00	-$8,500.00	300150	Revenue	Income		12	2022	-$500.00
+12/7/2022	AR	Transfer Fee - Capital Contribution - Unit#052		Operating		$500.00	-$9,000.00	300150	Revenue	Income		12	2022	-$500.00
+12/14/2022	AR	Transfer Fee - Capital Contribution - Unit#058		Operating		$500.00	-$9,500.00	300150	Revenue	Income		12	2022	-$500.00
+12/19/2022	AR	Transfer Fee - Capital Contribution - Unit #010		Operating		$500.00	-$10,000.00	300150	Revenue	Income		12	2022	-$500.00
+12/21/2022	AR	Capital Contribution - Unit#065		Operating		$500.00	-$10,500.00	300150	Revenue	Income		12	2022	-$500.00
+3/3/2023	AP	Lotus House Development Corp (Lotus House Development Corp), Invoice #: 20230303; Payment per agreement		Operating	$10,500.00		$0.00	300150	Revenue	Income		3	2023	$10,500.00
+3/8/2023	AR	Capital Contribution - Unit# 054		Operating		$500.00	-$500.00	300150	Revenue	Income		3	2023	-$500.00
+3/8/2023	AR	Capital Contribution - Unit# 009		Operating		$500.00	-$1,000.00	300150	Revenue	Income		3	2023	-$500.00
+3/30/2023	AR	Capital Contribution - Unit# 005		Operating		$500.00	-$1,500.00	300150	Revenue	Income		3	2023	-$500.00
+4/4/2023	AR	Capital Contribution - Unit# 106		Operating		$500.00	-$2,000.00	300150	Revenue	Income		4	2023	-$500.00
+4/17/2023	AR	Capital Contribution - Unit# 108		Operating		$500.00	-$2,500.00	300150	Revenue	Income		4	2023	-$500.00
+4/18/2023	AR	Capital Contribution - Unit#053		Operating		$500.00	-$3,000.00	300150	Revenue	Income		4	2023	-$500.00
+4/27/2023	AR	Capital Contribution - Unit# 078		Operating		$500.00	-$3,500.00	300150	Revenue	Income		4	2023	-$500.00
+5/19/2023	AR	Capital Contribution - Unit# 001		Operating		$500.00	-$4,000.00	300150	Revenue	Income		5	2023	-$500.00
+1/22/2024	AR	Capital Contribution - Unit #055		Operating		$500.00	-$4,500.00	300150	Revenue	Income		1	2024	-$500.00
+3/8/2024	AP	Lotus House Development Corp (Lotus House Development Corp), Invoice #: 20240308; Payment Per Agreement		Operating	$4,500.00		$0.00	300150	Revenue	Income		3	2024	$4,500.00
+4/18/2024	AR	Transfer Fee - Capital Contribution - Unit #082		Operating		$500.00	-$500.00	300150	Revenue	Income		4	2024	-$500.00
+5/6/2024	AR	REVERSAL - [Transfer Fee - Capital Contribution - Unit #059]		Operating	$200.00		-$300.00	300150	Revenue	Income		5	2024	$200.00
+5/6/2024	AR	Transfer Fee - Capital Contribution - Unit #059		Operating		$500.00	-$800.00	300150	Revenue	Income		5	2024	-$500.00
+5/6/2024	AR	Transfer Fee - Capital Contribution - Unit #059		Operating		$200.00	-$1,000.00	300150	Revenue	Income		5	2024	-$200.00
+5/8/2024	AR	Transfer Fee - Capital Contribution - 109		Operating		$500.00	-$1,500.00	300150	Revenue	Income		5	2024	-$500.00
+5/8/2024	AR	Transfer Fee - Capital Contribution - Unit #110		Operating		$500.00	-$2,000.00	300150	Revenue	Income		5	2024	-$500.00
+5/8/2024	AR	Transfer Fee - Capital Contribution - Unit #111		Operating		$500.00	-$2,500.00	300150	Revenue	Income		5	2024	-$500.00
+6/27/2024	AR	Transfer Fee - Capital Contribution		Operating		$500.00	-$3,000.00	300150	Revenue	Income		6	2024	-$500.00
+6/28/2024	AR	Transfer Fee - Capital Contribution for unit 083		Operating		$500.00	-$3,500.00	300150	Revenue	Income		6	2024	-$500.00
+7/19/2024	AR	Transfer Fee - Capital Contribution - Unit #107		Operating		$500.00	-$4,000.00	300150	Revenue	Income		7	2024	-$500.00
+8/21/2024	AR	Transfer Fee - Capital Contribution - Unit #048		Operating		$500.00	-$4,500.00	300150	Revenue	Income		8	2024	-$500.00
+8/21/2024	AR	Transfer Fee - Capital Contribution - Unit #112		Operating		$500.00	-$5,000.00	300150	Revenue	Income		8	2024	-$500.00
+1/20/2025	AR	Transfer Fee - Capital Contribution - Unit #049		Operating		$500.00	-$5,500.00	300150	Revenue	Income		1	2025	-$500.00
+3/2/2025	AR	Transfer Fee - Capital Contribution - Unit #097		Operating		$500.00	-$6,000.00	300150	Revenue	Income		3	2025	-$500.00
+5/9/2025	AR	Transfer Fee - Capital Contribution - Unit #047		Operating		$500.00	-$6,500.00	300150	Revenue	Income		5	2025	-$500.00
+5/20/2025	AR	Transfer Fee - Capital Contribution Unit #073		Operating		$500.00	-$7,000.00	300150	Revenue	Income		5	2025	-$500.00
+8/4/2025	AR	Transfer Fee - Capital Contribution		Operating		$500.00	-$7,500.00	300150	Revenue	Income		8	2025	-$500.00
+9/19/2025	AR	Transfer Fee - Capital Contribution		Operating		$500.00	-$8,000.00	300150	Revenue	Income		9	2025	-$500.00
+9/19/2025	AP	Lotus House Development Corp (Lotus House Development Corp), Invoice #: 20250919; Payment per agreement		Operating	$7,500.00		-$500.00	300150	Revenue	Income		9	2025	$7,500.00
+9/30/2025	AR	Transfer Fee - Capital Contribution		Operating		$500.00	-$1,000.00	300150	Revenue	Income		9	2025	-$500.00
+11/20/2025	AR	Transfer Fee - Capital Contribution		Operating		$500.00	-$1,500.00	300150	Revenue	Income		11	2025	-$500.00
