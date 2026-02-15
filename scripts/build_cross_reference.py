@@ -338,6 +338,38 @@ def extract_recording_stamp(text: str) -> date | None:
     return None
 
 
+def extract_related_lots_from_text(text: str) -> list[int]:
+    lots: set[int] = set()
+    parcel_sections: list[str] = []
+    for match in re.finditer(r"(Tax Parcel[^\n]*|Assessor.?s Tax Parcel[^\n]*)", text, flags=re.IGNORECASE):
+        start = match.start()
+        end = min(len(text), start + 450)
+        parcel_sections.append(text[start:end])
+    parse_targets = parcel_sections if parcel_sections else [text]
+
+    for target in parse_targets:
+        # Normalized parcel numbers like 44140006900, 44140010900, etc.
+        for m in re.finditer(r"\b4414\d{7}\b", target):
+            digits = m.group(0)
+            try:
+                lot = int(digits[6:9])
+            except ValueError:
+                continue
+            if 0 < lot <= 500:
+                lots.add(lot)
+
+        # Hyphenated parcel numbers like 4414-00-06100
+        for m in re.finditer(r"\b4414[-\s]?00[-\s]?0?(\d{1,3})00\b", target):
+            try:
+                lot = int(m.group(1))
+            except ValueError:
+                continue
+            if 0 < lot <= 500:
+                lots.add(lot)
+
+    return sorted(lots)
+
+
 def auto_fit_columns(ws, min_width: int = 10, max_width: int = 60) -> None:
     for column in ws.columns:
         values = [normalize_space(str(cell.value)) for cell in column if cell.value is not None]
@@ -379,6 +411,7 @@ def main() -> None:
         deed["deedDateObj"] = parse_us_date(deed.get("normalizedDate"))
         deed["grantor"] = normalize_space(deed.get("grantor"))
         deed["grantee"] = normalize_space(deed.get("grantee"))
+        deed["relatedLots"] = [deed["lotInt"]] if isinstance(deed.get("lotInt"), int) else []
 
     page_maps: dict[str, dict[int, str]] = {}
     for source_key, filename in SOURCE_FILES.items():
@@ -419,6 +452,14 @@ def main() -> None:
             deed["isPostAmendment"] = replacement >= AMENDMENT_DATE
             deed["dateRepairNote"] = reason
             repaired_dates += 1
+
+        lot_chunk = "\n".join(pages.get(p, "") for p in range(page, page + 2))
+        extracted_lots = extract_related_lots_from_text(lot_chunk)
+        related = set(x for x in deed.get("relatedLots", []) if isinstance(x, int))
+        related.update(extracted_lots)
+        if deed.get("lotInt"):
+            related.add(deed["lotInt"])
+        deed["relatedLots"] = sorted(related)
 
     deed_to_resale = match_by_lot(
         left_items=deeds,
@@ -497,11 +538,16 @@ def main() -> None:
         if matched_resale and matched_resale.get("escrowDateObj"):
             target_date = matched_resale["escrowDateObj"]
 
-        candidates = []
+        exact_candidates = []
+        related_candidates = []
         for gl in post_collections:
             if gl["_idx"] in used_collection_ids:
                 continue
-            if gl.get("unitInt") != lot:
+            unit = gl.get("unitInt")
+            if unit is None:
+                continue
+            related_lots = deed.get("relatedLots", [])
+            if unit not in related_lots:
                 continue
             delta_days = abs((gl["glDateObj"] - target_date).days)
             score = delta_days
@@ -509,8 +555,12 @@ def main() -> None:
                 score += 120
             if "transfer" not in gl["description"].lower() and "capital" not in gl["description"].lower():
                 score += 10
-            candidates.append((score, delta_days, gl["_idx"]))
+            if unit == lot:
+                exact_candidates.append((score, delta_days, gl["_idx"]))
+            else:
+                related_candidates.append((score + 20, delta_days, gl["_idx"]))
 
+        candidates = exact_candidates if exact_candidates else related_candidates
         if not candidates:
             continue
         candidates.sort()
@@ -581,16 +631,48 @@ def main() -> None:
                 used_collection_ids.add(gl["_idx"])
                 current_net = proposal
 
+    supplemental_gl_to_deed: dict[int, int] = {}
+    for gl in sorted(post_collections, key=lambda x: (x["glDateObj"], x["_idx"])):
+        if gl["_idx"] in used_collection_ids:
+            continue
+        unit = gl.get("unitInt")
+        if unit is None:
+            continue
+        candidates = []
+        for deed in all_dated_deeds:
+            if unit not in deed.get("relatedLots", []):
+                continue
+            delta = abs((gl["glDateObj"] - deed["deedDateObj"]).days)
+            max_delta = 400 if deed["deedDateObj"] >= AMENDMENT_DATE else 120
+            if delta > max_delta:
+                continue
+            score = delta
+            if deed.get("lotInt") != unit:
+                score += 25
+            if is_bad_name(deed.get("grantor")):
+                score += 10
+            if is_bad_name(deed.get("grantee")):
+                score += 10
+            candidates.append((score, deed["_idx"]))
+        if not candidates:
+            continue
+        candidates.sort()
+        _, best_deed_idx = candidates[0]
+        supplemental_gl_to_deed[gl["_idx"]] = best_deed_idx
+        used_collection_ids.add(gl["_idx"])
+
     analysis_deeds = [
         d
         for d in all_dated_deeds
         if d["deedDateObj"] >= AMENDMENT_DATE
         or d["_idx"] in deed_to_collection
         or d["_idx"] in deed_reversal_ids
+        or d["_idx"] in supplemental_gl_to_deed.values()
     ]
     analysis_deeds.sort(key=lambda x: (x["deedDateObj"], x.get("lotInt") or 0, x.get("_idx")))
 
     cross_rows: list[dict[str, Any]] = []
+    deed_lookup = {d["_idx"]: d for d in deeds}
     for deed in analysis_deeds:
         lot = deed.get("lotInt")
         grantor = deed.get("grantor") or ""
@@ -661,11 +743,19 @@ def main() -> None:
             notes.append("Collection posted on exempt transfer.")
         if not is_post_amendment and primary_gl:
             notes.append("Matched to pre-amendment deed for visibility.")
+        display_lot = lot
+        if primary_gl and isinstance(primary_gl.get("unitInt"), int):
+            gl_unit = int(primary_gl["unitInt"])
+            if gl_unit in deed.get("relatedLots", []) and gl_unit != lot:
+                display_lot = gl_unit
+                notes.append(
+                    f"GL unit {gl_unit} matched via multi-lot deed context (primary parsed lot {lot})."
+                )
 
         cross_rows.append(
             {
                 "Phase": deed.get("phase", ""),
-                "Lot": lot,
+                "Lot": display_lot,
                 "Deed Date": deed.get("deedDateObj"),
                 "Deed Type": deed.get("deedType", ""),
                 "Grantor": grantor,
@@ -684,6 +774,63 @@ def main() -> None:
             }
         )
 
+    for gl_idx, deed_idx in sorted(supplemental_gl_to_deed.items(), key=lambda x: x[0]):
+        deed = deed_lookup.get(deed_idx)
+        gl = gl_entries[gl_idx]
+        if deed is None:
+            continue
+        grantor = deed.get("grantor") or ""
+        grantee = deed.get("grantee") or ""
+        lotus_grantor = is_lotus_house(grantor)
+        is_post_amendment = deed["deedDateObj"] >= AMENDMENT_DATE
+        due = (not lotus_grantor) if is_post_amendment else None
+        expected = (500 if due else 0) if is_post_amendment else None
+        actual = float(gl.get("amount", 0))
+        if expected is None:
+            status = "Pre-Amendment Matched"
+            impact = currency(actual)
+            category = "Pre-amendment transfer with GL activity"
+            due_text = "N/A (pre-amendment)"
+        else:
+            impact = currency(actual - expected)
+            if actual == expected:
+                status = "Correct"
+            elif actual < expected:
+                status = "Under-Collected"
+            else:
+                status = "Over-Collected"
+            category = "Exempt transfer (grantor Lotus House)" if due is False else "Conveyance assessment due"
+            due_text = "Yes" if due else "No"
+        notes = [
+            "Supplemental GL matched via deed related-lot context.",
+            f"GL/deed date delta: {abs((gl['glDateObj'] - deed['deedDateObj']).days)} days.",
+        ]
+        if deed.get("lotInt") != gl.get("unitInt"):
+            notes.append(
+                f"GL unit {gl.get('unitInt')} matched via multi-lot deed context (primary parsed lot {deed.get('lotInt')})."
+            )
+        cross_rows.append(
+            {
+                "Phase": deed.get("phase", ""),
+                "Lot": gl.get("unitInt") if gl.get("unitInt") else deed.get("lotInt"),
+                "Deed Date": deed.get("deedDateObj"),
+                "Deed Type": deed.get("deedType", ""),
+                "Grantor": grantor,
+                "Grantee": grantee,
+                "Category": category,
+                "Grantor=Lotus House?": "Yes" if lotus_grantor else "No",
+                "$500 Due?": due_text,
+                "GL Date": gl.get("glDateObj"),
+                "GL Unit": gl.get("unitInt"),
+                "GL Description": gl.get("description"),
+                "Match Status": status,
+                "$ Impact": impact,
+                "Notes": " ".join(notes),
+                "_deedIdx": deed.get("_idx"),
+                "_glIdx": gl.get("_idx"),
+            }
+        )
+
     matched_gl_ids = set(used_collection_ids) | used_reversal_ids
     unmatched_gl_rows: list[dict[str, Any]] = []
     unmatched_gl_linked_pre = 0
@@ -698,7 +845,9 @@ def main() -> None:
         category = "Unmatched GL entry"
         if isinstance(lot, int):
             deed_candidates = [
-                d for d in deeds if d.get("lotInt") == lot and isinstance(d.get("deedDateObj"), date)
+                d
+                for d in deeds
+                if isinstance(d.get("deedDateObj"), date) and lot in d.get("relatedLots", [])
             ]
             if deed_candidates:
                 nearest = min(
