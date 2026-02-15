@@ -8,7 +8,8 @@ const PDF_BY_SOURCE_FILE = {
 };
 
 const LOT_MAP_IMAGE = `${import.meta.env.BASE_URL}images/lot-map.jpg`;
-const MAX_MAP_SNAP_DISTANCE = 0.045;
+const AUTO_SELECT_DISTANCE = 0.028;
+const HOVER_PREVIEW_DISTANCE = 0.08;
 
 const MONEY = new Intl.NumberFormat("en-US", {
   style: "currency",
@@ -81,6 +82,8 @@ export default function App() {
   const [dataset, setDataset] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [hoverSelection, setHoverSelection] = useState(null);
+  const [clickChoice, setClickChoice] = useState(null);
 
   useEffect(() => {
     const urlLot = readLotFromUrl();
@@ -190,19 +193,68 @@ export default function App() {
     const clickX = (event.clientX - rect.left) / rect.width;
     const clickY = (event.clientY - rect.top) / rect.height;
 
+    const ranked = clickableMapPoints
+      .map((point) => {
+        const dx = point.x - clickX;
+        const dy = point.y - clickY;
+        return {
+          lot: point.lot,
+          x: point.x,
+          y: point.y,
+          distance: Math.sqrt(dx * dx + dy * dy),
+        };
+      })
+      .sort((a, b) => a.distance - b.distance);
+
+    const best = ranked[0];
+    const second = ranked[1];
+    if (!best) {
+      return;
+    }
+
+    const confidentByDistance = best.distance <= AUTO_SELECT_DISTANCE;
+    const confidentBySeparation = second ? best.distance / second.distance <= 0.72 : true;
+
+    if (confidentByDistance || confidentBySeparation) {
+      setSelectedLot(best.lot);
+      setClickChoice(null);
+      return;
+    }
+
+    setClickChoice({
+      x: clickX,
+      y: clickY,
+      options: ranked.slice(0, 5).map((entry) => entry.lot),
+    });
+  };
+
+  const handleMapMouseMove = (event) => {
+    if (!clickableMapPoints.length) {
+      return;
+    }
+    const rect = event.currentTarget.getBoundingClientRect();
+    const x = (event.clientX - rect.left) / rect.width;
+    const y = (event.clientY - rect.top) / rect.height;
+
     let best = null;
     for (const point of clickableMapPoints) {
-      const dx = point.x - clickX;
-      const dy = point.y - clickY;
+      const dx = point.x - x;
+      const dy = point.y - y;
       const distance = Math.sqrt(dx * dx + dy * dy);
       if (!best || distance < best.distance) {
-        best = { lot: point.lot, distance };
+        best = { lot: point.lot, x: point.x, y: point.y, distance };
       }
     }
 
-    if (best && best.distance <= MAX_MAP_SNAP_DISTANCE) {
-      setSelectedLot(best.lot);
+    if (best && best.distance <= HOVER_PREVIEW_DISTANCE) {
+      setHoverSelection(best);
+    } else {
+      setHoverSelection(null);
     }
+  };
+
+  const handleMapMouseLeave = () => {
+    setHoverSelection(null);
   };
 
   return (
@@ -237,13 +289,15 @@ export default function App() {
                 </button>
               </form>
               <p className="mt-1.5 text-[11px] text-zinc-500">
-                Click any lot on the map to auto-search. Link: <code>?lot=67</code>
+                Click any lot on the map to auto-search. If selection is ambiguous, you can choose from suggested lots. Link: <code>?lot=67</code>
               </p>
             </div>
           </div>
           <div
             onClick={handleMapClick}
-            className="relative block w-full overflow-hidden rounded-xl border border-zinc-200 bg-zinc-100 shadow-lg shadow-zinc-900/5 lg:ml-auto lg:w-1/2"
+            onMouseMove={handleMapMouseMove}
+            onMouseLeave={handleMapMouseLeave}
+            className="relative block w-full cursor-crosshair overflow-hidden rounded-xl border border-zinc-200 bg-zinc-100 shadow-lg shadow-zinc-900/5 lg:ml-auto lg:w-1/2"
           >
             <img
               src={LOT_MAP_IMAGE}
@@ -258,6 +312,38 @@ export default function App() {
               >
                 {activeMapPoint.lot}
               </span>
+            )}
+            {hoverSelection && (
+              <span
+                className="pointer-events-none absolute -translate-x-1/2 -translate-y-1/2 rounded-full border border-emerald-500 bg-white/95 px-2 py-0.5 text-xs font-semibold text-emerald-700 shadow"
+                style={{ left: `${hoverSelection.x * 100}%`, top: `${hoverSelection.y * 100}%` }}
+              >
+                {hoverSelection.lot}
+              </span>
+            )}
+            {clickChoice && (
+              <div
+                className="absolute z-20 -translate-x-1/2 -translate-y-full rounded-lg border border-zinc-200 bg-white/96 p-2 shadow-xl backdrop-blur"
+                style={{ left: `${clickChoice.x * 100}%`, top: `${clickChoice.y * 100}%` }}
+                onClick={(event) => event.stopPropagation()}
+              >
+                <p className="mb-1 text-[11px] text-zinc-600">Pick lot:</p>
+                <div className="flex flex-wrap gap-1.5">
+                  {clickChoice.options.map((lot) => (
+                    <button
+                      key={lot}
+                      type="button"
+                      className="rounded-md bg-zinc-900 px-2 py-0.5 text-xs font-medium text-white hover:bg-zinc-700"
+                      onClick={() => {
+                        setSelectedLot(lot);
+                        setClickChoice(null);
+                      }}
+                    >
+                      {lot}
+                    </button>
+                  ))}
+                </div>
+              </div>
             )}
           </div>
         </section>
