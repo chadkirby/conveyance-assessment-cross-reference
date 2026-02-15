@@ -9,6 +9,13 @@ from pathlib import Path
 from typing import Any
 
 
+SOURCE_FILE_MAP = {
+    "4414 Deeds": "Deschutes Heights 4414 Deeds",
+    "Phase 1 File": "Deschutes Heights Phase 1 Deeds",
+    "Phase 2 File": "Deschutes Heights Phase 2 Deeds",
+}
+
+
 def normalize_space(text: str | None) -> str:
     if not text:
         return ""
@@ -58,6 +65,11 @@ def parse_date(value: str | None) -> datetime | None:
         except ValueError:
             continue
     return None
+
+
+def source_file_label(value: str | None) -> str:
+    raw = normalize_space(value)
+    return SOURCE_FILE_MAP.get(raw, raw)
 
 
 def extract_parcels(value: str | None) -> list[int]:
@@ -122,6 +134,7 @@ def main() -> None:
             date_str = normalize_space(r.get("normalizedDate"))
             if not date_str:
                 continue
+            page = int(r.get("page") or 0)
             conveyances_raw.append(
                 {
                     "date": date_str,
@@ -129,15 +142,16 @@ def main() -> None:
                     "deedType": deed_type_enum(r.get("deedType")),
                     "grantor": normalize_space(r.get("grantor")),
                     "grantee": normalize_space(r.get("grantee")),
+                    "sourceFile": source_file_label(r.get("source")),
+                    "sourcePage": page if page > 0 else None,
                     "_recording": normalize_space(str(r.get("recordingNumber") or "")),
                     "_source": normalize_space(str(r.get("source") or "")),
-                    "_page": int(r.get("page") or 0),
+                    "_page": page,
                 }
             )
 
         # dedupe conveyances for the same lot by core fields
-        seen: set[tuple[str, str, str, str]] = set()
-        conveyances: list[dict[str, Any]] = []
+        grouped: dict[tuple[str, str, str, str, str], dict[str, Any]] = {}
         for c in sorted(
             conveyances_raw,
             key=lambda x: (
@@ -147,18 +161,31 @@ def main() -> None:
                 x["_page"],
             ),
         ):
-            key = (c["date"], c["deedType"], c["grantor"], c["grantee"])
-            if key in seen:
-                continue
-            seen.add(key)
-            conveyances.append(
-                {
+            key = (c["date"], c["deedType"], c["grantor"], c["grantee"], c["sourceFile"])
+            if key not in grouped:
+                grouped[key] = {
                     "date": c["date"],
                     "deedType": c["deedType"],
                     "grantor": c["grantor"],
                     "grantee": c["grantee"],
+                    "sourceFile": c["sourceFile"],
+                    "sourcePages": [],
                 }
-            )
+            p = c.get("sourcePage")
+            if isinstance(p, int) and p > 0 and p not in grouped[key]["sourcePages"]:
+                grouped[key]["sourcePages"].append(p)
+
+        conveyances = sorted(
+            grouped.values(),
+            key=lambda x: (
+                parse_date(x["date"]) or datetime.max,
+                x["sourceFile"],
+                x["grantor"],
+                x["grantee"],
+            ),
+        )
+        for c in conveyances:
+            c["sourcePages"] = sorted(c["sourcePages"])
 
         if not conveyances:
             continue
