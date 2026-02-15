@@ -207,34 +207,22 @@ export default function App() {
 
   return (
     <div className="min-h-screen text-zinc-900">
-      <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-        <section className="mt-2">
-          <div
-            onClick={handleMapClick}
-            className="relative block w-full overflow-hidden rounded-xl border border-zinc-200 bg-zinc-100 shadow-lg shadow-zinc-900/5 lg:w-1/2"
-          >
-            <img
-              src={LOT_MAP_IMAGE}
-              alt="Deschutes Heights lot number map"
-              className="block w-full"
-              draggable="false"
-            />
-            <div
-              className="absolute left-2 top-2 z-10 w-[min(34rem,95vw)] rounded-xl border border-zinc-200 bg-white/96 p-3 shadow-xl backdrop-blur sm:left-3 sm:top-3 sm:p-4"
-              onClick={(event) => event.stopPropagation()}
-            >
-              <p className="text-[11px] uppercase tracking-[0.22em] text-zinc-500">Deschutes Heights HOA</p>
-              <h1 className="mt-1 text-balance text-xl font-semibold tracking-tight text-zinc-900 sm:text-2xl">
+      <div className="mx-auto max-w-none px-2 py-3 sm:px-3 lg:px-4">
+        <section className="relative mt-1">
+          <div className="pointer-events-none absolute left-2 top-2 z-10 sm:left-3 sm:top-3">
+            <div className="pointer-events-auto w-[min(24rem,90vw)] rounded-xl border border-zinc-200 bg-white/95 p-2.5 shadow-xl backdrop-blur sm:p-3">
+              <p className="text-[10px] uppercase tracking-[0.2em] text-zinc-500">Deschutes Heights HOA</p>
+              <h1 className="mt-1 text-balance text-lg font-semibold tracking-tight text-zinc-900 sm:text-xl">
                 Conveyance Chain + Assessment Explorer
               </h1>
-              <p className="mt-1.5 text-sm leading-relaxed text-zinc-600">
+              <p className="mt-1 text-xs leading-relaxed text-zinc-600">
                 Search by lot number or click the map to load a lot instantly.
               </p>
-              <form className="flex flex-col gap-2 sm:flex-row sm:items-end" onSubmit={submitLookup}>
+              <form className="mt-2 flex flex-col gap-2 sm:flex-row sm:items-end" onSubmit={submitLookup}>
                 <label className="flex-1">
-                  <span className="mb-1.5 block text-xs uppercase tracking-[0.18em] text-zinc-500">Lot Number</span>
+                  <span className="mb-1 block text-[10px] uppercase tracking-[0.18em] text-zinc-500">Lot Number</span>
                   <input
-                    className="w-full rounded-xl border border-zinc-300 bg-white px-3 py-2.5 text-base outline-none ring-emerald-500 transition focus:ring-2"
+                    className="w-full rounded-xl border border-zinc-300 bg-white px-3 py-2 text-base outline-none ring-emerald-500 transition focus:ring-2"
                     placeholder="Enter lot (e.g., 67)"
                     value={query}
                     onChange={(event) => setQuery(event.target.value)}
@@ -243,15 +231,26 @@ export default function App() {
                 </label>
                 <button
                   type="submit"
-                  className="rounded-xl bg-zinc-900 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-zinc-700"
+                  className="rounded-xl bg-zinc-900 px-4 py-2 text-sm font-medium text-white transition hover:bg-zinc-700"
                 >
                   Find Lot
                 </button>
               </form>
-              <p className="mt-2 text-xs text-zinc-500">
-                Click any lot on the map to auto-search. Direct link: <code>?lot=67</code>
+              <p className="mt-1.5 text-[11px] text-zinc-500">
+                Click any lot on the map to auto-search. Link: <code>?lot=67</code>
               </p>
             </div>
+          </div>
+          <div
+            onClick={handleMapClick}
+            className="relative block w-full overflow-hidden rounded-xl border border-zinc-200 bg-zinc-100 shadow-lg shadow-zinc-900/5 lg:ml-auto lg:w-1/2"
+          >
+            <img
+              src={LOT_MAP_IMAGE}
+              alt="Deschutes Heights lot number map"
+              className="block w-full"
+              draggable="false"
+            />
             {activeMapPoint && (
               <span
                 className="pointer-events-none absolute -translate-x-1/2 -translate-y-1/2 rounded-full bg-emerald-600 px-2 py-0.5 text-xs font-semibold text-white shadow"
@@ -263,21 +262,21 @@ export default function App() {
           </div>
         </section>
 
-        {loading && <p className="mt-4 text-sm text-zinc-600">Loading data...</p>}
-        {!loading && error && <p className="mt-4 text-sm text-rose-700">{error}</p>}
+        {loading && <p className="mt-2 text-sm text-zinc-600">Loading data...</p>}
+        {!loading && error && <p className="mt-2 text-sm text-rose-700">{error}</p>}
 
         {!loading && !error && activeLot === null && (
-          <p className="mt-4 text-sm text-zinc-600">Enter a lot number to view chain-of-title and assessment history.</p>
+          <p className="mt-2 text-sm text-zinc-600">Enter a lot number to view chain-of-title and assessment history.</p>
         )}
 
         {!loading && !error && activeLot !== null && !lotRecord && (
-          <p className="mt-4 text-sm text-zinc-700">
+          <p className="mt-2 text-sm text-zinc-700">
             No lot record found for <strong>{activeLot}</strong>.
           </p>
         )}
 
         {!loading && !error && lotRecord && (
-          <section className="mt-4 space-y-4">
+          <section className="mt-2 space-y-3">
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
               <article className="rounded-2xl border border-zinc-200 bg-white p-4">
                 <p className="text-xs uppercase tracking-[0.16em] text-zinc-500">Lot</p>
