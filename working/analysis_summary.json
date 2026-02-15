@@ -1,13 +1,14 @@
 {
   "workbook": "/Users/ckirby/repos/Cowork Projects/Conveyance Assessment Cross-Reference/conveyance_assessment_analysis.xlsx",
   "postAmendmentDeeds": 80,
-  "crossRows": 80,
+  "crossRows": 81,
   "statusCounts": {
+    "Pre-Amendment Matched": 1,
     "Over-Collected": 8,
-    "Under-Collected": 28,
-    "Correct": 44
+    "Under-Collected": 27,
+    "Correct": 45
   },
-  "unmatchedGlRows": 32,
+  "unmatchedGlRows": 30,
   "resaleRows": 59,
   "resaleMissingDeedRows": 18,
   "repairedDeedDates": 10,
@@ -15,5 +16,5 @@
   "claim1Subtotal": 9000.0,
   "claim2Subtotal": 49000.0,
   "grandTotal": 58000.0,
-  "unmatchedGlLinkedPreAmendment": 1
+  "unmatchedGlLinkedPreAmendment": 0
 }

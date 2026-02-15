@@ -460,7 +460,8 @@ def main() -> None:
         row["description"] = normalize_space(row.get("description"))
         row["isPostAmendment"] = bool(row["glDateObj"] and row["glDateObj"] >= AMENDMENT_DATE)
 
-    post_deeds = [d for d in deeds if d.get("deedDateObj") and d["deedDateObj"] >= AMENDMENT_DATE]
+    all_dated_deeds = [d for d in deeds if d.get("deedDateObj")]
+    post_deeds = [d for d in all_dated_deeds if d["deedDateObj"] >= AMENDMENT_DATE]
     post_deeds.sort(key=lambda x: (x["deedDateObj"], x.get("lotInt") or 0, x.get("_idx")))
 
     post_collections = [
@@ -476,7 +477,18 @@ def main() -> None:
 
     used_collection_ids: set[int] = set()
     deed_to_collection: dict[int, int] = {}
-    for deed in post_deeds:
+    # Match GL collections to deeds by lot/date even when the deed predates amendment.
+    # This keeps early HOA charges visible as full deed rows instead of generic unmatched GL entries.
+    match_candidate_deeds = sorted(
+        all_dated_deeds,
+        key=lambda x: (
+            x["deedDateObj"] < AMENDMENT_DATE,
+            x["deedDateObj"],
+            x.get("lotInt") or 0,
+            x.get("_idx"),
+        ),
+    )
+    for deed in match_candidate_deeds:
         lot = deed.get("lotInt")
         if lot is None:
             continue
@@ -503,13 +515,14 @@ def main() -> None:
             continue
         candidates.sort()
         best_score, best_delta, best_idx = candidates[0]
-        if best_delta <= 400 and best_score <= 550:
+        max_delta = 400 if deed["deedDateObj"] >= AMENDMENT_DATE else 120
+        if best_delta <= max_delta and best_score <= 550:
             used_collection_ids.add(best_idx)
             deed_to_collection[deed["_idx"]] = best_idx
 
     used_reversal_ids: set[int] = set()
     deed_reversal_ids: dict[int, list[int]] = defaultdict(list)
-    for deed in post_deeds:
+    for deed in match_candidate_deeds:
         primary_idx = deed_to_collection.get(deed["_idx"])
         if primary_idx is None:
             continue
@@ -526,24 +539,81 @@ def main() -> None:
                 deed_reversal_ids[deed["_idx"]].append(rev["_idx"])
                 used_reversal_ids.add(rev["_idx"])
 
+    deed_extra_collection_ids: dict[int, list[int]] = defaultdict(list)
+    for deed in match_candidate_deeds:
+        if deed["deedDateObj"] < AMENDMENT_DATE:
+            continue
+        primary_idx = deed_to_collection.get(deed["_idx"])
+        if primary_idx is None:
+            continue
+        lot = deed.get("lotInt")
+        if lot is None:
+            continue
+
+        lotus_grantor = is_lotus_house(deed.get("grantor"))
+        expected = 0 if lotus_grantor else 500
+        primary = gl_entries[primary_idx]
+        current_net = float(primary.get("amount", 0))
+        for rev_idx in deed_reversal_ids.get(deed["_idx"], []):
+            current_net += float(gl_entries[rev_idx].get("amount", 0))
+
+        extra_candidates = []
+        for gl in post_collections:
+            if gl["_idx"] in used_collection_ids:
+                continue
+            if gl.get("unitInt") != lot:
+                continue
+            if abs((gl["glDateObj"] - primary["glDateObj"]).days) > 30:
+                continue
+            extra_candidates.append(gl)
+        extra_candidates.sort(
+            key=lambda g: (
+                abs((g["glDateObj"] - primary["glDateObj"]).days),
+                abs(float(g.get("amount", 0))),
+                g["_idx"],
+            )
+        )
+
+        for gl in extra_candidates:
+            proposal = current_net + float(gl.get("amount", 0))
+            if abs(proposal - expected) < abs(current_net - expected):
+                deed_extra_collection_ids[deed["_idx"]].append(gl["_idx"])
+                used_collection_ids.add(gl["_idx"])
+                current_net = proposal
+
+    analysis_deeds = [
+        d
+        for d in all_dated_deeds
+        if d["deedDateObj"] >= AMENDMENT_DATE
+        or d["_idx"] in deed_to_collection
+        or d["_idx"] in deed_reversal_ids
+    ]
+    analysis_deeds.sort(key=lambda x: (x["deedDateObj"], x.get("lotInt") or 0, x.get("_idx")))
+
     cross_rows: list[dict[str, Any]] = []
-    for deed in post_deeds:
+    for deed in analysis_deeds:
         lot = deed.get("lotInt")
         grantor = deed.get("grantor") or ""
         grantee = deed.get("grantee") or ""
         lotus_grantor = is_lotus_house(grantor)
         lotus_grantee = is_lotus_house(grantee)
-        due = not lotus_grantor
-        expected = 500 if due else 0
+        is_post_amendment = deed["deedDateObj"] >= AMENDMENT_DATE
+        due = (not lotus_grantor) if is_post_amendment else None
+        expected = (500 if due else 0) if is_post_amendment else None
 
         primary_gl = gl_entries[deed_to_collection[deed["_idx"]]] if deed["_idx"] in deed_to_collection else None
         primary_amount = float(primary_gl["amount"]) if primary_gl else 0.0
         adjustments = [gl_entries[i] for i in deed_reversal_ids.get(deed["_idx"], [])]
-        adjustment_total = sum(float(a["amount"]) for a in adjustments)
+        extra_collections = [gl_entries[i] for i in deed_extra_collection_ids.get(deed["_idx"], [])]
+        adjustment_total = sum(float(a["amount"]) for a in adjustments) + sum(
+            float(c["amount"]) for c in extra_collections
+        )
         actual_net = primary_amount + adjustment_total
-        impact = currency(actual_net - expected)
+        impact = currency(actual_net - expected) if expected is not None else currency(actual_net)
 
-        if actual_net == expected:
+        if not is_post_amendment:
+            status = "Pre-Amendment Matched" if (primary_gl or adjustments) else "Pre-Amendment"
+        elif actual_net == expected:
             status = "Correct"
         elif actual_net < expected:
             status = "Under-Collected"
@@ -551,7 +621,9 @@ def main() -> None:
             status = "Over-Collected"
 
         category = "Conveyance assessment due"
-        if lotus_grantor:
+        if not is_post_amendment:
+            category = "Pre-amendment transfer with GL activity"
+        elif lotus_grantor:
             category = "Exempt transfer (grantor Lotus House)"
         elif lotus_grantee:
             category = "Lotus House as buyer (Claim 1)"
@@ -577,10 +649,18 @@ def main() -> None:
                 for a in sorted(adjustments, key=lambda x: x["glDateObj"])
             )
             notes.append(f"Included reversal adjustment(s): {adj_txt}.")
+        if extra_collections:
+            extra_txt = "; ".join(
+                f"{c['date']} ({c['amount']:+.0f})"
+                for c in sorted(extra_collections, key=lambda x: x["glDateObj"])
+            )
+            notes.append(f"Included additional same-lot collection(s): {extra_txt}.")
         if due and not primary_gl:
             notes.append("No matching GL collection entry by unit/date.")
-        if not due and primary_gl:
+        if due is False and primary_gl:
             notes.append("Collection posted on exempt transfer.")
+        if not is_post_amendment and primary_gl:
+            notes.append("Matched to pre-amendment deed for visibility.")
 
         cross_rows.append(
             {
@@ -592,7 +672,7 @@ def main() -> None:
                 "Grantee": grantee,
                 "Category": category,
                 "Grantor=Lotus House?": "Yes" if lotus_grantor else "No",
-                "$500 Due?": "Yes" if due else "No",
+                "$500 Due?": ("Yes" if due else "No") if due is not None else "N/A (pre-amendment)",
                 "GL Date": primary_gl.get("glDateObj") if primary_gl else None,
                 "GL Unit": primary_gl.get("unitInt") if primary_gl else None,
                 "GL Description": primary_gl.get("description") if primary_gl else "",
@@ -604,7 +684,7 @@ def main() -> None:
             }
         )
 
-    matched_gl_ids = set(deed_to_collection.values()) | used_reversal_ids
+    matched_gl_ids = set(used_collection_ids) | used_reversal_ids
     unmatched_gl_rows: list[dict[str, Any]] = []
     unmatched_gl_linked_pre = 0
     for gl in sorted(
@@ -867,6 +947,7 @@ def main() -> None:
     red_fill = PatternFill("solid", fgColor="FFC7CE")
     orange_fill = PatternFill("solid", fgColor="FCE4D6")
     yellow_fill = PatternFill("solid", fgColor="FFF2CC")
+    blue_fill = PatternFill("solid", fgColor="D9EAF7")
     header_fill = PatternFill("solid", fgColor="D9E1F2")
 
     for cell in ws1[1]:
@@ -883,6 +964,8 @@ def main() -> None:
             fill = red_fill
         elif status == "Over-Collected":
             fill = orange_fill
+        elif status == "Pre-Amendment Matched":
+            fill = blue_fill
         elif status == "Unmatched GL":
             fill = yellow_fill
         if fill:
@@ -991,7 +1074,10 @@ def main() -> None:
 
     wb.save(workbook_path)
 
-    due_rows = [r for r in cross_rows if r["$500 Due?"] == "Yes"]
+    post_scope_rows = [r for r in cross_rows if isinstance(r["Deed Date"], date) and r["Deed Date"] >= AMENDMENT_DATE]
+    due_rows = [r for r in post_scope_rows if r["$500 Due?"] == "Yes"]
+    exempt_rows = [r for r in post_scope_rows if r["$500 Due?"] == "No"]
+    pre_rows = [r for r in cross_rows if r["$500 Due?"] == "N/A (pre-amendment)"]
     claim1_count = len(claim1_rows)
     status_counts: dict[str, int] = defaultdict(int)
     for row in cross_rows:
@@ -1022,11 +1108,14 @@ def main() -> None:
     )
     lines.append("")
     lines.append("## Match Summary")
+    lines.append(f"- Post-amendment rows in scope: {len(post_scope_rows)}")
     lines.append(f"- Due transfers (`$500 Due? = Yes`): {len(due_rows)}")
-    lines.append(f"- Exempt transfers (`grantor = Lotus House`): {len(cross_rows) - len(due_rows)}")
+    lines.append(f"- Exempt transfers (`grantor = Lotus House`): {len(exempt_rows)}")
+    lines.append(f"- Pre-amendment matched rows included for context: {len(pre_rows)}")
     lines.append(f"- Correct rows: {status_counts.get('Correct', 0)}")
     lines.append(f"- Under-collected rows: {status_counts.get('Under-Collected', 0)}")
     lines.append(f"- Over-collected rows: {status_counts.get('Over-Collected', 0)}")
+    lines.append(f"- Pre-amendment matched status rows: {status_counts.get('Pre-Amendment Matched', 0)}")
     lines.append(f"- Unmatched GL rows: {len(unmatched_gl_rows)}")
     lines.append(f"- Unmatched GL rows tied to pre-amendment deeds: {unmatched_gl_linked_pre}")
     lines.append("")

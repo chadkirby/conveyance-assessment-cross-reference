@@ -11,13 +11,16 @@
 - Post-amendment GL collection/reversal rows: 76
 
 ## Match Summary
+- Post-amendment rows in scope: 80
 - Due transfers (`$500 Due? = Yes`): 62
 - Exempt transfers (`grantor = Lotus House`): 18
-- Correct rows: 44
-- Under-collected rows: 28
+- Pre-amendment matched rows included for context: 1
+- Correct rows: 45
+- Under-collected rows: 27
 - Over-collected rows: 8
-- Unmatched GL rows: 32
-- Unmatched GL rows tied to pre-amendment deeds: 1
+- Pre-amendment matched status rows: 1
+- Unmatched GL rows: 30
+- Unmatched GL rows tied to pre-amendment deeds: 0
 
 ## Spot-Check Matches
 - Lot 78: deed 04/21/2023 vs GL 04/27/2023 (6 days), status=Correct.
