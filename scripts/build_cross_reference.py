@@ -383,6 +383,15 @@ def currency(value: float) -> float:
     return round(float(value), 2)
 
 
+def deed_confidence(deed: dict[str, Any]) -> int:
+    derived = str(deed.get("derivedFrom") or "")
+    if derived == "page_scan":
+        return 0
+    if derived == "existing_record_related_lot":
+        return 1
+    return 2
+
+
 def main() -> None:
     project_root = Path(__file__).resolve().parents[1]
     data_dir = project_root / "data"
@@ -524,6 +533,7 @@ def main() -> None:
         all_dated_deeds,
         key=lambda x: (
             x["deedDateObj"] < AMENDMENT_DATE,
+            -deed_confidence(x),
             x["deedDateObj"],
             x.get("lotInt") or 0,
             x.get("_idx"),
@@ -661,13 +671,35 @@ def main() -> None:
         supplemental_gl_to_deed[gl["_idx"]] = best_deed_idx
         used_collection_ids.add(gl["_idx"])
 
+    lot_only_gl_to_deed: dict[int, int] = {}
+    for gl in sorted(post_collections, key=lambda x: (x["glDateObj"], x["_idx"])):
+        if gl["_idx"] in used_collection_ids:
+            continue
+        unit = gl.get("unitInt")
+        if unit is None:
+            continue
+        candidates = []
+        for deed in all_dated_deeds:
+            if unit not in deed.get("relatedLots", []):
+                continue
+            delta = abs((gl["glDateObj"] - deed["deedDateObj"]).days)
+            score = delta + (0 if deed_confidence(deed) >= 1 else 20)
+            candidates.append((score, deed["_idx"]))
+        if not candidates:
+            continue
+        candidates.sort()
+        _, best_deed_idx = candidates[0]
+        lot_only_gl_to_deed[gl["_idx"]] = best_deed_idx
+        used_collection_ids.add(gl["_idx"])
+
     analysis_deeds = [
         d
         for d in all_dated_deeds
-        if d["deedDateObj"] >= AMENDMENT_DATE
+        if (d["deedDateObj"] >= AMENDMENT_DATE and deed_confidence(d) >= 1)
         or d["_idx"] in deed_to_collection
         or d["_idx"] in deed_reversal_ids
         or d["_idx"] in supplemental_gl_to_deed.values()
+        or d["_idx"] in lot_only_gl_to_deed.values()
     ]
     analysis_deeds.sort(key=lambda x: (x["deedDateObj"], x.get("lotInt") or 0, x.get("_idx")))
 
@@ -743,6 +775,8 @@ def main() -> None:
             notes.append("Collection posted on exempt transfer.")
         if not is_post_amendment and primary_gl:
             notes.append("Matched to pre-amendment deed for visibility.")
+        if deed_confidence(deed) == 0:
+            notes.append("Low-confidence page-scan deed; included due GL linkage.")
         display_lot = lot
         if primary_gl and isinstance(primary_gl.get("unitInt"), int):
             gl_unit = int(primary_gl["unitInt"])
@@ -825,6 +859,45 @@ def main() -> None:
                 "GL Description": gl.get("description"),
                 "Match Status": status,
                 "$ Impact": impact,
+                "Notes": " ".join(notes),
+                "_deedIdx": deed.get("_idx"),
+                "_glIdx": gl.get("_idx"),
+            }
+        )
+
+    for gl_idx, deed_idx in sorted(lot_only_gl_to_deed.items(), key=lambda x: x[0]):
+        deed = deed_lookup.get(deed_idx)
+        gl = gl_entries[gl_idx]
+        if deed is None:
+            continue
+        grantor = deed.get("grantor") or ""
+        grantee = deed.get("grantee") or ""
+        lotus_grantor = is_lotus_house(grantor)
+        delta = abs((gl["glDateObj"] - deed["deedDateObj"]).days)
+        notes = [
+            "GL linked by lot only; no close date-based deed match found.",
+            f"GL/deed date delta: {delta} days.",
+        ]
+        if deed.get("lotInt") != gl.get("unitInt"):
+            notes.append(
+                f"GL unit {gl.get('unitInt')} matched via multi-lot deed context (primary parsed lot {deed.get('lotInt')})."
+            )
+        cross_rows.append(
+            {
+                "Phase": deed.get("phase", ""),
+                "Lot": gl.get("unitInt") if gl.get("unitInt") else deed.get("lotInt"),
+                "Deed Date": deed.get("deedDateObj"),
+                "Deed Type": deed.get("deedType", ""),
+                "Grantor": grantor,
+                "Grantee": grantee,
+                "Category": "GL linked by lot only (date mismatch)",
+                "Grantor=Lotus House?": "Yes" if lotus_grantor else "No",
+                "$500 Due?": "Review",
+                "GL Date": gl.get("glDateObj"),
+                "GL Unit": gl.get("unitInt"),
+                "GL Description": gl.get("description"),
+                "Match Status": "Lot-Only Match",
+                "$ Impact": currency(float(gl.get("amount", 0))),
                 "Notes": " ".join(notes),
                 "_deedIdx": deed.get("_idx"),
                 "_glIdx": gl.get("_idx"),
@@ -1097,6 +1170,7 @@ def main() -> None:
     orange_fill = PatternFill("solid", fgColor="FCE4D6")
     yellow_fill = PatternFill("solid", fgColor="FFF2CC")
     blue_fill = PatternFill("solid", fgColor="D9EAF7")
+    teal_fill = PatternFill("solid", fgColor="DDEBF7")
     header_fill = PatternFill("solid", fgColor="D9E1F2")
 
     for cell in ws1[1]:
@@ -1115,6 +1189,8 @@ def main() -> None:
             fill = orange_fill
         elif status == "Pre-Amendment Matched":
             fill = blue_fill
+        elif status == "Lot-Only Match":
+            fill = teal_fill
         elif status == "Unmatched GL":
             fill = yellow_fill
         if fill:

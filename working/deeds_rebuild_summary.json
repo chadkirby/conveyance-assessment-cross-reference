@@ -1,0 +1,9 @@
+{
+  "inputExistingCount": 166,
+  "expandedExistingCount": 168,
+  "scannedCount": 124,
+  "finalCount": 207,
+  "backupPath": "/Users/ckirby/repos/Cowork Projects/Conveyance Assessment Cross-Reference/working/all_deeds_final.original.json",
+  "outputAllDeedsFinal": "/Users/ckirby/repos/Cowork Projects/Conveyance Assessment Cross-Reference/all_deeds_final.json",
+  "outputSourceTruth": "/Users/ckirby/repos/Cowork Projects/Conveyance Assessment Cross-Reference/working/deeds_source_truth.json"
+}
