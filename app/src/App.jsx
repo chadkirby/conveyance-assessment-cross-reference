@@ -207,21 +207,11 @@ export default function App() {
 
   return (
     <div className="min-h-screen text-zinc-900">
-      <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
-        <header className="rounded-3xl border border-zinc-200/70 bg-white/80 p-7 shadow-xl shadow-zinc-900/5 backdrop-blur">
-          <p className="text-xs uppercase tracking-[0.22em] text-zinc-500">Deschutes Heights HOA</p>
-          <h1 className="mt-2 text-balance text-3xl font-semibold tracking-tight text-zinc-900 sm:text-4xl">
-            Conveyance Chain + Assessment Explorer
-          </h1>
-          <p className="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-600">
-            Search by lot number to review deed history, linked assessment collections, and source PDF pages.
-          </p>
-        </header>
-
-        <section className="mt-6 rounded-2xl border border-zinc-200/70 bg-white/75 p-4 shadow-lg shadow-zinc-900/5 sm:p-6">
+      <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+        <section className="mt-2">
           <div
             onClick={handleMapClick}
-            className="relative mt-1 block w-full overflow-hidden rounded-xl border border-zinc-200 bg-zinc-100 lg:w-3/4"
+            className="relative block w-full overflow-hidden rounded-xl border border-zinc-200 bg-zinc-100 shadow-lg shadow-zinc-900/5 lg:w-1/2"
           >
             <img
               src={LOT_MAP_IMAGE}
@@ -230,9 +220,16 @@ export default function App() {
               draggable="false"
             />
             <div
-              className="absolute left-3 top-3 z-10 w-[min(28rem,85vw)] rounded-xl border border-zinc-200 bg-white/95 p-3 shadow-xl backdrop-blur sm:left-4 sm:top-4 sm:p-4"
+              className="absolute left-2 top-2 z-10 w-[min(34rem,95vw)] rounded-xl border border-zinc-200 bg-white/96 p-3 shadow-xl backdrop-blur sm:left-3 sm:top-3 sm:p-4"
               onClick={(event) => event.stopPropagation()}
             >
+              <p className="text-[11px] uppercase tracking-[0.22em] text-zinc-500">Deschutes Heights HOA</p>
+              <h1 className="mt-1 text-balance text-xl font-semibold tracking-tight text-zinc-900 sm:text-2xl">
+                Conveyance Chain + Assessment Explorer
+              </h1>
+              <p className="mt-1.5 text-sm leading-relaxed text-zinc-600">
+                Search by lot number or click the map to load a lot instantly.
+              </p>
               <form className="flex flex-col gap-2 sm:flex-row sm:items-end" onSubmit={submitLookup}>
                 <label className="flex-1">
                   <span className="mb-1.5 block text-xs uppercase tracking-[0.18em] text-zinc-500">Lot Number</span>
@@ -266,21 +263,21 @@ export default function App() {
           </div>
         </section>
 
-        {loading && <p className="mt-6 text-sm text-zinc-600">Loading data...</p>}
-        {!loading && error && <p className="mt-6 text-sm text-rose-700">{error}</p>}
+        {loading && <p className="mt-4 text-sm text-zinc-600">Loading data...</p>}
+        {!loading && error && <p className="mt-4 text-sm text-rose-700">{error}</p>}
 
         {!loading && !error && activeLot === null && (
-          <p className="mt-6 text-sm text-zinc-600">Enter a lot number to view chain-of-title and assessment history.</p>
+          <p className="mt-4 text-sm text-zinc-600">Enter a lot number to view chain-of-title and assessment history.</p>
         )}
 
         {!loading && !error && activeLot !== null && !lotRecord && (
-          <p className="mt-6 text-sm text-zinc-700">
+          <p className="mt-4 text-sm text-zinc-700">
             No lot record found for <strong>{activeLot}</strong>.
           </p>
         )}
 
         {!loading && !error && lotRecord && (
-          <section className="mt-6 space-y-4">
+          <section className="mt-4 space-y-4">
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
               <article className="rounded-2xl border border-zinc-200 bg-white p-4">
                 <p className="text-xs uppercase tracking-[0.16em] text-zinc-500">Lot</p>
