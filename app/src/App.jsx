@@ -11,6 +11,12 @@ const LOT_MAP_IMAGE = `${import.meta.env.BASE_URL}images/lot-map.jpg`;
 const AUTO_SELECT_DISTANCE = 0.028;
 const HOVER_PREVIEW_DISTANCE = 0.08;
 const POINT_OVERRIDE_STORAGE_KEY = "lotMapPointOverrides.v2";
+const MAP_GEO_BOUNDS = {
+  southLat: 46.97199,
+  northLat: 46.97811,
+  westLon: -122.87976,
+  eastLon: -122.86695,
+};
 
 const MONEY = new Intl.NumberFormat("en-US", {
   style: "currency",
@@ -205,6 +211,30 @@ function sortSameDayConveyancesNewestFirst(group) {
   return oldestToNewest.reverse();
 }
 
+function sortConveyancesNewestFirst(conveyances) {
+  if (!Array.isArray(conveyances) || !conveyances.length) {
+    return [];
+  }
+  const withIndex = conveyances.map((row, idx) => ({ ...row, __idx: idx }));
+  const byDate = new Map();
+  for (const row of withIndex) {
+    const dateKey = String(row.date || "");
+    if (!byDate.has(dateKey)) {
+      byDate.set(dateKey, []);
+    }
+    byDate.get(dateKey).push(row);
+  }
+
+  const sortedDates = [...byDate.keys()].sort((a, b) => parseDateKey(b) - parseDateKey(a));
+  const finalRows = [];
+  for (const dateKey of sortedDates) {
+    const sameDateRows = byDate.get(dateKey);
+    const ordered = sortSameDayConveyancesNewestFirst(sameDateRows);
+    finalRows.push(...ordered.map(({ __idx, ...row }) => row));
+  }
+  return finalRows;
+}
+
 function parseLotNumber(value) {
   const parsed = Number.parseInt(String(value ?? "").trim(), 10);
   return Number.isNaN(parsed) ? null : parsed;
@@ -229,6 +259,182 @@ function clamp01(value) {
     return 1;
   }
   return value;
+}
+
+function mapLatLonToImagePoint(lat, lon) {
+  const x = (lon - MAP_GEO_BOUNDS.westLon) / (MAP_GEO_BOUNDS.eastLon - MAP_GEO_BOUNDS.westLon);
+  const y = (MAP_GEO_BOUNDS.northLat - lat) / (MAP_GEO_BOUNDS.northLat - MAP_GEO_BOUNDS.southLat);
+  return {
+    x: clamp01(x),
+    y: clamp01(y),
+    inBounds: x >= 0 && x <= 1 && y >= 0 && y <= 1,
+  };
+}
+
+function readAscii(view, offset, length) {
+  let output = "";
+  for (let i = 0; i < length; i += 1) {
+    const code = view.getUint8(offset + i);
+    if (code === 0) {
+      break;
+    }
+    output += String.fromCharCode(code);
+  }
+  return output;
+}
+
+function bytesPerType(type) {
+  if (type === 1 || type === 2 || type === 7) {
+    return 1;
+  }
+  if (type === 3) {
+    return 2;
+  }
+  if (type === 4 || type === 9) {
+    return 4;
+  }
+  if (type === 5 || type === 10) {
+    return 8;
+  }
+  return 0;
+}
+
+function readRational(view, offset, littleEndian) {
+  const numerator = view.getUint32(offset, littleEndian);
+  const denominator = view.getUint32(offset + 4, littleEndian);
+  if (!denominator) {
+    return 0;
+  }
+  return numerator / denominator;
+}
+
+function parseExifGpsFromArrayBuffer(buffer) {
+  const view = new DataView(buffer);
+  if (view.byteLength < 4 || view.getUint16(0, false) !== 0xffd8) {
+    return null;
+  }
+
+  let offset = 2;
+  while (offset + 4 <= view.byteLength) {
+    if (view.getUint8(offset) !== 0xff) {
+      offset += 1;
+      continue;
+    }
+    const marker = view.getUint8(offset + 1);
+    if (marker === 0xda || marker === 0xd9) {
+      break;
+    }
+    const segmentLength = view.getUint16(offset + 2, false);
+    if (segmentLength < 2) {
+      break;
+    }
+
+    if (marker === 0xe1) {
+      const app1Start = offset + 4;
+      if (app1Start + 6 <= view.byteLength && readAscii(view, app1Start, 6) === "Exif") {
+        const tiffStart = app1Start + 6;
+        const endianness = readAscii(view, tiffStart, 2);
+        const littleEndian = endianness === "II";
+        if (endianness !== "II" && endianness !== "MM") {
+          return null;
+        }
+        if (view.getUint16(tiffStart + 2, littleEndian) !== 0x2a) {
+          return null;
+        }
+
+        const ifd0Offset = view.getUint32(tiffStart + 4, littleEndian);
+        const ifd0Absolute = tiffStart + ifd0Offset;
+        if (ifd0Absolute + 2 > view.byteLength) {
+          return null;
+        }
+        const ifd0Count = view.getUint16(ifd0Absolute, littleEndian);
+        let gpsIfdOffset = null;
+
+        for (let i = 0; i < ifd0Count; i += 1) {
+          const entry = ifd0Absolute + 2 + i * 12;
+          if (entry + 12 > view.byteLength) {
+            break;
+          }
+          const tag = view.getUint16(entry, littleEndian);
+          if (tag === 0x8825) {
+            gpsIfdOffset = view.getUint32(entry + 8, littleEndian);
+            break;
+          }
+        }
+
+        if (gpsIfdOffset === null) {
+          return null;
+        }
+
+        const gpsIfdAbsolute = tiffStart + gpsIfdOffset;
+        if (gpsIfdAbsolute + 2 > view.byteLength) {
+          return null;
+        }
+        const gpsCount = view.getUint16(gpsIfdAbsolute, littleEndian);
+
+        let latRef = "";
+        let lonRef = "";
+        let latValues = null;
+        let lonValues = null;
+
+        for (let i = 0; i < gpsCount; i += 1) {
+          const entry = gpsIfdAbsolute + 2 + i * 12;
+          if (entry + 12 > view.byteLength) {
+            break;
+          }
+
+          const tag = view.getUint16(entry, littleEndian);
+          const type = view.getUint16(entry + 2, littleEndian);
+          const count = view.getUint32(entry + 4, littleEndian);
+          const valueOrOffset = view.getUint32(entry + 8, littleEndian);
+          const valueBytes = bytesPerType(type) * count;
+          const valueOffset = valueBytes <= 4 ? entry + 8 : tiffStart + valueOrOffset;
+          if (valueOffset < 0 || valueOffset + valueBytes > view.byteLength) {
+            continue;
+          }
+
+          if (tag === 0x0001 && type === 2) {
+            latRef = readAscii(view, valueOffset, count);
+          } else if (tag === 0x0003 && type === 2) {
+            lonRef = readAscii(view, valueOffset, count);
+          } else if (tag === 0x0002 && type === 5 && count >= 3) {
+            latValues = [
+              readRational(view, valueOffset, littleEndian),
+              readRational(view, valueOffset + 8, littleEndian),
+              readRational(view, valueOffset + 16, littleEndian),
+            ];
+          } else if (tag === 0x0004 && type === 5 && count >= 3) {
+            lonValues = [
+              readRational(view, valueOffset, littleEndian),
+              readRational(view, valueOffset + 8, littleEndian),
+              readRational(view, valueOffset + 16, littleEndian),
+            ];
+          }
+        }
+
+        if (!latValues || !lonValues) {
+          return null;
+        }
+        const latSign = String(latRef).trim().toUpperCase() === "S" ? -1 : 1;
+        const lonSign = String(lonRef).trim().toUpperCase() === "W" ? -1 : 1;
+        const latitude = latSign * (latValues[0] + latValues[1] / 60 + latValues[2] / 3600);
+        const longitude = lonSign * (lonValues[0] + lonValues[1] / 60 + lonValues[2] / 3600);
+        if (!Number.isFinite(latitude) || !Number.isFinite(longitude)) {
+          return null;
+        }
+        return { latitude, longitude };
+      }
+    }
+
+    offset += 2 + segmentLength;
+  }
+
+  return null;
+}
+
+async function readGpsFromPhoto(file) {
+  const buffer = await file.arrayBuffer();
+  return parseExifGpsFromArrayBuffer(buffer);
 }
 
 function readPointOverridesFromStorage() {
@@ -288,6 +494,8 @@ export default function App() {
   const [error, setError] = useState("");
   const [hoverSelection, setHoverSelection] = useState(null);
   const [clickChoice, setClickChoice] = useState(null);
+  const [photoOverlay, setPhotoOverlay] = useState(null);
+  const [photoStatus, setPhotoStatus] = useState("");
 
   useEffect(() => {
     const urlLot = readLotFromUrl();
@@ -529,6 +737,79 @@ export default function App() {
     setDebugMessage("Reset lot point overrides.");
   };
 
+  const clearPhotoOverlay = () => {
+    setPhotoOverlay((prev) => {
+      if (prev?.url) {
+        URL.revokeObjectURL(prev.url);
+      }
+      return null;
+    });
+    setPhotoStatus("");
+  };
+
+  const handlePhotoUpload = async (event) => {
+    const file = event.target.files?.[0];
+    event.target.value = "";
+    if (!file) {
+      return;
+    }
+
+    setPhotoStatus("Reading photo GPS metadata...");
+
+    try {
+      const gps = await readGpsFromPhoto(file);
+      if (!gps) {
+        setPhotoOverlay((prev) => {
+          if (prev?.url) {
+            URL.revokeObjectURL(prev.url);
+          }
+          return null;
+        });
+        setPhotoStatus("No GPS metadata found. Use a geotagged JPEG photo with location enabled.");
+        return;
+      }
+
+      const mappedPoint = mapLatLonToImagePoint(gps.latitude, gps.longitude);
+      const objectUrl = URL.createObjectURL(file);
+      setPhotoOverlay((prev) => {
+        if (prev?.url) {
+          URL.revokeObjectURL(prev.url);
+        }
+        return {
+          name: file.name,
+          url: objectUrl,
+          latitude: gps.latitude,
+          longitude: gps.longitude,
+          x: mappedPoint.x,
+          y: mappedPoint.y,
+          inBounds: mappedPoint.inBounds,
+        };
+      });
+      setPhotoStatus(
+        mappedPoint.inBounds
+          ? "Photo placed on map from GPS metadata."
+          : "Photo GPS appears outside current map bounds, so it was clamped to the map edge.",
+      );
+    } catch {
+      setPhotoOverlay((prev) => {
+        if (prev?.url) {
+          URL.revokeObjectURL(prev.url);
+        }
+        return null;
+      });
+      setPhotoStatus("Could not read GPS metadata from that file.");
+    }
+  };
+
+  useEffect(
+    () => () => {
+      if (photoOverlay?.url) {
+        URL.revokeObjectURL(photoOverlay.url);
+      }
+    },
+    [photoOverlay],
+  );
+
   return (
     <div className="min-h-screen text-zinc-900">
       <div className="mx-auto max-w-none px-2 py-3 sm:px-3 lg:px-4">
@@ -563,6 +844,33 @@ export default function App() {
               <p className="mt-1.5 text-[11px] text-zinc-500">
                 Click any lot on the map to auto-search. If selection is ambiguous, you can choose from suggested lots. Link: <code>?lot=67</code>
               </p>
+              <div className="mt-2 rounded-md border border-zinc-200 bg-zinc-50/80 p-1.5">
+                <label className="block text-[10px] uppercase tracking-[0.16em] text-zinc-500">Geotagged Photo</label>
+                <input
+                  type="file"
+                  accept="image/jpeg,image/jpg"
+                  onChange={handlePhotoUpload}
+                  className="mt-1 block w-full cursor-pointer text-[11px] text-zinc-700 file:mr-2 file:rounded-md file:border-0 file:bg-zinc-900 file:px-2 file:py-1 file:text-[11px] file:font-medium file:text-white hover:file:bg-zinc-700"
+                />
+                <p className="mt-1 text-[11px] text-zinc-500">
+                  Upload a geotagged photo to place it on the map. Then click nearby lots to inspect ownership.
+                </p>
+                {photoOverlay && (
+                  <div className="mt-1.5 flex items-center justify-between gap-2">
+                    <p className="truncate text-[11px] text-zinc-700">
+                      {photoOverlay.name} ({photoOverlay.latitude.toFixed(5)}, {photoOverlay.longitude.toFixed(5)})
+                    </p>
+                    <button
+                      type="button"
+                      onClick={clearPhotoOverlay}
+                      className="shrink-0 rounded-md border border-zinc-300 bg-white px-2 py-0.5 text-[11px] font-medium text-zinc-700 hover:bg-zinc-100"
+                    >
+                      Clear
+                    </button>
+                  </div>
+                )}
+                {photoStatus && <p className="mt-1 text-[11px] text-zinc-600">{photoStatus}</p>}
+              </div>
               {!loading && !error && lotRecord && (
                 <div className="mt-2 hidden grid-cols-2 gap-2 lg:grid">
                   <div className="rounded-lg border border-zinc-200 bg-white p-2">
@@ -620,6 +928,17 @@ export default function App() {
               className="block w-full"
               draggable="false"
             />
+            {photoOverlay && (
+              <div
+                className="pointer-events-none absolute z-10 -translate-x-1/2 -translate-y-[calc(100%+8px)]"
+                style={{ left: `${photoOverlay.x * 100}%`, top: `${photoOverlay.y * 100}%` }}
+              >
+                <div className="overflow-hidden rounded-md border border-white/90 bg-white/95 p-1 shadow-lg shadow-zinc-900/20">
+                  <img src={photoOverlay.url} alt={photoOverlay.name} className="h-14 w-14 rounded object-cover" />
+                </div>
+                <span className="mx-auto mt-1 block h-2.5 w-2.5 rounded-full border border-white bg-rose-600 shadow" />
+              </div>
+            )}
             {debugMode &&
               clickableMapPoints.map((point) => (
                 <span
